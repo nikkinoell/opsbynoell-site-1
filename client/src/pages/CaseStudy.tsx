@@ -49,56 +49,44 @@ const built = [
 
 export default function CaseStudy() {
   return (
-    <div style={{ backgroundColor: 'transparent', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section style={{
-        paddingTop: '110px',
-        paddingBottom: '0',
-        backgroundColor: 'transparent',
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '520px',
-        display: 'flex',
-        alignItems: 'flex-end',
-      }}>
+      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', left: '-80px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(139,92,246,0.16) 0%, transparent 65%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '80px', right: '-100px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.5, pointerEvents: 'none' }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '3rem' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
           <FadeItem delay={0}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-              <p className="eyebrow" style={{ color: '#A78BFA' }}>Case Study · Laguna Niguel, CA</p>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0A0A0A', backgroundColor: '#A78BFA', padding: '0.2rem 0.75rem' }}>Founding Client Partner</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+              <span className="pill-badge">
+                <span className="pill-badge-dot" />
+                Case Study · Laguna Niguel, CA
+              </span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0A0A0A', background: 'linear-gradient(135deg, #8B5CF6, #6366F1)', padding: '0.25rem 0.875rem', borderRadius: '4px' }}>Founding Client Partner</span>
             </div>
           </FadeItem>
           <FadeItem delay={0.1}>
-            <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              maxWidth: '760px',
-              marginBottom: '1.5rem',
-            }}>
-              25 years of expertise. Zero operational infrastructure.{' '}
-              <span style={{ color: '#A78BFA', fontWeight: 700 }}>Here's what we built.</span>
+            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', maxWidth: '860px', marginBottom: '2.5rem' }}>
+              <span className="gradient-text">25 years of expertise.</span>{' '}
+              <span style={{ color: '#F5F0EB' }}>Zero infrastructure.</span>
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem' }}>
               {[
                 { label: 'Industry', value: 'Massage Therapy' },
                 { label: 'Location', value: 'Laguna Niguel, CA' },
                 { label: 'Experience', value: '25+ Years' },
                 { label: 'Timeline', value: '2 Weeks to Live' },
               ].map((item, i) => (
-                <div key={i}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '0.25rem' }}>
+                <div key={i} className="glass-card-violet" style={{ padding: '1rem 1.5rem' }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#A78BFA', marginBottom: '0.25rem' }}>
                     {item.label}
                   </p>
-                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.25rem', fontWeight: 700, color: '#F5F0EB' }}>
+                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.125rem', fontWeight: 700, color: '#F5F0EB' }}>
                     {item.value}
                   </p>
                 </div>
@@ -335,35 +323,23 @@ export default function CaseStudy() {
 
 
       {/* ─── CTA ─── */}
-      <section className="section-pad" style={{ backgroundColor: 'transparent' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: '6rem 0', borderTop: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(139,92,246,0.14) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeItem delay={0}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>Your Turn</p>
-            <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.1,
-              marginBottom: '1.25rem',
-              maxWidth: '600px',
-              margin: '0 auto 1.25rem',
-            }}>
+            <span className="pill-badge" style={{ marginBottom: '1.5rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              Your Turn
+            </span>
+            <h2 className="gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.25rem', maxWidth: '600px', margin: '0 auto 1.25rem', display: 'block' }}>
               Ready to close your revenue gaps?
             </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '460px',
-              margin: '0 auto 2.5rem',
-            }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               Santa went from zero digital infrastructure to a fully automated business in two weeks. Start with a free 15-minute intro call and we'll show you exactly what we'd build for yours.
             </p>
-            <a href="/book" className="btn-primary">
-              Book Your Free Intro Call
-              <ArrowRight size={14} />
+            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
+              Book Your Free Intro Call <ArrowRight size={16} />
             </a>
           </FadeItem>
         </div>

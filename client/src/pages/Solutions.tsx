@@ -218,110 +218,54 @@ const BUILDS = [
 
 export default function Solutions() {
   return (
-    <div style={{ backgroundColor: 'transparent', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section
-        style={{
-          position: 'relative',
-          paddingTop: 'calc(64px + 3rem)',
-          paddingBottom: '3rem',
-          backgroundColor: 'transparent',
-          overflow: 'hidden',
-        }}
-      >
+      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', left: '-100px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(139,92,246,0.16) 0%, transparent 65%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '60px', right: '-60px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.5, pointerEvents: 'none' }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
           <FadeItem delay={0}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              backgroundColor: 'rgba(167,139,250,0.1)',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'rgba(167,139,250,0.3)',
-              borderRadius: '100px',
-              padding: '0.375rem 1rem',
-              marginBottom: '2rem',
-            }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#A78BFA' }} />
-              <span style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                color: '#A78BFA',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-              }}>
-                AI Builds · Custom Automation Systems
-              </span>
-            </div>
+            <span className="pill-badge" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              AI Builds · Custom Automation Systems
+            </span>
           </FadeItem>
 
           <FadeItem delay={0.08}>
             <h1 style={{
               fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.25rem, 5vw, 4rem)',
+              fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)',
               fontWeight: 800,
-              color: '#F5F0EB',
-              lineHeight: 1.05,
-              letterSpacing: '-0.03em',
-              marginBottom: '1.5rem',
-              maxWidth: '720px',
+              lineHeight: 1.0,
+              letterSpacing: '-0.04em',
+              marginBottom: '1.75rem',
+              maxWidth: '800px',
             }}>
-              The AI systems we build.{' '}
-              <span style={{ color: '#A78BFA' }}>See how they work.</span>
+              <span style={{ color: '#F5F0EB' }}>The AI systems</span>{' '}
+              <span className="gradient-text-purple">we build.</span>
             </h1>
           </FadeItem>
 
           <FadeItem delay={0.16}>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1.0625rem',
-              color: '#8A8480',
-              lineHeight: 1.75,
-              maxWidth: '560px',
-              marginBottom: '2.5rem',
-            }}>
-Every system below is custom-built and deployed for your specific business. We don't hand you software. We install infrastructure that runs your business while you focus on the work.
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#A09890', lineHeight: 1.75, maxWidth: '560px', marginBottom: '2.75rem' }}>
+              Every system below is custom-built and deployed for your specific business. We don't hand you software — we install infrastructure that runs your business while you focus on the work.
             </p>
           </FadeItem>
 
           <FadeItem delay={0.24}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.875rem', alignItems: 'center' }}>
-              <a href="/book" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                backgroundColor: '#A78BFA',
-                color: '#0A0A0A',
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                padding: '0.75rem 1.5rem',
-                borderRadius: '0.5rem',
-                textDecoration: 'none',
-                letterSpacing: '-0.01em',
-              }}>
-                Get a Custom Build <ArrowRight size={14} />
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+              <a href="/book" className="btn-gradient" style={{ fontSize: '1rem', padding: '1rem 2.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+                Get a Custom Build <ArrowRight size={16} />
               </a>
-              <Link href="/services" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.375rem',
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: '#8A8480',
-                textDecoration: 'none',
-                transition: 'color 0.15s ease',
-              }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#A78BFA'; }}
+              <Link href="/services" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.9375rem', fontWeight: 600, color: '#8A8480', textDecoration: 'none', transition: 'color 0.15s ease' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#C4B5FD'; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#8A8480'; }}
               >
-                View Packages <ArrowRight size={13} />
+                View Packages <ArrowRight size={14} />
               </Link>
             </div>
           </FadeItem>
@@ -329,32 +273,19 @@ Every system below is custom-built and deployed for your specific business. We d
       </section>
 
       {/* ─── BUILDS GRID ─── */}
-      <section className="section-pad" style={{ backgroundColor: '#0A0A0A', borderTop: '1px solid #2A2A2A' }}>
+      <section className="section-pad" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }} className="md:grid-cols-2 lg:grid-cols-3">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }} className="md:grid-cols-2 lg:grid-cols-3">
             {BUILDS.map((build, i) => (
-              <FadeItem key={i} delay={i * 0.08}>
+              <FadeItem key={i} delay={i * 0.07}>
                 <div
+                  className="glass-card-violet"
                   style={{
-                    backgroundColor: '#141414',
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    borderColor: '#2A2A2A',
-                    borderRadius: '0.75rem',
                     padding: '2rem',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '1.25rem',
-                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(167,139,250,0.4)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 24px rgba(167,139,250,0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = '#2A2A2A';
-                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
                   }}
                 >
                   {/* Icon + Tag */}
@@ -441,46 +372,32 @@ Every system below is custom-built and deployed for your specific business. We d
       <FAQSection />
 
       {/* ─── CUSTOM BUILD CTA ─── */}
-      <section className="section-pad" style={{ backgroundColor: '#141414', borderTop: '1px solid #2A2A2A' }}>
-        <div className="container">
+      <section style={{ position: 'relative', padding: '6rem 0', borderTop: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(139,92,246,0.14) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <FadeSection>
             <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>Don't see what you need?</p>
-              <h2 style={{
+              <span className="pill-badge" style={{ marginBottom: '1.5rem', display: 'inline-flex' }}>
+                <span className="pill-badge-dot" />
+                Don't see what you need?
+              </span>
+              <h2 className="gradient-text" style={{
                 fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                 fontWeight: 800,
-                color: '#F5F0EB',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
+                lineHeight: 1.05,
+                letterSpacing: '-0.03em',
                 marginBottom: '1.25rem',
+                display: 'block',
               }}>
                 We build custom AI systems for your exact workflow.
               </h2>
-              <p style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '1rem',
-                color: '#8A8480',
-                lineHeight: 1.75,
-                marginBottom: '2.5rem',
-              }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, marginBottom: '2.5rem' }}>
                 Every business is different. Start with a free 15-minute intro call and we'll show you exactly what we'd build to fix it.
               </p>
-              <a href="/book" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                backgroundColor: '#A78BFA',
-                color: '#0A0A0A',
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.9375rem',
-                fontWeight: 700,
-                padding: '0.875rem 2rem',
-                borderRadius: '0.5rem',
-                textDecoration: 'none',
-                letterSpacing: '-0.01em',
-              }}>
-                Book Free Intro Call <ArrowRight size={15} />
+              <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
+                Book Free Intro Call <ArrowRight size={16} />
               </a>
             </div>
           </FadeSection>

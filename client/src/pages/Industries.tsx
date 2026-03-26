@@ -79,43 +79,29 @@ const industries = [
 
 export default function Industries() {
   return (
-    <div style={{ backgroundColor: 'transparent' }}>
+    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section style={{
-        paddingTop: '110px',
-        paddingBottom: '1.5rem',
-        backgroundColor: 'transparent',
-        position: 'relative',
-      }}>
-        <div className="container">
+      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', left: '-100px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(139,92,246,0.16) 0%, transparent 65%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '80px', right: '-80px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.5, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
           <FadeItem delay={0}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>Industries We Serve</p>
+            <span className="pill-badge" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              Industries We Serve
+            </span>
           </FadeItem>
           <FadeItem delay={0.1}>
-            <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              maxWidth: '760px',
-              marginBottom: '1.5rem',
-            }}>
-              Built for appointment-based businesses.{' '}
-              <span style={{ color: '#A78BFA' }}>Across every vertical.</span>
+            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', maxWidth: '800px', marginBottom: '1.75rem' }}>
+              <span style={{ color: '#F5F0EB' }}>Built for appointment-based</span>{' '}
+              <span className="gradient-text-purple">businesses.</span>
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1.0625rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '560px',
-            }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#A09890', lineHeight: 1.75, maxWidth: '560px' }}>
               If your business runs on bookings, phone calls, and repeat clients, we build the AI systems that make sure nothing falls through the cracks. Every industry has the same core gaps. We've built the fixes for all of them.
             </p>
           </FadeItem>
@@ -218,35 +204,23 @@ export default function Industries() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="section-pad" style={{ backgroundColor: 'rgba(26,26,26,0.55)' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: '6rem 0', borderTop: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(139,92,246,0.14) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeItem delay={0}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>Ready to Get Started?</p>
-            <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.1,
-              marginBottom: '1.25rem',
-              maxWidth: '600px',
-              margin: '0 auto 1.25rem',
-            }}>
+            <span className="pill-badge" style={{ marginBottom: '1.5rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              Ready to Get Started?
+            </span>
+            <h2 className="gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.25rem', maxWidth: '600px', margin: '0 auto 1.25rem', display: 'block' }}>
               Don't see your industry? Let's talk anyway.
             </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '480px',
-              margin: '0 auto 2.5rem',
-            }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto 2.5rem' }}>
               If your business runs on appointments, phone calls, and repeat clients, we can almost certainly help. Book a free 15-minute intro call and we'll tell you honestly what's possible.
             </p>
-            <a href="/book" className="btn-primary">
-              Book Free Intro Call
-              <ArrowRight size={14} />
+            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
+              Book Free Intro Call <ArrowRight size={16} />
             </a>
           </FadeItem>
         </div>

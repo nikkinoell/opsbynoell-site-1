@@ -56,57 +56,30 @@ const differentiators = [
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: 'transparent' }}>
+    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section style={{
-        paddingTop: '110px',
-        paddingBottom: '3rem',
-        backgroundColor: 'transparent',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', left: '-100px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(139,92,246,0.16) 0%, transparent 65%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '60px', right: '-80px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.5, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
           <FadeItem delay={0}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>About Ops by Noell</p>
+            <span className="pill-badge" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              About Ops by Noell
+            </span>
           </FadeItem>
           <FadeItem delay={0.1}>
-            <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              maxWidth: '720px',
-              marginBottom: '1.5rem',
-            }}>
-              Built by The Noells.{' '}
-              <span style={{ color: '#A78BFA', fontWeight: 700 }}>Powered by automation. Backed by people who care.</span>
+            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', maxWidth: '800px', marginBottom: '1.75rem' }}>
+              <span style={{ color: '#F5F0EB' }}>Built by The Noells.</span>{' '}
+              <span className="gradient-text-purple">Powered by automation.</span>
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1.0625rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '580px',
-              marginBottom: '1rem',
-            }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#A09890', lineHeight: 1.75, maxWidth: '580px' }}>
               We're Nikki and James Noell, and we put our last name on this for a reason.
-            </p>
-          </FadeItem>
-          <FadeItem delay={0.25}>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1.0625rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '580px',
-            }}>
-
             </p>
           </FadeItem>
         </div>
@@ -348,35 +321,23 @@ export default function About() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="section-pad" style={{ backgroundColor: 'transparent' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: '6rem 0', borderTop: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(139,92,246,0.14) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="dot-grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeItem delay={0}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>Work With Us</p>
-            <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-              fontWeight: 700,
-              color: '#F5F0EB',
-              lineHeight: 1.1,
-              marginBottom: '1.25rem',
-              maxWidth: '600px',
-              margin: '0 auto 1.25rem',
-            }}>
+            <span className="pill-badge" style={{ marginBottom: '1.5rem', display: 'inline-flex' }}>
+              <span className="pill-badge-dot" />
+              Work With Us
+            </span>
+            <h2 className="gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.25rem', maxWidth: '600px', margin: '0 auto 1.25rem', display: 'block' }}>
               Let's find out what your gaps are costing you.
             </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1rem',
-              color: '#C8C0B8',
-              lineHeight: 1.75,
-              maxWidth: '460px',
-              margin: '0 auto 2.5rem',
-            }}>
-              15 minutes. Free. No obligation. We learn about your business, you learn about us, and we figure out together if we're the right fit.
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+              15 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
-            <a href="/book" className="btn-primary">
-              Book Free Intro Call
-              <ArrowRight size={14} />
+            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
+              Book Free Intro Call <ArrowRight size={16} />
             </a>
           </FadeItem>
         </div>
