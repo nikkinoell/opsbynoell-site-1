@@ -22,30 +22,18 @@ import CaseStudy from "./pages/CaseStudy";
 import About from "./pages/About";
 import Book from "./pages/Book";
 import BotAnalytics from "./pages/BotAnalytics";
-import Solutions from "./pages/Solutions";
-import Industries from "./pages/Industries";
 
 // SEO meta descriptions per page
 const pageMeta: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Ops by Noell — AI Automation Systems for Service Businesses",
+    title: "Ops by Noell — AI Automation Systems for Local Businesses",
     description:
-      "Done-for-you AI automation systems for appointment-based service businesses. Ops by Noell designs, installs, and manages complete automation for lead capture, booking, follow-up, and reviews.",
+      "Done-for-you AI automation systems for Orange County local service businesses. Ops by Noell designs, installs, and manages complete automation for lead capture, booking, follow-up, and reviews.",
   },
   "/services": {
     title: "Services — Ops by Noell",
     description:
-      "Complete AI automation services: missed call text-back, AI booking + reminders, review generation, lead follow-up, and marketing automation. Fully done-for-you.",
-  },
-  "/solutions": {
-    title: "AI Solutions — Ops by Noell",
-    description:
-      "Eight custom AI automation systems built for appointment-based businesses: lead qualification bots, onboarding pipelines, review generation, revenue dashboards, and more.",
-  },
-  "/industries": {
-    title: "Industries We Serve — Ops by Noell",
-    description:
-      "AI automation systems built for salons, med spas, dental offices, home services, wellness, and fitness businesses. Custom-built for appointment-based operations.",
+      "Complete AI automation services for local businesses: missed call text-back, AI booking + reminders, review generation, lead follow-up, and marketing automation. Fully done-for-you.",
   },
   "/case-study": {
     title: "Case Study: 25 Years of Expertise, Zero Infrastructure — Ops by Noell",
@@ -55,12 +43,12 @@ const pageMeta: Record<string, { title: string; description: string }> = {
   "/about": {
     title: "About — Ops by Noell",
     description:
-      "Ops by Noell builds and manages complete AI automation systems for appointment-based service businesses. We specialize in revenue-focused operational infrastructure — done for you.",
+      "Ops by Noell builds and manages complete AI automation systems for Orange County local service businesses. We specialize in revenue-focused operational infrastructure — done for you.",
   },
   "/book": {
-    title: "Book a Free Intro Call — Ops by Noell",
+    title: "Book a Free Automation Audit — Ops by Noell",
     description:
-      "Book a free 15-minute intro call with Ops by Noell. We learn about your business and figure out if automation is the right move. No pitch, no pressure.",
+      "Book a free 30-minute Revenue Leak Audit with Ops by Noell. We identify your top operational gaps and quantify what each is costing you monthly. No pitch, no obligation.",
   },
   "/analytics": {
     title: "Bot Analytics — Ops by Noell",
@@ -99,8 +87,6 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
-        <Route path="/solutions" component={Solutions} />
-        <Route path="/industries" component={Industries} />
         <Route path="/case-study" component={CaseStudy} />
         <Route path="/about" component={About} />
         <Route path="/book" component={Book} />
