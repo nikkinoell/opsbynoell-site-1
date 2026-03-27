@@ -205,7 +205,7 @@ export default function About() {
               {
                 step: '01',
                 title: 'Intro Call',
-                body: 'A free 15-minute conversation. We learn about your business, you learn about us, and we figure out if automation is the right move. No pitch. No pressure.',
+                body: 'A free 30-minute conversation. We learn about your business, you learn about us, and we figure out if automation is the right move. No pitch. No pressure.',
               },
               {
                 step: '02',
@@ -355,7 +355,7 @@ export default function About() {
               Let's find out what your gaps are costing you.
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
-              15 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
+              30 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
               Book Free Intro Call <ArrowRight size={16} />
