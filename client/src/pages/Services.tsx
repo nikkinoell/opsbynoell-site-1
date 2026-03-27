@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react';
-import { ArrowRight, Bot, Zap, MessageSquare, BarChart3, Phone, Calendar, Star, Megaphone, Settings, ChevronDown, Check, Scissors, Heart, Smile, Home as HomeIcon, Dumbbell, Stethoscope } from 'lucide-react';
+import { ArrowRight, Zap, MessageSquare, Phone, Calendar, Star, Megaphone, Settings, ChevronDown, Check, Scissors, Heart, Smile, Home as HomeIcon, Dumbbell, Stethoscope } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { useFadeIn } from '@/hooks/useFadeIn';
@@ -39,14 +39,6 @@ function GradientText({ children }: { children: React.ReactNode }) {
 
 /* ─── DATA ─────────────────────────────────────────────────────── */
 
-const BUILDS = [
-  { icon: Bot, tag: 'Conversational AI', title: 'AI Lead Qualification Bot', desc: 'A multi-step conversational AI that qualifies inbound leads via SMS or web chat, collects contact info, scores intent, and routes hot leads directly to your calendar — without any human involvement.', outcome: 'Avg. 3x increase in qualified bookings' },
-  { icon: Zap, tag: 'Workflow Automation', title: 'Full Onboarding Pipeline', desc: 'End-to-end client onboarding automation: intake forms, contract delivery, payment collection, welcome sequences, and calendar scheduling. All triggered the moment a lead converts.', outcome: 'Onboarding time reduced from 2 days to 12 minutes' },
-  { icon: MessageSquare, tag: 'Reputation Management', title: 'Review Generation Engine', desc: 'Automated post-appointment review request sequences across Google, Yelp, and Facebook. Sentiment filtering routes unhappy clients to a private feedback form before they go public.', outcome: '4x review volume in 60 days' },
-  { icon: BarChart3, tag: 'Analytics & Reporting', title: 'Automated Revenue Dashboard', desc: 'Real-time revenue tracking pulled from your booking system, CRM, and payment processor — consolidated into a single dashboard with weekly email digests and anomaly alerts.', outcome: 'Full visibility in under 30 seconds' },
-  { icon: Phone, tag: 'Voice AI', title: 'Missed Call Recovery System', desc: "Every missed call triggers an instant AI-powered text response within 10 seconds. The AI engages the lead, answers FAQs, and books appointments — all before your competitor picks up.", outcome: '< 10 sec average response time' },
-  { icon: Calendar, tag: 'Scheduling Automation', title: 'Smart Booking + Reminder Pipeline', desc: "Intelligent scheduling that syncs across calendars, sends multi-channel reminders (SMS + email), handles reschedules automatically, and fills cancellations from a waitlist.", outcome: '30–50% no-show reduction' },
-];
 
 const SERVICES = [
   {
@@ -134,7 +126,7 @@ const PACKAGES = [
   {
     name: 'Growth',
     subtitle: 'Full AI Back Office',
-    price: '$1,197',
+    price: '$1,497',
     period: '/mo · + $1,497 setup',
     desc: 'The complete operational transformation. Every system working together to capture, convert, retain, and grow, on autopilot.',
     includes: ['Everything in Starter', 'Automated Review Generation', 'Lead Follow-Up Automation', 'Marketing Automation', 'Priority support & optimization'],
@@ -214,39 +206,6 @@ export default function Services() {
               </a>
             </div>
           </FadeItem>
-        </div>
-      </section>
-
-      {/* ═══ WHAT WE BUILD — 6 specific automation builds ══════════ */}
-      <section style={{ padding: '6rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <SectionBadge>What We Build</SectionBadge>
-            <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
-              The AI systems <GradientText>we build.</GradientText>
-            </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7 }}>
-              Every system is custom-built and deployed for your specific business. We don't hand you software — we install infrastructure that runs while you focus on the work.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-            {BUILDS.map(({ icon: Icon, tag, title, desc, outcome }, i) => (
-              <FadeItem key={title} delay={i * 0.07}>
-                <div className="feature-card" style={{ padding: '2rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div className="icon-box"><Icon size={20} style={{ color: '#A78BFA' }} /></div>
-                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, color: '#868583', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tag}</span>
-                  </div>
-                  <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '1.0625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>{title}</h3>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.7, flex: 1 }}>{desc}</p>
-                  <div style={{ background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: '8px', padding: '0.625rem 0.875rem' }}>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 700, color: '#A78BFA' }}>{outcome}</p>
-                  </div>
-                </div>
-              </FadeItem>
-            ))}
-          </div>
         </div>
       </section>
 
