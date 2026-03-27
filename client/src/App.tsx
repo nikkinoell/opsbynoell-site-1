@@ -28,6 +28,7 @@ import Newsletter from "./pages/Newsletter";
 import ChatInbox from "./pages/ChatInbox";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Calculator from "./pages/Calculator";
 
 // SEO meta per page — descriptions kept to 50–160 chars; keywords are page-specific
 const pageMeta: Record<string, { title: string; description: string; keywords: string }> = {
@@ -177,6 +178,7 @@ function Router() {
         <Route path="/book" component={Book} />
         <Route path="/industries" component={Services} />
         <Route path="/newsletter" component={Newsletter} />
+        <Route path="/calculator" component={Calculator} />
         <Route path="/analytics" component={BotAnalytics} />
         <Route path="/admin/inbox" component={ChatInbox} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
