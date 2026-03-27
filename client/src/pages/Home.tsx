@@ -1,50 +1,14 @@
 /*
  * OPS BY NOELL — Home Page (NeuraFlas Design System)
- * Structure: Nav → Hero → Brand Strip → RevenueCalculator → Features → How It Works → Testimonials → CTA → Footer
+ * Structure: Nav → Hero → How It Works → Testimonials → CTA → Footer
  */
 
-import {
-  PhoneCall, CalendarCheck, Star, MessageSquare, BotMessageSquare,
-  Zap, TrendingUp, ArrowRight
-} from 'lucide-react';
+import { Star, Zap, ArrowRight } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import RevenueCalculator from '@/components/RevenueCalculator';
 
 /* ─── DATA ─────────────────────────────────────────────────────── */
 
-const FEATURES = [
-  {
-    icon: PhoneCall,
-    title: 'Missed Call Text-Back',
-    desc: 'Every missed call triggers an instant text response. The lead stays warm. You never lose another prospect to voicemail.',
-  },
-  {
-    icon: CalendarCheck,
-    title: 'Appointment Booking',
-    desc: 'Clients book themselves 24/7. No back-and-forth, no phone tag. Just filled calendars.',
-  },
-  {
-    icon: MessageSquare,
-    title: 'Lead Follow-Up Sequences',
-    desc: 'Multi-step SMS + email nurture flows that convert cold leads on autopilot.',
-  },
-  {
-    icon: Star,
-    title: 'Review Generation',
-    desc: 'Automated review requests after every job. More 5-star ratings without lifting a finger.',
-  },
-  {
-    icon: BotMessageSquare,
-    title: 'AI Receptionist',
-    desc: 'An AI that answers questions, qualifies leads, and books appointments — around the clock.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'No-Show Reduction',
-    desc: 'Automated reminder sequences at 48hr and 2hr before every appointment. No-shows drop 30-50% in the first month.',
-  },
-];
 
 const STEPS = [
   {
@@ -64,20 +28,6 @@ const STEPS = [
   },
 ];
 
-const INTEGRATIONS = [
-  { name: 'GoHighLevel', emoji: '⚡' },
-  { name: 'Calendly', emoji: '📅' },
-  { name: 'Zapier', emoji: '🔗' },
-  { name: 'Twilio', emoji: '📱' },
-  { name: 'Stripe', emoji: '💳' },
-  { name: 'Google', emoji: '🔍' },
-  { name: 'Facebook Ads', emoji: '📢' },
-  { name: 'Mailchimp', emoji: '📧' },
-  { name: 'Slack', emoji: '💬' },
-  { name: 'HubSpot', emoji: '🎯' },
-  { name: 'QuickBooks', emoji: '📊' },
-  { name: 'Yelp', emoji: '⭐' },
-];
 
 const TESTIMONIALS = [
   {
@@ -139,7 +89,6 @@ function GradientText({ children }: { children: React.ReactNode }) {
 
 /* ─── MAIN COMPONENT ─────────────────────────────────────────────── */
 export default function Home() {
-  const marqueeItems = [...INTEGRATIONS, ...INTEGRATIONS];
 
   return (
     <>
@@ -232,65 +181,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ BRAND STRIP ═══════════════════════════════════════════ */}
-      <section style={{
-        borderTop: '1px solid rgba(167,139,250,0.1)',
-        borderBottom: '1px solid rgba(167,139,250,0.1)',
-        padding: '2.5rem 0',
-        overflow: 'hidden',
-      }}>
-        <div style={{ marginBottom: '1.25rem', textAlign: 'center' }}>
-          <p style={{
-            fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem',
-            color: '#868583', letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 500,
-          }}>
-            Automation powered by the tools you already use
-          </p>
-        </div>
-        <div style={{ overflow: 'hidden', maskImage: 'linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)' }}>
-          <div className="marquee-track">
-            {marqueeItems.map((item, i) => (
-              <div key={i} className="integration-logo">
-                <span>{item.emoji}</span><span>{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ REVENUE CALCULATOR ═════════════════════════════════════════ */}
-      <RevenueCalculator />
-
-      {/* ═══ FEATURES ══════════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
-            <SectionBadge>Features</SectionBadge>
-            <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
-              Built to run your business,{' '}<GradientText>not your inbox</GradientText>
-            </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
-              Six systems that work together to capture, convert, and retain customers — automatically.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-            {FEATURES.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="feature-card" style={{ padding: '2rem' }}>
-                <div className="icon-box" style={{ marginBottom: '1.25rem' }}>
-                  <Icon size={22} style={{ color: '#A78BFA' }} />
-                </div>
-                <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.625rem', letterSpacing: '-0.01em' }}>
-                  {title}
-                </h3>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.65 }}>
-                  {desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══ HOW IT WORKS ══════════════════════════════════════════ */}
       <section style={{ padding: '7rem 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
