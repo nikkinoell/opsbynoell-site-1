@@ -28,14 +28,14 @@ function Slider({ label, sublabel, value, min, max, step, unit = '', onChange }:
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
         <div>
           <span style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Sora', sans-serif",
             fontSize: '0.8125rem',
             color: 'rgba(245,240,235,0.7)',
             letterSpacing: '0.01em',
           }}>{label}</span>
           {sublabel && (
             <span style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.6875rem',
               color: 'rgba(245,240,235,0.35)',
               marginLeft: '0.5rem',
@@ -43,7 +43,7 @@ function Slider({ label, sublabel, value, min, max, step, unit = '', onChange }:
           )}
         </div>
         <span style={{
-          fontFamily: "'Space Grotesk', sans-serif",
+          fontFamily: "'Satoshi', sans-serif",
           fontSize: '1.125rem',
           color: '#A78BFA',
           fontWeight: 600,
@@ -137,13 +137,13 @@ function CostPill({ label, cost, assumption }: CostPillProps) {
         }}
       >
         <span style={{
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "'Sora', sans-serif",
           fontSize: '0.8125rem',
           color: 'rgba(245,240,235,0.55)',
           flexGrow: 1,
         }}>{label}</span>
         <span style={{
-          fontFamily: "'Space Grotesk', sans-serif",
+          fontFamily: "'Satoshi', sans-serif",
           fontSize: '1rem',
           color: '#A78BFA',
           fontWeight: 600,
@@ -166,7 +166,7 @@ function CostPill({ label, cost, assumption }: CostPillProps) {
           zIndex: 10,
         }}>
           <p style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Sora', sans-serif",
             fontSize: '0.6875rem',
             color: 'rgba(245,240,235,0.5)',
             lineHeight: 1.6,
@@ -218,10 +218,10 @@ export default function RevenueCalculator() {
             The Cost of Waiting
           </p>
           <h2 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: "'Satoshi', sans-serif",
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
             fontWeight: 800,
-            color: '#F5F0EB',
+            color: '#F5F0EC',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
             marginBottom: '0.875rem',
@@ -229,9 +229,9 @@ export default function RevenueCalculator() {
             Enter your numbers. See exactly what inaction is costing you.
           </h2>
           <p style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Sora', sans-serif",
             fontSize: '0.9375rem',
-            color: '#8A8480',
+            color: '#868583',
             lineHeight: 1.75,
           }}>
             Adjust the sliders to match your business. The estimates update instantly. Click any cost row to see the assumption behind the number.
@@ -254,7 +254,7 @@ export default function RevenueCalculator() {
             padding: '2rem',
           }}>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.625rem',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
@@ -316,7 +316,7 @@ export default function RevenueCalculator() {
             />
 
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.6875rem',
               color: 'rgba(245,240,235,0.2)',
               lineHeight: 1.6,
@@ -331,7 +331,7 @@ export default function RevenueCalculator() {
           {/* RIGHT: Results */}
           <div>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.625rem',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
@@ -382,7 +382,7 @@ export default function RevenueCalculator() {
             }}>
               <div>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.625rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
@@ -392,10 +392,10 @@ export default function RevenueCalculator() {
                   Total estimated monthly loss
                 </p>
                 <p style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontFamily: "'Satoshi', sans-serif",
                   fontSize: 'clamp(2.25rem, 4vw, 3rem)',
                   fontWeight: 800,
-                  color: '#F5F0EB',
+                  color: '#F5F0EC',
                   lineHeight: 1,
                   letterSpacing: '-0.03em',
                   transition: 'all 0.3s ease',
@@ -403,7 +403,7 @@ export default function RevenueCalculator() {
                   {fmt(costs.total)}
                 </p>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.6875rem',
                   color: 'rgba(245,240,235,0.3)',
                   marginTop: '0.25rem',
@@ -412,7 +412,7 @@ export default function RevenueCalculator() {
                 </p>
               </div>
               <div style={{
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Satoshi', sans-serif",
                 fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                 fontWeight: 700,
                 color: 'rgba(167,139,250,0.2)',
@@ -421,7 +421,7 @@ export default function RevenueCalculator() {
                 textAlign: 'right',
               }}>
                 {fmt(costs.total * 12)}<br />
-                <span style={{ fontSize: '0.5em', color: 'rgba(167,139,250,0.3)', letterSpacing: '0.05em', fontFamily: "'Inter', sans-serif", fontWeight: 400 }}>
+                <span style={{ fontSize: '0.5em', color: 'rgba(167,139,250,0.3)', letterSpacing: '0.05em', fontFamily: "'Sora', sans-serif", fontWeight: 400 }}>
                   / year
                 </span>
               </div>
@@ -430,9 +430,9 @@ export default function RevenueCalculator() {
             {/* CTA */}
             <div>
               <p style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Sora', sans-serif",
                 fontSize: '0.9375rem',
-                color: '#8A8480',
+                color: '#868583',
                 lineHeight: 1.75,
                 marginBottom: '1.25rem',
               }}>
@@ -446,7 +446,7 @@ export default function RevenueCalculator() {
                   gap: '0.625rem',
                   backgroundColor: '#A78BFA',
                   color: '#0A0A0A',
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.9375rem',
                   fontWeight: 700,
                   letterSpacing: '-0.01em',

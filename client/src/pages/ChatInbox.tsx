@@ -69,7 +69,7 @@ export default function ChatInbox() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#0A0A0A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#8A8480', fontFamily: "'Inter', sans-serif" }}>Loading...</div>
+        <div style={{ color: '#868583', fontFamily: "'Sora', sans-serif" }}>Loading...</div>
       </div>
     );
   }
@@ -82,9 +82,9 @@ export default function ChatInbox() {
   if (user.role !== 'admin') {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#0A0A0A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#F5F0EB', fontFamily: "'Inter', sans-serif", textAlign: 'center' }}>
+        <div style={{ color: '#F5F0EC', fontFamily: "'Sora', sans-serif", textAlign: 'center' }}>
           <p style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Access Denied</p>
-          <p style={{ color: '#8A8480', fontSize: '0.875rem' }}>Admin access required.</p>
+          <p style={{ color: '#868583', fontSize: '0.875rem' }}>Admin access required.</p>
         </div>
       </div>
     );
@@ -118,7 +118,7 @@ export default function ChatInbox() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <MessageSquare size={20} color="#A78BFA" />
-          <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, color: '#F5F0EB', fontSize: '1rem' }}>
+          <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#F5F0EC', fontSize: '1rem' }}>
             Nova Chat Inbox
           </span>
           {totalUnread > 0 && (
@@ -129,7 +129,7 @@ export default function ChatInbox() {
               padding: '0.125rem 0.5rem',
               fontSize: '0.6875rem',
               fontWeight: 700,
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
             }}>
               {totalUnread} unread
             </span>
@@ -138,12 +138,12 @@ export default function ChatInbox() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button
             onClick={() => { refetchSessions(); if (selectedSession) refetchMessages(); }}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#8A8480', display: 'flex', alignItems: 'center', gap: '0.375rem' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#868583', display: 'flex', alignItems: 'center', gap: '0.375rem' }}
           >
             <RefreshCw size={14} />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.75rem' }}>Refresh</span>
+            <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem' }}>Refresh</span>
           </button>
-          <a href="/" style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: '#8A8480', textDecoration: 'none' }}>
+          <a href="/" style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', textDecoration: 'none' }}>
             ← Back to site
           </a>
         </div>
@@ -160,11 +160,11 @@ export default function ChatInbox() {
           backgroundColor: '#0F0F0F',
         }}>
           {sessionsLoading ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#8A8480', fontFamily: "'Inter', sans-serif", fontSize: '0.875rem' }}>
+            <div style={{ padding: '2rem', textAlign: 'center', color: '#868583', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem' }}>
               Loading sessions...
             </div>
           ) : !sessions || sessions.length === 0 ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#8A8480', fontFamily: "'Inter', sans-serif", fontSize: '0.875rem' }}>
+            <div style={{ padding: '2rem', textAlign: 'center', color: '#868583', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem' }}>
               No conversations yet.<br />
               <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>Chats from the website widget will appear here.</span>
             </div>
@@ -194,13 +194,13 @@ export default function ChatInbox() {
                     {session.humanTakeover ? (
                       <UserCheck size={14} color="#A78BFA" />
                     ) : (
-                      <Bot size={14} color="#8A8480" />
+                      <Bot size={14} color="#868583" />
                     )}
                     <span style={{
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.8125rem',
                       fontWeight: 600,
-                      color: '#F5F0EB',
+                      color: '#F5F0EC',
                     }}>
                       {session.visitorName ?? 'Anonymous Visitor'}
                     </span>
@@ -210,21 +210,21 @@ export default function ChatInbox() {
                   )}
                 </div>
                 {session.visitorEmail && (
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6875rem', color: '#8A8480', marginBottom: '0.125rem' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: '#868583', marginBottom: '0.125rem' }}>
                     {session.visitorEmail}
                   </p>
                 )}
                 {session.businessType && (
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6875rem', color: '#6A6460' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: '#868583' }}>
                     {session.businessType}
                   </p>
                 )}
                 {session.visitorLocation && (
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6875rem', color: '#5A5450', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: '#5A5450', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     📍 {session.visitorLocation}
                   </p>
                 )}
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', color: '#4A4440', marginTop: '0.375rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', color: '#4A4440', marginTop: '0.375rem' }}>
                   {new Date(session.updatedAt).toLocaleString()}
                 </p>
               </div>
@@ -237,7 +237,7 @@ export default function ChatInbox() {
           {!selectedSession ? (
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1rem' }}>
               <MessageSquare size={40} color="#2A2A2A" />
-              <p style={{ fontFamily: "'Inter', sans-serif", color: '#4A4440', fontSize: '0.875rem' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", color: '#4A4440', fontSize: '0.875rem' }}>
                 Select a conversation to view messages
               </p>
             </div>
@@ -253,10 +253,10 @@ export default function ChatInbox() {
                 justifyContent: 'space-between',
               }}>
                 <div>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, color: '#F5F0EB', fontSize: '0.875rem' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#F5F0EC', fontSize: '0.875rem' }}>
                     {selectedSessionData?.visitorName ?? 'Anonymous Visitor'}
                   </p>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6875rem', color: '#8A8480' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: '#868583' }}>
                     {selectedSessionData?.visitorEmail ?? 'No email'} · {selectedSessionData?.businessType ?? 'Business type unknown'}
                     {selectedSessionData?.visitorLocation && (
                       <span style={{ marginLeft: '0.5rem', color: '#5A5450' }}>· 📍 {selectedSessionData.visitorLocation}</span>
@@ -268,9 +268,9 @@ export default function ChatInbox() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <span style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '0.6875rem',
-                    color: selectedSessionData?.humanTakeover ? '#A78BFA' : '#8A8480',
+                    color: selectedSessionData?.humanTakeover ? '#A78BFA' : '#868583',
                   }}>
                     {selectedSessionData?.humanTakeover ? 'Human takeover ON' : 'Bot mode'}
                   </span>
@@ -281,12 +281,12 @@ export default function ChatInbox() {
                     })}
                     style={{
                       backgroundColor: selectedSessionData?.humanTakeover ? '#A78BFA' : '#2A2A2A',
-                      color: selectedSessionData?.humanTakeover ? '#0A0A0A' : '#F5F0EB',
+                      color: selectedSessionData?.humanTakeover ? '#0A0A0A' : '#F5F0EC',
                       border: 'none',
                       borderRadius: '6px',
                       padding: '0.375rem 0.75rem',
                       cursor: 'pointer',
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.6875rem',
                       fontWeight: 600,
                       display: 'flex',
@@ -303,7 +303,7 @@ export default function ChatInbox() {
               {/* Messages */}
               <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {!messages || messages.length === 0 ? (
-                  <div style={{ textAlign: 'center', color: '#4A4440', fontFamily: "'Inter', sans-serif", fontSize: '0.875rem', marginTop: '2rem' }}>
+                  <div style={{ textAlign: 'center', color: '#4A4440', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', marginTop: '2rem' }}>
                     No messages yet
                   </div>
                 ) : (
@@ -322,7 +322,7 @@ export default function ChatInbox() {
                           width: '28px', height: '28px', borderRadius: '50%',
                           backgroundColor: '#2A2A2A', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                         }}>
-                          <User size={14} color="#8A8480" />
+                          <User size={14} color="#868583" />
                         </div>
                       )}
                       <div style={{
@@ -333,28 +333,28 @@ export default function ChatInbox() {
                       }}>
                         {msg.role !== 'visitor' && (
                           <p style={{
-                            fontFamily: "'Inter', sans-serif",
+                            fontFamily: "'Sora', sans-serif",
                             fontSize: '0.5625rem',
                             fontWeight: 600,
                             letterSpacing: '0.08em',
                             textTransform: 'uppercase',
-                            color: msg.role === 'human' ? '#0A0A0A' : '#8A8480',
+                            color: msg.role === 'human' ? '#0A0A0A' : '#868583',
                             marginBottom: '0.25rem',
                           }}>
                             {msg.role === 'human' ? 'You (Nova)' : 'Nova Bot'}
                           </p>
                         )}
                         <p style={{
-                          fontFamily: "'Inter', sans-serif",
+                          fontFamily: "'Sora', sans-serif",
                           fontSize: '0.8125rem',
-                          color: msg.role === 'human' ? '#0A0A0A' : '#F5F0EB',
+                          color: msg.role === 'human' ? '#0A0A0A' : '#F5F0EC',
                           lineHeight: 1.5,
                           whiteSpace: 'pre-wrap',
                         }}>
                           {msg.content}
                         </p>
                         <p style={{
-                          fontFamily: "'Inter', sans-serif",
+                          fontFamily: "'Sora', sans-serif",
                           fontSize: '0.5625rem',
                           color: msg.role === 'human' ? 'rgba(10,10,10,0.5)' : '#4A4440',
                           marginTop: '0.25rem',
@@ -369,7 +369,7 @@ export default function ChatInbox() {
                           backgroundColor: msg.role === 'human' ? '#A78BFA' : '#2A2A2A',
                           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                         }}>
-                          {msg.role === 'human' ? <UserCheck size={14} color="#0A0A0A" /> : <Bot size={14} color="#8A8480" />}
+                          {msg.role === 'human' ? <UserCheck size={14} color="#0A0A0A" /> : <Bot size={14} color="#868583" />}
                         </div>
                       )}
                     </div>
@@ -400,9 +400,9 @@ export default function ChatInbox() {
                       border: '1px solid #2A2A2A',
                       borderRadius: '8px',
                       padding: '0.625rem 0.875rem',
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.8125rem',
-                      color: '#F5F0EB',
+                      color: '#F5F0EC',
                       resize: 'none',
                       outline: 'none',
                       lineHeight: 1.5,

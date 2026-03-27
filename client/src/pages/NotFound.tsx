@@ -18,7 +18,7 @@ export default function NotFound() {
         <div style={{ textAlign: 'center', maxWidth: '560px' }}>
           {/* Large 404 */}
           <p style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: "'Satoshi', sans-serif",
             fontSize: 'clamp(6rem, 20vw, 12rem)',
             fontWeight: 800,
             color: 'rgba(167,139,250,0.12)',
@@ -31,10 +31,10 @@ export default function NotFound() {
           </p>
 
           <h1 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: "'Satoshi', sans-serif",
             fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
             fontWeight: 800,
-            color: '#F5F0EB',
+            color: '#F5F0EC',
             lineHeight: 1.1,
             letterSpacing: '-0.03em',
             marginBottom: '1.25rem',
@@ -43,9 +43,9 @@ export default function NotFound() {
           </h1>
 
           <p style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Sora', sans-serif",
             fontSize: '1rem',
-            color: '#8A8480',
+            color: '#868583',
             lineHeight: 1.75,
             marginBottom: '2.5rem',
           }}>
@@ -60,7 +60,7 @@ export default function NotFound() {
                 gap: '0.5rem',
                 backgroundColor: '#A78BFA',
                 color: '#0A0A0A',
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Sora', sans-serif",
                 fontSize: '0.875rem',
                 fontWeight: 700,
                 letterSpacing: '0.04em',
@@ -80,8 +80,8 @@ export default function NotFound() {
                 alignItems: 'center',
                 gap: '0.5rem',
                 backgroundColor: 'transparent',
-                color: '#F5F0EB',
-                fontFamily: "'Inter', sans-serif",
+                color: '#F5F0EC',
+                fontFamily: "'Sora', sans-serif",
                 fontSize: '0.875rem',
                 fontWeight: 700,
                 letterSpacing: '0.04em',

@@ -77,10 +77,10 @@ function FAQSection() {
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>FAQ</p>
             <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Satoshi', sans-serif",
               fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
               fontWeight: 800,
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
             }}>
@@ -113,10 +113,10 @@ function FAQSection() {
                   }}
                 >
                   <span style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '0.9375rem',
                     fontWeight: 600,
-                    color: open === i ? '#A78BFA' : '#F5F0EB',
+                    color: open === i ? '#A78BFA' : '#F5F0EC',
                     lineHeight: 1.4,
                     transition: 'color 0.2s ease',
                   }}>
@@ -137,7 +137,7 @@ function FAQSection() {
                     transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)',
                   }}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M5 2V8M2 5H8" stroke={open === i ? '#A78BFA' : '#8A8480'} strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M5 2V8M2 5H8" stroke={open === i ? '#A78BFA' : '#868583'} strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
                   </span>
                 </button>
@@ -147,9 +147,9 @@ function FAQSection() {
                   transition: 'max-height 0.35s ease',
                 }}>
                   <p style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '0.9rem',
-                    color: '#8A8480',
+                    color: '#868583',
                     lineHeight: 1.75,
                     paddingBottom: '1.375rem',
                   }}>
@@ -237,7 +237,7 @@ export default function Solutions() {
 
           <FadeItem delay={0.08}>
             <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Satoshi', sans-serif",
               fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)',
               fontWeight: 800,
               lineHeight: 1.0,
@@ -245,13 +245,13 @@ export default function Solutions() {
               marginBottom: '1.75rem',
               maxWidth: '800px',
             }}>
-              <span style={{ color: '#F5F0EB' }}>The AI systems</span>{' '}
+              <span style={{ color: '#F5F0EC' }}>The AI systems</span>{' '}
               <span className="gradient-text-purple">we build.</span>
             </h1>
           </FadeItem>
 
           <FadeItem delay={0.16}>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#A09890', lineHeight: 1.75, maxWidth: '560px', marginBottom: '2.75rem' }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#A09890', lineHeight: 1.75, maxWidth: '560px', marginBottom: '2.75rem' }}>
               Every system below is custom-built and deployed for your specific business. We don't hand you software — we install infrastructure that runs your business while you focus on the work.
             </p>
           </FadeItem>
@@ -261,9 +261,9 @@ export default function Solutions() {
               <a href="/book" className="btn-gradient" style={{ fontSize: '1rem', padding: '1rem 2.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
                 Get a Custom Build <ArrowRight size={16} />
               </a>
-              <Link href="/services" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.9375rem', fontWeight: 600, color: '#8A8480', textDecoration: 'none', transition: 'color 0.15s ease' }}
+              <Link href="/services" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', fontWeight: 600, color: '#868583', textDecoration: 'none', transition: 'color 0.15s ease' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#C4B5FD'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#8A8480'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#868583'; }}
               >
                 View Packages <ArrowRight size={14} />
               </Link>
@@ -302,10 +302,10 @@ export default function Solutions() {
                       <build.icon size={18} color="#A78BFA" />
                     </div>
                     <span style={{
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.6875rem',
                       fontWeight: 700,
-                      color: '#8A8480',
+                      color: '#868583',
                       letterSpacing: '0.08em',
                       textTransform: 'uppercase',
                     }}>{build.tag}</span>
@@ -313,19 +313,19 @@ export default function Solutions() {
 
                   {/* Title */}
                   <h3 style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '1.0625rem',
                     fontWeight: 700,
-                    color: '#F5F0EB',
+                    color: '#F5F0EC',
                     lineHeight: 1.3,
                     letterSpacing: '-0.01em',
                   }}>{build.title}</h3>
 
                   {/* Description */}
                   <p style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '0.875rem',
-                    color: '#8A8480',
+                    color: '#868583',
                     lineHeight: 1.7,
                     flex: 1,
                   }}>{build.description}</p>
@@ -333,9 +333,9 @@ export default function Solutions() {
                   {/* Perfect for */}
                   {'perfectFor' in build && (
                     <p style={{
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.8125rem',
-                      color: '#8A8480',
+                      color: '#868583',
                       lineHeight: 1.6,
                     }}>
                       <span style={{ color: '#A78BFA', fontWeight: 600 }}>Perfect for: </span>
@@ -353,7 +353,7 @@ export default function Solutions() {
                     padding: '0.75rem 1rem',
                   }}>
                     <p style={{
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Sora', sans-serif",
                       fontSize: '0.8125rem',
                       fontWeight: 700,
                       color: '#A78BFA',
@@ -383,7 +383,7 @@ export default function Solutions() {
                 Don't see what you need?
               </span>
               <h2 className="gradient-text" style={{
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Satoshi', sans-serif",
                 fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                 fontWeight: 800,
                 lineHeight: 1.05,
@@ -393,7 +393,7 @@ export default function Solutions() {
               }}>
                 We build custom AI systems for your exact workflow.
               </h2>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, marginBottom: '2.5rem' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#A09890', lineHeight: 1.75, marginBottom: '2.5rem' }}>
                 Every business is different. Start with a free 30-minute intro call and we'll show you exactly what we'd build to fix it.
               </p>
               <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>

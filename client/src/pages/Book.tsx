@@ -120,10 +120,10 @@ export default function Book() {
           </FadeItem>
           <FadeItem delay={0.1}>
             <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Satoshi', sans-serif",
               fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               fontWeight: 700,
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
               maxWidth: '680px',
@@ -134,9 +134,9 @@ export default function Book() {
           </FadeItem>
           <FadeItem delay={0.2}>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '1.0625rem',
-              color: '#C8C0B8',
+              color: '#868583',
               lineHeight: 1.75,
               maxWidth: '520px',
             }}>
@@ -164,7 +164,7 @@ export default function Book() {
                         alignItems: 'flex-start',
                         gap: '1.25rem',
                         padding: '1.5rem 0',
-                        borderBottom: i < expectations.length - 1 ? '1px solid #FFFFFF' : 'none',
+                        borderBottom: i < expectations.length - 1 ? '1px solid rgba(167,139,250,0.12)' : 'none',
                       }}
                     >
                       <div style={{
@@ -180,15 +180,15 @@ export default function Book() {
                       </div>
                       <div>
                         <h3 style={{
-                          fontFamily: "'Inter', sans-serif",
+                          fontFamily: "'Sora', sans-serif",
                           fontSize: '1.25rem',
                           fontWeight: 700,
-                          color: '#F5F0EB',
+                          color: '#F5F0EC',
                           marginBottom: '0.375rem',
                         }}>
                           {item.title}
                         </h3>
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.875rem', color: '#C8C0B8', lineHeight: 1.7 }}>
+                        <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.7 }}>
                           {item.detail}
                         </p>
                       </div>
@@ -227,15 +227,15 @@ export default function Book() {
               ].map((item, i) => (
                 <div key={i} style={{ textAlign: 'center' }}>
                   <p style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '1.5rem',
                     fontWeight: 700,
-                    color: '#F5F0EB',
+                    color: '#F5F0EC',
                     marginBottom: '0.25rem',
                   }}>
                     {item.label}
                   </p>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: '#C8C0B8', letterSpacing: '0.06em' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', letterSpacing: '0.06em' }}>
                     {item.sub}
                   </p>
                 </div>
@@ -251,10 +251,10 @@ export default function Book() {
           <FadeItem delay={0}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>Still Have Questions?</p>
             <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Satoshi', sans-serif",
               fontSize: 'clamp(2rem, 3.5vw, 3rem)',
               fontWeight: 700,
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               lineHeight: 1.1,
               marginBottom: '1.25rem',
               maxWidth: '560px',
@@ -263,9 +263,9 @@ export default function Book() {
               The intro call answers everything. It costs nothing.
             </h2>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '1rem',
-              color: '#C8C0B8',
+              color: '#868583',
               lineHeight: 1.75,
               maxWidth: '420px',
               margin: '0 auto 2.5rem',

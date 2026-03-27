@@ -78,10 +78,10 @@ export default function Newsletter() {
           </FadeItem>
           <FadeItem delay={0.1}>
             <h1 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Satoshi', sans-serif",
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',
               fontWeight: 700,
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
               marginBottom: '1.5rem',
@@ -92,9 +92,9 @@ export default function Newsletter() {
           </FadeItem>
           <FadeItem delay={0.2}>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '1.0625rem',
-              color: '#C8C0B8',
+              color: '#868583',
               lineHeight: 1.75,
               marginBottom: '2.5rem',
             }}>
@@ -110,7 +110,7 @@ export default function Newsletter() {
                 {topics.map((topic, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem' }}>
                     <CheckCircle size={16} color="#A78BFA" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9375rem', color: '#C8C0B8', lineHeight: 1.6 }}>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.6 }}>
                       {topic}
                     </p>
                   </div>
@@ -130,15 +130,15 @@ export default function Newsletter() {
               }}>
                 <CheckCircle size={32} color="#A78BFA" style={{ margin: '0 auto 1rem' }} />
                 <h3 style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontFamily: "'Satoshi', sans-serif",
                   fontSize: '1.25rem',
                   fontWeight: 700,
-                  color: '#F5F0EB',
+                  color: '#F5F0EC',
                   marginBottom: '0.5rem',
                 }}>
                   {alreadySubscribed ? 'Already subscribed.' : "You're in."}
                 </h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9375rem', color: '#C8C0B8', lineHeight: 1.6 }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.6 }}>
                   {alreadySubscribed
                     ? 'That email is already on the list. You\'ll hear from us when there\'s something worth reading.'
                     : "Check your inbox. A welcome email is on its way. We'll be in touch when there's something worth reading."}
@@ -157,8 +157,8 @@ export default function Newsletter() {
                         width: '100%',
                         backgroundColor: 'rgba(20,20,20,0.6)',
                         border: `1px solid ${error ? '#EF4444' : '#2A2A2A'}`,
-                        color: '#F5F0EB',
-                        fontFamily: "'Inter', sans-serif",
+                        color: '#F5F0EC',
+                        fontFamily: "'Sora', sans-serif",
                         fontSize: '1rem',
                         padding: '0.875rem 1.25rem',
                         outline: 'none',
@@ -169,7 +169,7 @@ export default function Newsletter() {
                       onBlur={(e) => { (e.currentTarget as HTMLElement).style.borderColor = error ? '#EF4444' : '#2A2A2A'; }}
                     />
                     {error && (
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8125rem', color: '#EF4444', marginTop: '0.375rem' }}>
+                      <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#EF4444', marginTop: '0.375rem' }}>
                         {error}
                       </p>
                     )}
@@ -185,18 +185,18 @@ export default function Newsletter() {
                   </button>
                 </div>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.8125rem',
-                  color: '#8A8480',
+                  color: '#868583',
                   marginTop: '0.875rem',
                   lineHeight: 1.5,
                 }}>
                   No spam. Unsubscribe anytime. We respect your inbox.
                 </p>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.75rem',
-                  color: '#6A6460',
+                  color: '#868583',
                   marginTop: '0.5rem',
                   lineHeight: 1.6,
                   textAlign: 'center',

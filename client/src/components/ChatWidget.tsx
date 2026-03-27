@@ -499,16 +499,16 @@ export default function ChatWidget() {
             onClick={openChat}
           >
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.8125rem',
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               lineHeight: 1.5,
               marginBottom: '0.375rem',
             }}>
               Have a question? I'm Nova, ask me anything.
             </p>
             <p style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.75rem',
               color: '#A78BFA',
               display: 'flex',
@@ -616,22 +616,22 @@ export default function ChatWidget() {
               justifyContent: 'center',
               flexShrink: 0,
             }}>
-              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.875rem', color: '#0A0A0A', fontWeight: 700 }}>N</span>
+              <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '0.875rem', color: '#0A0A0A', fontWeight: 700 }}>N</span>
             </div>
             <div>
-              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.875rem', fontWeight: 700, color: '#F5F0EB', lineHeight: 1.2 }}>
+              <p style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '0.875rem', fontWeight: 700, color: '#F5F0EC', lineHeight: 1.2 }}>
                 Ops by Noell
               </p>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8A8480' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#868583' }}>
                 Typically replies in minutes
               </p>
             </div>
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#8A8480', display: 'flex', alignItems: 'center', borderRadius: '4px', transition: 'color 0.15s ease' }}
-            onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EB'}
-            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#8A8480'}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#868583', display: 'flex', alignItems: 'center', borderRadius: '4px', transition: 'color 0.15s ease' }}
+            onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EC'}
+            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#868583'}
             aria-label="Close chat"
           >
             <X size={16} />
@@ -668,9 +668,9 @@ export default function ChatWidget() {
                 borderLeft: msg.role === 'bot' ? '2px solid #2A2A2A' : 'none',
               }}>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.8125rem',
-                  color: msg.role === 'user' ? '#0A0A0A' : '#C8C0B8',
+                  color: msg.role === 'user' ? '#0A0A0A' : '#868583',
                   lineHeight: 1.6,
                   whiteSpace: 'pre-line',
                   margin: 0,
@@ -704,21 +704,21 @@ export default function ChatWidget() {
                     borderRadius: '8px',
                     padding: '0.5rem 0.75rem',
                     cursor: 'pointer',
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Sora', sans-serif",
                     fontSize: '0.75rem',
-                    color: '#C8C0B8',
+                    color: '#868583',
                     lineHeight: 1.4,
                     transition: 'background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease',
                   }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(167,139,250,0.08)';
                     (e.currentTarget as HTMLButtonElement).style.borderColor = '#A78BFA';
-                    (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EB';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EC';
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
                     (e.currentTarget as HTMLButtonElement).style.borderColor = '#2A2A2A';
-                    (e.currentTarget as HTMLButtonElement).style.color = '#C8C0B8';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#868583';
                   }}
                 >
                   {q}
@@ -751,16 +751,16 @@ export default function ChatWidget() {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.6875rem',
-                  color: '#8A8480',
+                  color: '#868583',
                   textDecoration: 'underline',
                   textUnderlineOffset: '3px',
                   padding: '0.25rem 0',
                   transition: 'color 0.15s ease',
                 }}
                 onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = '#A78BFA'}
-                onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#8A8480'}
+                onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#868583'}
               >
                 Still need help? Talk to a person
               </button>
@@ -779,7 +779,7 @@ export default function ChatWidget() {
               marginTop: '0.25rem',
               animation: 'chatFadeIn 0.4s ease-out',
             }}>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: '#8A8480', marginBottom: '0.625rem', lineHeight: 1.5 }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', marginBottom: '0.625rem', lineHeight: 1.5 }}>
                 Want to see exactly where your revenue is leaking?
               </p>
               <button
@@ -793,7 +793,7 @@ export default function ChatWidget() {
                   borderRadius: '6px',
                   padding: '0.5rem 0.875rem',
                   cursor: 'pointer',
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Sora', sans-serif",
                   fontSize: '0.6875rem',
                   fontWeight: 600,
                   letterSpacing: '0.08em',
@@ -844,9 +844,9 @@ export default function ChatWidget() {
               borderColor: '#2A2A2A',
               borderRadius: '8px',
               padding: '0.5rem 0.75rem',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Sora', sans-serif",
               fontSize: '0.8125rem',
-              color: '#F5F0EB',
+              color: '#F5F0EC',
               backgroundColor: '#0A0A0A',
               outline: 'none',
               transition: 'border-color 0.2s ease',
@@ -885,7 +885,7 @@ export default function ChatWidget() {
             textAlign: 'center',
             flexShrink: 0,
           }}>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.625rem', color: '#4A4A4A', lineHeight: 1.5 }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', color: '#4A4A4A', lineHeight: 1.5 }}>
               By continuing, you agree to our{' '}
               <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#A78BFA', textDecoration: 'underline' }}>Privacy Policy</a>
               {' '}and{' '}
@@ -902,7 +902,7 @@ export default function ChatWidget() {
           textAlign: 'center',
           flexShrink: 0,
         }}>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.5625rem', color: '#3A3A3A', letterSpacing: '0.08em' }}>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.5625rem', color: '#3A3A3A', letterSpacing: '0.08em' }}>
             Ops by Noell · hello@opsbynoell.com
           </p>
         </div>

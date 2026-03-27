@@ -75,7 +75,7 @@ export default function About() {
         {/* Hero gradient bg */}
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-          background: 'linear-gradient(180deg, rgba(36,64,180,0.18) 0%, rgba(100,50,220,0.12) 35%, #010509 72%)',
+          background: 'linear-gradient(180deg, rgba(120,58,237,0.18) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)',
         }} />
         <div style={{ position: 'absolute', top: '-80px', left: '-100px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ position: 'absolute', top: '60px', right: '-80px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
@@ -100,7 +100,7 @@ export default function About() {
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '580px' }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#868583', lineHeight: 1.75, maxWidth: '580px' }}>
               We're Nikki and James Noell, and we put our last name on this for a reason.
             </p>
           </FadeItem>
@@ -124,19 +124,19 @@ export default function About() {
                 }}>
                   We come from operations. We build what actually works.
                 </h2>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   We're Nikki and James Noell, a husband-and-wife team from Lake Forest, California. We've spent years inside fast-growing companies building systems, managing operations, and fixing what was broken. That's just how we're wired.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   We kept seeing the same thing: talented people running great businesses, losing clients not because of bad service, but because nothing happened after the call. No follow-up. No reminder. No review request. The work was excellent. The systems behind it were nonexistent.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   So we built the fix. And then we built it for everyone else.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   Today, we work with appointment-based service businesses, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8 }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8 }}>
                   Ops by Noell is our family name on the door. That means something to us. Every system we build, we build like it's our own business on the line. Because in a way, it is.
                 </p>
               </div>
@@ -167,7 +167,7 @@ export default function About() {
                     }}>
                       {stat.label}
                     </p>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#6b7280' }}>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583' }}>
                       {stat.sub}
                     </p>
                   </div>
@@ -194,7 +194,7 @@ export default function About() {
               }}>
                 Most automation stops at the surface. We go deeper.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#a0a8b8', lineHeight: 1.8 }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', lineHeight: 1.8 }}>
                 Most hand you a login and call it done. We built Ops by Noell because we believed businesses deserved something different: a partner who builds the system, runs it, and stands behind it.
               </p>
             </div>
@@ -240,7 +240,7 @@ export default function About() {
                   }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.75, position: 'relative', zIndex: 1 }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75, position: 'relative', zIndex: 1 }}>
                     {item.body}
                   </p>
                 </div>
@@ -308,7 +308,7 @@ export default function About() {
                   }}>
                     {d.title}
                   </h3>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.75 }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75 }}>
                     {d.body}
                   </p>
                   {d.highlight && (
@@ -354,7 +354,7 @@ export default function About() {
             }}>
               Let's find out what your gaps are costing you.
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>

@@ -6,17 +6,17 @@
  *   Primary bg:    #0A0A0A  (near-black)
  *   Card bg:       #141414
  *   Alt section:   #1A1A1A
- *   Primary text:  #F5F0EB  (warm off-white)
- *   Muted text:    #8A8480
+ *   Primary text:  #F5F0EC  (warm off-white)
+ *   Muted text:    #868583
  *   Accent:        #A78BFA  (soft violet — premium AI)
  *   Border:        #2A2A2A
  *   Btn primary:   #A78BFA bg, #0A0A0A text
- *   Btn secondary: transparent bg, #F5F0EB border and text
+ *   Btn secondary: transparent bg, #F5F0EC border and text
  *
  * Typography:
- *   Headings:  Space Grotesk 700 (geometric, matches logo energy)
- *   Body/Nav:  Inter 400–600
- *   Labels:    Inter 600, uppercase, tracked
+ *   Headings:  Satoshi 700 (NeuraFlas design system)
+ *   Body/Nav:  Sora 400–600
+ *   Labels:    Sora 600, uppercase, tracked
  */
 
 @import "tailwindcss";
@@ -62,13 +62,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Brand dark tokens — NeuraFlas design system */
-  --color-brand-bg:        #010509;
+  /* Brand dark tokens — Ops by Noell design system */
+  --color-brand-bg:        #0A0A0A;
   --color-brand-card:      #010509;
   --color-brand-surface:   #0a0d14;
-  --color-brand-headline:  #ffffff;
-  --color-brand-body:      #a0a8b8;
-  --color-brand-muted:     #6b7280;
+  --color-brand-headline:  #F5F0EC;
+  --color-brand-body:      #868583;
+  --color-brand-muted:     #868583;
   --color-brand-accent:    #A78BFA;
   --color-brand-accent-2:  #C4B5FD;
   --color-brand-accent-h:  #7C3AED;
@@ -124,8 +124,8 @@
   }
 
   body {
-    background-color: #010509;
-    color: #ffffff;
+    background-color: #0A0A0A;
+    color: #F5F0EC;
     font-family: 'Sora', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -141,8 +141,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-    color: #F5F0EB;
+    font-family: 'Satoshi', sans-serif;
+    color: #F5F0EC;
     line-height: 1.1;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -185,7 +185,7 @@
 
   /* Eyebrow label */
   .eyebrow {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Sora', sans-serif;
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -207,7 +207,7 @@
     gap: 0.5rem;
     background-color: #A78BFA;
     color: #0A0A0A;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Sora', sans-serif;
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -232,13 +232,13 @@
     align-items: center;
     gap: 0.5rem;
     background-color: transparent;
-    color: #F5F0EB;
-    font-family: 'Inter', sans-serif;
+    color: #F5F0EC;
+    font-family: 'Sora', sans-serif;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.01em;
     padding: 0.75rem 1.75rem;
-    border: 1.5px solid #F5F0EB;
+    border: 1.5px solid #F5F0EC;
     border-radius: 0.5rem;
     transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
     text-decoration: none;
@@ -380,7 +380,7 @@
   background: rgba(167, 139, 250, 0.08);
   border: 1px solid rgba(167, 139, 250, 0.3);
   border-radius: 999px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -618,7 +618,7 @@
 .font-sora    { font-family: 'Sora', sans-serif; }
 
 .hero-gradient-bg {
-  background: linear-gradient(180deg, rgba(36,64,180,0.35) 0%, rgba(100,50,220,0.2) 30%, #010509 70%);
+  background: linear-gradient(180deg, rgba(120,58,237,0.35) 0%, rgba(139,92,246,0.2) 30%, #010509 70%);
 }
 
 .section-heading {

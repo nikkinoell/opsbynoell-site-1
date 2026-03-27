@@ -157,7 +157,7 @@ export default function Home() {
         {/* Vertical gradient backdrop */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'linear-gradient(180deg, rgba(36,64,180,0.28) 0%, rgba(100,50,220,0.18) 35%, #010509 72%)',
+          background: 'linear-gradient(180deg, rgba(120,58,237,0.28) 0%, rgba(139,92,246,0.18) 35%, #010509 72%)',
         }} />
         {/* Purple orb */}
         <div style={{
@@ -200,7 +200,7 @@ export default function Home() {
           <p style={{
             fontFamily: "'Sora', sans-serif",
             fontSize: 'clamp(1rem, 2vw, 1.175rem)',
-            color: '#a0a8b8', lineHeight: 1.75,
+            color: '#868583', lineHeight: 1.75,
             maxWidth: '600px', margin: '0 auto 2.5rem',
           }}>
             We design, install, and manage AI automation systems for local service businesses. Lead capture, booking, follow-up, reviews. All running automatically so you never miss revenue again.
@@ -225,7 +225,7 @@ export default function Home() {
             ].map(({ value, label }) => (
               <div key={label} style={{ textAlign: 'center' }}>
                 <div style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.1 }}>{value}</div>
-                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#6b7280', marginTop: '0.25rem' }}>{label}</div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '0.25rem' }}>{label}</div>
               </div>
             ))}
           </div>
@@ -242,7 +242,7 @@ export default function Home() {
         <div style={{ marginBottom: '1.25rem', textAlign: 'center' }}>
           <p style={{
             fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem',
-            color: '#6b7280', letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 500,
+            color: '#868583', letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 500,
           }}>
             Automation powered by the tools you already use
           </p>
@@ -269,7 +269,7 @@ export default function Home() {
             <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
               Built to run your business,{' '}<GradientText>not your inbox</GradientText>
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#a0a8b8', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
               Six systems that work together to capture, convert, and retain customers — automatically.
             </p>
           </div>
@@ -283,7 +283,7 @@ export default function Home() {
                 <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.625rem', letterSpacing: '-0.01em' }}>
                   {title}
                 </h3>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.65 }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.65 }}>
                   {desc}
                 </p>
               </div>
@@ -331,7 +331,7 @@ export default function Home() {
                   <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(1.25rem, 2.5vw, 1.625rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.25, marginBottom: '1rem', letterSpacing: '-0.015em' }}>
                     {title}
                   </h3>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '440px' }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '440px' }}>
                     {desc}
                   </p>
                 </div>
@@ -359,12 +359,12 @@ export default function Home() {
                     <Star key={i} size={15} style={{ color: '#A78BFA', fill: '#A78BFA' }} />
                   ))}
                 </div>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.75, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75, marginBottom: '1.5rem', fontStyle: 'italic' }}>
                   "{text}"
                 </p>
                 <div>
                   <div style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, color: '#ffffff', fontSize: '0.9375rem' }}>{name}</div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#6b7280', marginTop: '0.125rem' }}>{role}</div>
+                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '0.125rem' }}>{role}</div>
                 </div>
               </div>
             ))}
@@ -383,7 +383,7 @@ export default function Home() {
           <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>
             Stop losing leads to{' '}<GradientText>slow follow-up.</GradientText>
           </h2>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.125rem', color: '#a0a8b8', maxWidth: '500px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.125rem', color: '#868583', maxWidth: '500px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
             30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -394,7 +394,7 @@ export default function Home() {
               See Our Results
             </a>
           </div>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#6b7280', marginTop: '1.5rem' }}>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '1.5rem' }}>
             No commitment. No credit card. Just a conversation.
           </p>
         </div>

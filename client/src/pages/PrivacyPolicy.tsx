@@ -12,33 +12,33 @@ const SECTION_STYLE: React.CSSProperties = {
 };
 
 const H2_STYLE: React.CSSProperties = {
-  fontFamily: "'Space Grotesk', sans-serif",
+  fontFamily: "'Satoshi', sans-serif",
   fontSize: '1.25rem',
   fontWeight: 700,
-  color: '#F5F0EB',
+  color: '#F5F0EC',
   marginBottom: '0.875rem',
   letterSpacing: '-0.02em',
 };
 
 const P_STYLE: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "'Sora', sans-serif",
   fontSize: '0.9375rem',
-  color: '#8A8480',
+  color: '#868583',
   lineHeight: 1.8,
   marginBottom: '0.875rem',
 };
 
 const UL_STYLE: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "'Sora', sans-serif",
   fontSize: '0.9375rem',
-  color: '#8A8480',
+  color: '#868583',
   lineHeight: 1.8,
   paddingLeft: '1.5rem',
   marginBottom: '0.875rem',
 };
 
 const CALLOUT_STYLE: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
+  fontFamily: "'Sora', sans-serif",
   fontSize: '0.9375rem',
   color: 'rgba(245,240,235,0.8)',
   lineHeight: 1.8,
@@ -59,17 +59,17 @@ export default function PrivacyPolicy() {
         <div className="container">
           <p className="eyebrow" style={{ color: '#A78BFA', marginBottom: '1rem' }}>Legal</p>
           <h1 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: "'Satoshi', sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            color: '#F5F0EB',
+            color: '#F5F0EC',
             lineHeight: 1.1,
             marginBottom: '1rem',
             letterSpacing: '-0.03em',
           }}>
             Privacy Policy
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9375rem', color: '#8A8480' }}>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583' }}>
             Last updated: March 25, 2026
           </p>
         </div>

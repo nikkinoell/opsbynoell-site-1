@@ -67,7 +67,7 @@ export default function CaseStudy() {
       <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-          background: 'linear-gradient(180deg, rgba(36,64,180,0.18) 0%, rgba(100,50,220,0.12) 35%, #010509 72%)',
+          background: 'linear-gradient(180deg, rgba(120,58,237,0.18) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)',
         }} />
         <div style={{ position: 'absolute', top: '-80px', left: '-80px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ position: 'absolute', top: '80px', right: '-100px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
@@ -134,13 +134,13 @@ export default function CaseStudy() {
                 }}>
                   A master of her craft. Invisible to the internet.
                 </h2>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   Santa is a licensed massage therapist based in Laguna Niguel with over 25 years of experience. Her clients are loyal. Her work is exceptional. Her reputation, built entirely through word of mouth, is impeccable.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   But Santa had zero digital infrastructure. No website. No online booking. No automated follow-up. No review system. Every new client had to find her through a personal referral, and even then, they had to navigate a booking process that relied entirely on phone calls and memory.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.8 }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8 }}>
                   She was excellent at her work. Her operations were silently costing her thousands every month in missed opportunities.
                 </p>
               </div>
@@ -187,7 +187,7 @@ export default function CaseStudy() {
               }}>
                 Six operational gaps. Each one costing revenue daily.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.75 }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75 }}>
                 When we sat down with Santa, we mapped every gap in her operation and quantified what each one was costing her monthly.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function CaseStudy() {
                       {gap.label}
                     </h3>
                   </div>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#a0a8b8', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.7 }}>
                     {gap.detail}
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export default function CaseStudy() {
               }}>
                 A complete operational back office. Built in two weeks.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.75 }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75 }}>
                 We designed and installed every component of Santa's automation system. She didn't configure a single setting. She was live and capturing leads within 14 days of her audit.
               </p>
             </div>
@@ -260,7 +260,7 @@ export default function CaseStudy() {
                     <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.375rem' }}>
                       {item.item}
                     </h3>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#a0a8b8', lineHeight: 1.7 }}>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.7 }}>
                       {item.detail}
                     </p>
                   </div>
@@ -287,7 +287,7 @@ export default function CaseStudy() {
               }}>
                 Before and after.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
                 The operational transformation: from zero infrastructure to a fully automated business back office.
               </p>
             </div>
@@ -390,7 +390,7 @@ export default function CaseStudy() {
             }}>
               Ready to close your revenue gaps?
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#a0a8b8', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
