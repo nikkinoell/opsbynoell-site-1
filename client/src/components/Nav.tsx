@@ -16,7 +16,7 @@ const navLinks = [
   { label: 'About', href: '/about' },
 ];
 
-const LOGO_URL = '/logo.png';
+const LOGO_URL = '/logo.svg';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);

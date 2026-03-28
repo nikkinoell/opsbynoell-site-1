@@ -7,7 +7,7 @@
 import { Link } from 'wouter';
 import { Instagram, Linkedin, Facebook } from 'lucide-react';
 
-const LOGO_URL = '/logo.png';
+const LOGO_URL = '/logo.svg';
 
 export default function Footer() {
   return (
