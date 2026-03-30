@@ -209,14 +209,24 @@ const normalizeToolChoice = (
   return toolChoice;
 };
 
-const resolveApiUrl = () =>
-  ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0
-    ? `${ENV.forgeApiUrl.replace(/\/$/, "")}/v1/chat/completions`
-    : "https://forge.manus.im/v1/chat/completions";
+const resolveApiUrl = () => {
+  if (ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0) {
+    return `${ENV.forgeApiUrl.replace(/\/$/, "")}/v1/chat/completions`;
+  }
+  if (ENV.anthropicApiKey && ENV.anthropicApiKey.trim().length > 0) {
+    return "https://api.anthropic.com/v1/messages";
+  }
+  return "https://forge.manus.im/v1/chat/completions";
+};
+
+const resolveApiKey = () =>
+  ENV.forgeApiKey && ENV.forgeApiKey.trim().length > 0
+    ? ENV.forgeApiKey
+    : ENV.anthropicApiKey;
 
 const assertApiKey = () => {
-  if (!ENV.forgeApiKey) {
-    throw new Error("OPENAI_API_KEY is not configured");
+  if (!resolveApiKey()) {
+    throw new Error("No API key configured (set ANTHROPIC_API_KEY or BUILT_IN_FORGE_API_KEY)");
   }
 };
 
@@ -316,7 +326,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
+      authorization: `Bearer ${resolveApiKey()}`,
     },
     body: JSON.stringify(payload),
   });
