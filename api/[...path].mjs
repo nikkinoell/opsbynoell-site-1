@@ -2186,14 +2186,16 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 registerOAuthRoutes(app);
 registerTelegramWebhook(app);
 async function handler(req, res) {
-  const url = req.url ?? "/";
-  if (url.startsWith("/api/trpc")) {
+  const rawUrl = req.url ?? "/";
+  const urlPath = rawUrl.split("?")[0];
+  if (urlPath.startsWith("/api/trpc")) {
+    const trpcPath = urlPath.replace(/^\/api\/trpc\/?/, "");
     return nodeHTTPRequestHandler({
       router: appRouter,
       createContext,
       req,
       res,
-      path: url.replace(/^\/api\/trpc\/?/, "")
+      path: trpcPath
     });
   }
   return new Promise((resolve, reject) => {
