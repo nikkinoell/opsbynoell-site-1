@@ -1,5 +1,4 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import serverless from "serverless-http";
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "../server/_core/oauth";
@@ -20,8 +19,15 @@ app.use(
   createExpressMiddleware({ router: appRouter, createContext })
 );
 
-const handler = serverless(app);
-
-export default async function (req: VercelRequest, res: VercelResponse) {
-  await handler(req as any, res as any);
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return new Promise<void>((resolve, reject) => {
+    app(req as any, res as any, (err: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        res.status(404).json({ error: "Not found" });
+        resolve();
+      }
+    });
+  });
 }
