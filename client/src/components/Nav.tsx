@@ -3,11 +3,12 @@
  * - nav-blur: rgba(1,5,9,0.7) backdrop-filter blur(20px)
  * - Sora font, accent #A78BFA
  * - Active: gradient underline
+ * - Industries dropdown with 5 vertical landing pages
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -17,12 +18,23 @@ const navLinks = [
   { label: 'About', href: '/about' },
 ];
 
+const industries = [
+  { label: 'Massage Therapists', href: '/massage-therapist-automation', desc: 'From zero infrastructure to automated' },
+  { label: 'Med Spas', href: '/med-spa-automation', desc: 'High-value appointments, zero missed calls' },
+  { label: 'Salons', href: '/salon-automation', desc: 'Fill your chair. Keep it full.' },
+  { label: 'Dental Offices', href: '/dental-automation', desc: 'Reduce no-shows, automate recall' },
+  { label: 'Home Services', href: '/home-services-automation', desc: 'Never miss a job request again' },
+];
+
 const LOGO_URL = '/logo.svg';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   const [location] = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -32,7 +44,21 @@ export default function Nav() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setIndustriesOpen(false);
   }, [location]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIndustriesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const isIndustriesActive = industries.some(i => location === i.href);
 
   return (
     <>
@@ -102,6 +128,98 @@ export default function Nav() {
                 </Link>
               );
             })}
+
+            {/* Industries Dropdown */}
+            <div ref={dropdownRef} style={{ position: 'relative' }}>
+              <button
+                onClick={() => setIndustriesOpen(!industriesOpen)}
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontSize: '0.875rem',
+                  fontWeight: isIndustriesActive ? 600 : 400,
+                  color: isIndustriesActive ? '#ffffff' : 'rgba(160,168,184,0.85)',
+                  background: 'none',
+                  border: 'none',
+                  padding: '0.5rem 0.875rem',
+                  borderRadius: '0.375rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  position: 'relative',
+                  transition: 'color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isIndustriesActive) (e.currentTarget as HTMLElement).style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  if (!industriesOpen && !isIndustriesActive) (e.currentTarget as HTMLElement).style.color = 'rgba(160,168,184,0.85)';
+                }}
+              >
+                Industries
+                <ChevronDown size={14} style={{ transition: 'transform 0.2s ease', transform: industriesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                {isIndustriesActive && (
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    left: '0.875rem',
+                    right: '0.875rem',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, #A78BFA, #C4B5FD)',
+                    borderRadius: '99px',
+                  }} />
+                )}
+              </button>
+
+              {industriesOpen && (
+                <div style={{
+                  position: 'absolute',
+                  top: 'calc(100% + 8px)',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '280px',
+                  background: 'rgba(4,8,14,0.97)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid rgba(167,139,250,0.2)',
+                  borderRadius: '12px',
+                  padding: '0.5rem',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                  zIndex: 200,
+                }}>
+                  {industries.map((item) => {
+                    const isItemActive = location === item.href;
+                    return (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        style={{
+                          display: 'block',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '8px',
+                          textDecoration: 'none',
+                          background: isItemActive ? 'rgba(167,139,250,0.12)' : 'transparent',
+                          transition: 'background 0.15s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isItemActive) (e.currentTarget as HTMLElement).style.background = 'rgba(167,139,250,0.07)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isItemActive) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                        }}
+                      >
+                        <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', fontWeight: 600, color: isItemActive ? '#C4B5FD' : '#ffffff', marginBottom: '0.2rem' }}>
+                          {item.label}
+                        </div>
+                        <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: 'rgba(160,168,184,0.7)', lineHeight: 1.4 }}>
+                          {item.desc}
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Desktop CTA */}
@@ -167,7 +285,60 @@ export default function Nav() {
                 </Link>
               );
             })}
+
+            {/* Mobile Industries Accordion */}
+            <button
+              onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+              style={{
+                fontFamily: "'Sora', sans-serif",
+                fontSize: '1.125rem',
+                fontWeight: isIndustriesActive ? 600 : 400,
+                color: isIndustriesActive ? '#ffffff' : 'rgba(160,168,184,0.85)',
+                background: isIndustriesActive ? 'rgba(167,139,250,0.1)' : 'transparent',
+                border: 'none',
+                borderLeft: isIndustriesActive ? '3px solid #A78BFA' : '3px solid transparent',
+                padding: '0.875rem 1rem',
+                borderRadius: '0.5rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                textAlign: 'left',
+                width: '100%',
+              }}
+            >
+              Industries
+              <ChevronDown size={16} style={{ transition: 'transform 0.2s ease', transform: mobileIndustriesOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }} />
+            </button>
+
+            {mobileIndustriesOpen && (
+              <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                {industries.map((item) => {
+                  const isItemActive = location === item.href;
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      style={{
+                        fontFamily: "'Sora', sans-serif",
+                        fontSize: '1rem',
+                        fontWeight: isItemActive ? 600 : 400,
+                        color: isItemActive ? '#C4B5FD' : 'rgba(160,168,184,0.85)',
+                        textDecoration: 'none',
+                        padding: '0.75rem 1rem',
+                        borderRadius: '0.5rem',
+                        backgroundColor: isItemActive ? 'rgba(167,139,250,0.08)' : 'transparent',
+                        borderLeft: isItemActive ? '3px solid rgba(167,139,250,0.5)' : '3px solid transparent',
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </nav>
+
           <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <a href="/book" className="btn-gradient" style={{ display: 'flex', justifyContent: 'center', fontWeight: 600 }}>
               Book Free Call
