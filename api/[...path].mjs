@@ -1909,6 +1909,7 @@ function registerOAuthRoutes(app2) {
       `SameSite=Lax`,
       isProduction ? `Secure` : ""
     ].filter(Boolean).join("; ");
+    res.setHeader("Cache-Control", "private, no-store");
     res.setHeader("Set-Cookie", cookieValue);
     res.json({ success: true });
   });

@@ -41,8 +41,7 @@ export function registerOAuthRoutes(app: Express) {
       expiresInMs: ONE_YEAR_MS,
     });
 
-    // Build Set-Cookie header manually to ensure it works in Vercel serverless
-    // (res.cookie() can be silently dropped when Express wraps a Vercel response)
+    // Build Set-Cookie header manually
     const maxAgeSeconds = Math.floor(ONE_YEAR_MS / 1000);
     const isProduction = process.env.NODE_ENV === "production";
     const cookieValue = [
@@ -53,6 +52,8 @@ export function registerOAuthRoutes(app: Express) {
       `SameSite=Lax`,
       isProduction ? `Secure` : "",
     ].filter(Boolean).join("; ");
+    // Cache-Control: private prevents Vercel's CDN from caching/stripping Set-Cookie
+    res.setHeader("Cache-Control", "private, no-store");
     res.setHeader("Set-Cookie", cookieValue);
     res.json({ success: true });
   });
