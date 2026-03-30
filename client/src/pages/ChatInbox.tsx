@@ -36,6 +36,11 @@ export default function ChatInbox() {
   const [replyText, setReplyText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Login form state — must be declared unconditionally (React hooks rules)
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
+
   const { data: sessions, refetch: refetchSessions, isLoading: sessionsLoading } = trpc.chat.getSessions.useQuery(
     undefined,
     { enabled: !!user && user.role === 'admin', refetchInterval: 10000 }
@@ -72,10 +77,6 @@ export default function ChatInbox() {
       </div>
     );
   }
-
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [loginLoading, setLoginLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
