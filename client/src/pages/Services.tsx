@@ -178,6 +178,7 @@ const FAQS = [
   { q: 'What if I already use a CRM or booking software?', a: "We integrate with the tools you already use: HubSpot, Calendly, Acuity, Jane App, Mindbody, and more. If you already have a CRM, we'll build around it rather than replace it. We'll scope the integration during your free intro call." },
   { q: 'How does the process start?', a: "It starts with a free 30-minute intro call. We learn about your business, you learn about us, and we figure out if we're a fit. If it makes sense to move forward, we schedule a Revenue Audit to map your exact gaps and design your system." },
   { q: 'Can I upgrade or add more systems later?', a: "Absolutely. Most clients start with one system and add more as they see results. We'll proactively recommend additions when we spot new opportunities in your operation." },
+  { q: 'What do you do with my business data?', a: "We don't sell your data. Ever. We build systems for your business, not a database for ours. Anything you share with us is used solely to build and manage your automation stack. No third-party sharing, no marketing lists." },
 ];
 
 /* ─── MAIN ──────────────────────────────────────────────────────── */
@@ -403,6 +404,7 @@ export default function Services() {
             Book Free Intro Call <ArrowRight size={17} />
           </a>
           <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '1.25rem' }}>No commitment. No credit card. Just a conversation.</p>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#4B5563', marginTop: '0.625rem' }}>We don't sell your data. Ever. We build systems for your business, not a database for ours.</p>
         </div>
       </section>
 
