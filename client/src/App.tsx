@@ -27,6 +27,7 @@ const SalonAutomation = lazy(() => import("./pages/SalonAutomation"));
 const DentalAutomation = lazy(() => import("./pages/DentalAutomation"));
 const HomeServicesAutomation = lazy(() => import("./pages/HomeServicesAutomation"));
 const MassageTherapistCaseStudy = lazy(() => import("./pages/MassageTherapistCaseStudy"));
+const Blog = lazy(() => import("./pages/Blog"));
 
 function setMeta(selector: string, attr: string, value: string) {
     let el = document.querySelector(selector);
@@ -154,6 +155,13 @@ const pageMeta: Record<string, { title: string; description: string; keywords: s
           keywords:
                   "massage therapist automation case study, AI automation results, no-show reduction, Laguna Niguel massage, Ops by Noell case study, local business automation proof",
     },
+    "/blog": {
+          title: "The Ops Blog: AI Automation for Local Service Businesses | Ops by Noell",
+          description:
+                  "Practical AI automation insights for massage therapists, med spas, salons, and service businesses. Real strategies, real numbers, no fluff.",
+          keywords:
+                  "AI automation blog, local business automation tips, massage therapist revenue, service business operations, missed call text back, no-show reduction, Ops by Noell blog",
+    },
 };
 
 function MetaUpdater() {
@@ -246,6 +254,7 @@ function Router() {
                                   <Route path="/dental-automation" component={DentalAutomation} />
                                   <Route path="/home-services-automation" component={HomeServicesAutomation} />
                                   <Route path="/case-study/massage-therapist" component={MassageTherapistCaseStudy} />
+                                  <Route path="/blog" component={Blog} />
                                   <Route path="/404" component={NotFound} />
                                   <Route component={NotFound} />
                         </Switch>
