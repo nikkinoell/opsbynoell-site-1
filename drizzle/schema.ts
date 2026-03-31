@@ -76,6 +76,8 @@ export const chatSessions = pgTable("chatSessions", {
   visitorLocation: varchar("visitorLocation", { length: 256 }),
   humanTakeover: integer("humanTakeover").default(0).notNull(),
   unreadCount: integer("unreadCount").default(0).notNull(),
+  // Sales intelligence: 'hot' | 'warm' | 'low' — updated on each incoming message
+  priority: varchar("priority", { length: 16 }).default("low"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });

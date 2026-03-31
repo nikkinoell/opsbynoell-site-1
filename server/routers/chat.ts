@@ -8,17 +8,22 @@ import {
   markSessionRead,
   setHumanTakeover,
 } from "../db";
-import { sendTelegram, formatTelegramMessage } from "../telegram";
+import {
+  sendTelegram,
+  classifyIntent,
+  buildNewLeadAlert,
+  buildActiveConvoAlert,
+  buildHumanRequestAlert,
+  buildTakeoverAlert,
+  LeadIntent,
+} from "../telegram";
 import { sendHumanTakeoverEmail } from "../email";
 import { invokeLLM } from "../_core/llm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-// ─── SSE Event Emitter (in-process, per Vercel instance) ─────────────────────
-// Keeps track of active SSE connections so we can push updates instantly.
-// Note: Vercel serverless functions are stateless across invocations, so this
-// only broadcasts to connections on the same function instance. For a single
-// admin user refreshing the inbox, this covers the common case perfectly.
+// ─── SSE Event Emitter ────────────────────────────────────────────────────────
+// In-process, per Vercel instance. Works perfectly for single admin use.
 
 type SSEClient = {
   id: string;
@@ -33,7 +38,7 @@ export function broadcastSSE(event: string, payload: unknown) {
     try {
       client.write(data);
     } catch {
-      // Client disconnected — will be cleaned up on close
+      // disconnected — cleaned up on close
     }
   }
 }
@@ -47,10 +52,27 @@ export function removeSSEClient(id: string) {
   if (idx !== -1) sseClients.splice(idx, 1);
 }
 
+// ─── Handoff Keywords ─────────────────────────────────────────────────────────
+
+const HANDOFF_KEYWORDS = [
+  'talk to a person', 'talk to someone', 'speak to a person', 'speak to someone',
+  'real person', 'speak to nikki', 'talk to nikki', 'speak to james', 'talk to james',
+  'contact you', 'reach you', 'get in touch', 'someone call me', 'call me back',
+  'talk to a human', 'speak with someone', 'connect me', 'talk to the noells',
+  '[human handoff request]',
+];
+
+function isHandoffRequest(msg: string): boolean {
+  const lower = msg.toLowerCase();
+  return HANDOFF_KEYWORDS.some(kw => lower.includes(kw));
+}
+
+// ─── Router ───────────────────────────────────────────────────────────────────
+
 export const chatRouter = router({
   /**
-   * Called by ChatWidget to persist a visitor message and get a bot response.
-   * Creates/updates the session and stores both visitor message and bot reply.
+   * Visitor sends a message. Persists it, generates Nova response (or skips if
+   * human takeover is active), fires exactly one Telegram alert.
    */
   sendMessage: publicProcedure
     .input(
@@ -63,7 +85,7 @@ export const chatRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Extract visitor IP from request headers (works behind proxies)
+      // ── IP + geo lookup ──────────────────────────────────────────────────
       const req = (ctx as any).req;
       const rawIp: string =
         (req?.headers?.['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
@@ -72,39 +94,42 @@ export const chatRouter = router({
         '';
       const visitorIp = rawIp || undefined;
 
-      // Resolve approximate location from IP (non-blocking, best-effort)
       let visitorLocation: string | undefined;
       if (visitorIp && visitorIp !== '127.0.0.1' && visitorIp !== '::1') {
         try {
-          const geoRes = await fetch(`http://ip-api.com/json/${visitorIp}?fields=city,regionName,country,status`, { signal: AbortSignal.timeout(2000) });
+          const geoRes = await fetch(
+            `http://ip-api.com/json/${visitorIp}?fields=city,regionName,country,status`,
+            { signal: AbortSignal.timeout(2000) }
+          );
           if (geoRes.ok) {
             const geo = await geoRes.json() as { status: string; city?: string; regionName?: string; country?: string };
             if (geo.status === 'success') {
               visitorLocation = [geo.city, geo.regionName, geo.country].filter(Boolean).join(', ');
             }
           }
-        } catch {
-          // Geo lookup failed silently — not critical
-        }
+        } catch { /* non-critical */ }
       }
 
-      // Ensure session exists
+      // ── Intent classification (sales intelligence) ───────────────────────
+      const intent: LeadIntent = classifyIntent(input.message);
+
+      // ── Upsert session with priority ─────────────────────────────────────
       await upsertChatSession(input.sessionId, {
         visitorName: input.visitorName,
         visitorEmail: input.visitorEmail,
         businessType: input.businessType,
         visitorIp,
         visitorLocation,
+        priority: intent,
       });
 
-      // Store visitor message
+      // ── Persist visitor message ──────────────────────────────────────────
       await insertChatMessage(input.sessionId, "visitor", input.message);
 
-      // PHASE 1: Check if human has taken over BEFORE doing anything else.
-      // If humanTakeover === 1, DO NOT call AI. Persist message, notify, return.
+      // ── Check human takeover FIRST ───────────────────────────────────────
       const session = await getChatSession(input.sessionId);
       if (session?.humanTakeover) {
-        // Broadcast SSE so inbox updates instantly
+        // SSE push
         broadcastSSE('new_message', {
           sessionId: input.sessionId,
           role: 'visitor',
@@ -113,61 +138,31 @@ export const chatRouter = router({
         });
         broadcastSSE('session_updated', { sessionId: input.sessionId });
 
-        // Notify via Telegram with direct deep link
-        const inboxLink = `https://www.opsbynoell.com/admin/inbox?session=${input.sessionId}`;
-        sendTelegram(
-          `<b>💬 Nova Inbox — Human Takeover</b>\n\n` +
-          `<b>From:</b> ${input.visitorName ?? 'Visitor'}\n` +
-          `<b>Message:</b> ${input.message}\n\n` +
-          `<a href="${inboxLink}">Open conversation →</a>`
-        ).catch(() => {});
+        // Single clean Telegram alert — takeover variant
+        sendTelegram(buildTakeoverAlert({
+          sessionId: input.sessionId,
+          visitorName: input.visitorName,
+          visitorLocation,
+          businessType: input.businessType,
+          message: input.message,
+        })).catch(() => {});
 
         return { botReply: null, humanTakeover: true };
       }
 
-      // Notify owner of every visitor message (fire-and-forget)
-      // Only send ONE notification here — removed the duplicate that fired before the takeover check
-      {
-        const locationStr = visitorLocation ? ` (${visitorLocation})` : '';
-        const inboxLink = `https://www.opsbynoell.com/admin/inbox?session=${input.sessionId}`;
-        sendTelegram(
-          `<b>💬 Nova Chat</b>\n\n` +
-          `<b>From:</b> ${input.visitorName ?? 'Visitor'}${locationStr}\n` +
-          `<b>Message:</b> ${input.message}\n\n` +
-          `<a href="${inboxLink}">Open in inbox →</a>`
-        ).catch(() => {});
-      }
-
-      // Broadcast SSE — visitor message arrived
-      broadcastSSE('new_message', {
-        sessionId: input.sessionId,
-        role: 'visitor',
-        content: input.message,
-        visitorName: input.visitorName,
-      });
-      broadcastSSE('session_updated', { sessionId: input.sessionId });
-
-      // Detect human handoff request — notify owner immediately
-      const HANDOFF_KEYWORDS = [
-        'talk to a person', 'talk to someone', 'speak to a person', 'speak to someone',
-        'real person', 'speak to nikki', 'talk to nikki', 'speak to james', 'talk to james',
-        'contact you', 'reach you', 'get in touch', 'someone call me', 'call me back',
-        '[human handoff request]',
-      ];
-      const msgLower = input.message.toLowerCase();
-      const isHandoff = HANDOFF_KEYWORDS.some(kw => msgLower.includes(kw));
-      if (isHandoff) {
+      // ── Human handoff request detection ─────────────────────────────────
+      if (isHandoffRequest(input.message)) {
         const history = await getSessionMessages(input.sessionId);
-        const inboxLink = `https://www.opsbynoell.com/admin/inbox?session=${input.sessionId}`;
+
         await Promise.allSettled([
-          sendTelegram(
-            `<b>🙋 Visitor Wants a Person</b>\n\n` +
-            `<b>Name:</b> ${input.visitorName ?? 'Unknown'}\n` +
-            `<b>Email:</b> ${input.visitorEmail ?? 'Not provided'}\n` +
-            `<b>Business:</b> ${input.businessType ?? 'Not provided'}\n` +
-            `<b>Message:</b> ${input.message}\n\n` +
-            `<a href="${inboxLink}">Take over conversation →</a>`
-          ),
+          sendTelegram(buildHumanRequestAlert({
+            sessionId: input.sessionId,
+            visitorName: input.visitorName,
+            visitorLocation,
+            visitorEmail: input.visitorEmail,
+            businessType: input.businessType,
+            message: input.message,
+          })),
           sendHumanTakeoverEmail({
             visitorName: input.visitorName,
             visitorEmail: input.visitorEmail,
@@ -177,7 +172,8 @@ export const chatRouter = router({
             chatHistory: history,
           }),
         ]);
-        const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly. You can also book a free 30-minute intro call directly at opsbynoell.com/book if that's easier.";
+
+        const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly — you can also book a time directly at opsbynoell.com/book if that's easier.";
         await insertChatMessage(input.sessionId, "bot", handoffReply);
 
         broadcastSSE('new_message', {
@@ -185,21 +181,48 @@ export const chatRouter = router({
           role: 'bot',
           content: handoffReply,
         });
+        broadcastSSE('session_updated', { sessionId: input.sessionId });
 
         return { botReply: handoffReply, humanTakeover: false };
       }
 
-      // Fetch full conversation history for LLM context
-      const history = await getSessionMessages(input.sessionId);
+      // ── Standard message: one Telegram alert ────────────────────────────
+      // Determine if this is a new lead (only 1 message so far — the one we just inserted)
+      const allMessages = await getSessionMessages(input.sessionId);
+      const visitorMessageCount = allMessages.filter(m => m.role === 'visitor').length;
+      const isNewLead = visitorMessageCount === 1;
 
-      // Generate LLM-backed bot response (with keyword fallback)
-      const botReply = await generateNovaResponse(input.message, history, {
+      const alertPayload = {
+        sessionId: input.sessionId,
+        visitorName: input.visitorName,
+        visitorLocation,
+        businessType: input.businessType,
+        message: input.message,
+        intent,
+      };
+
+      sendTelegram(
+        isNewLead
+          ? buildNewLeadAlert(alertPayload)
+          : buildActiveConvoAlert(alertPayload)
+      ).catch(() => {});
+
+      // ── SSE push ─────────────────────────────────────────────────────────
+      broadcastSSE('new_message', {
+        sessionId: input.sessionId,
+        role: 'visitor',
+        content: input.message,
+        visitorName: input.visitorName,
+      });
+      broadcastSSE('session_updated', { sessionId: input.sessionId });
+
+      // ── Generate Nova reply ───────────────────────────────────────────────
+      const botReply = await generateNovaResponse(input.message, allMessages, {
         visitorName: input.visitorName,
         businessType: input.businessType,
       });
       await insertChatMessage(input.sessionId, "bot", botReply);
 
-      // Broadcast bot reply to SSE
       broadcastSSE('new_message', {
         sessionId: input.sessionId,
         role: 'bot',
@@ -210,7 +233,7 @@ export const chatRouter = router({
     }),
 
   /**
-   * Returns all messages for a given session (used by ChatWidget to sync state).
+   * Returns all messages for a session. Used by ChatWidget for polling.
    */
   getMessages: publicProcedure
     .input(z.object({ sessionId: z.string().min(1).max(64) }))
@@ -218,7 +241,7 @@ export const chatRouter = router({
       return getSessionMessages(input.sessionId);
     }),
 
-  // ─── Admin-only procedures ───────────────────────────────────────────────
+  // ─── Admin-only ──────────────────────────────────────────────────────────
 
   getSessions: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") {
@@ -238,21 +261,17 @@ export const chatRouter = router({
     }),
 
   adminReply: protectedProcedure
-    .input(
-      z.object({
-        sessionId: z.string().min(1).max(64),
-        message: z.string().min(1).max(2000),
-      })
-    )
+    .input(z.object({
+      sessionId: z.string().min(1).max(64),
+      message: z.string().min(1).max(2000),
+    }))
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
       }
-      // Ensure takeover is active when admin replies
       await setHumanTakeover(input.sessionId, true);
       await insertChatMessage(input.sessionId, "human", input.message);
 
-      // Broadcast to SSE so the thread updates live
       broadcastSSE('new_message', {
         sessionId: input.sessionId,
         role: 'human',
@@ -264,12 +283,10 @@ export const chatRouter = router({
     }),
 
   setTakeover: protectedProcedure
-    .input(
-      z.object({
-        sessionId: z.string().min(1).max(64),
-        active: z.boolean(),
-      })
-    )
+    .input(z.object({
+      sessionId: z.string().min(1).max(64),
+      active: z.boolean(),
+    }))
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
@@ -280,72 +297,58 @@ export const chatRouter = router({
     }),
 });
 
-// ─── Nova Level 2 — LLM-Backed Response Engine ──────────────────────────────
+// ─── Nova System Prompt ──────────────────────────────────────────────────────
 
-const NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell — an AI automation agency for appointment-based service businesses in Orange County, California. You are friendly, direct, and knowledgeable. You sound like a real person, not a bot.
-
-Your job: answer questions about Ops by Noell, qualify leads, and guide visitors toward booking a free 30-minute intro call.
+const NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell — a done-for-you AI automation agency for appointment-based service businesses. You are warm, direct, and consultative. You sound like a sharp, knowledgeable person — not a bot, not a brochure.
 
 ABOUT OPS BY NOELL:
-- Founders: James and Nikki Noell, based in Lake Forest, CA. This is a family business. When visitors ask to talk to a human, they want to speak with James and Nikki.
+- Founders: James and Nikki Noell, Lake Forest, CA. Local team. "Our name is on the door."
 - Website: opsbynoell.com
-- Booking link: https://api.leadconnectorhq.com/widget/booking/ko7eXb5zooItceadiV02
+- Booking: https://api.leadconnectorhq.com/widget/booking/ko7eXb5zooItceadiV02
 
-SERVICES (done-for-you, fully managed):
-1. Missed Call Text-Back — responds to every unanswered call within seconds via automated text. Stops lost leads instantly.
-2. AI Booking & Reminders — automated appointment scheduling and reminder sequences. Reduces no-shows 30-50%.
-3. Review Generation — automated review request sequences after every appointment. Clients typically see major review volume increases within 30 days.
-4. Lead Follow-Up Automation — nurture sequences for new leads and reactivation for past clients.
-5. Marketing Automation — email and SMS campaigns that run on autopilot.
-6. AI Voice Receptionist — answers calls 24/7, qualifies leads, answers questions, books appointments.
-7. Custom Ops — anything beyond the above, built to fit your specific business.
+WHAT WE BUILD (done-for-you, fully managed):
+1. Missed Call Text-Back — responds to unanswered calls via text within seconds. 85% of callers never call back after voicemail. This stops that.
+2. AI Booking + Reminders — 24/7 self-booking + automated reminder sequences. Reduces no-shows 30-50%.
+3. Review Generation — post-appointment review request sequences. Clients typically see major Google review increases in 30 days.
+4. Lead Follow-Up — automated nurture sequences. 80% of sales need 5+ touches. Most businesses stop at 1.
+5. Marketing Automation — birthday, win-back, referral, seasonal campaigns. Turns your client list into recurring revenue.
+6. AI Voice Receptionist — answers calls 24/7, qualifies leads, books appointments. No voicemail lost.
+7. Custom Ops — anything beyond the above, scoped and built to fit.
 
-PRICING:
-- Revenue Audit: $497 one-time (credited toward any retainer). Deep-dive analysis showing exactly where you're losing revenue.
-- Entry package: $997 setup + $197/mo (Missed Call Text-Back only).
-- Starter: $997 setup + $797/mo.
-- Growth: $1,497 setup + $1,497/mo.
-- Activation Sprint: $1,500 flat to implement one system in two weeks. Fee credited toward retainer.
-- All retainers are month-to-month, no contracts.
+PRICING (all month-to-month, no contracts):
+- Entry: $297 setup + $247/mo — Missed Call Text-Back + AI Voice Receptionist. Fast first step.
+- Starter: $997 setup + $797/mo — adds AI Booking + Reminder System.
+- Growth: $1,497 setup + $1,497/mo — full stack + Review Generation + Lead Follow-Up + Marketing Automation.
+- Revenue Audit: $497 one-time — deep-dive into exactly what your gaps cost. Credited toward any retainer.
 
 WHO WE WORK WITH:
-Appointment-based service businesses. Primary verticals: massage therapists, med spas, salons, estheticians, chiropractors, dental practices. Orange County and Southern California focus, but we work nationally.
+Appointment-based service businesses. Med spas, massage therapists, salons, estheticians, chiropractors, dental offices, fitness studios. OC + Southern California primary, but US-wide.
 
-KEY STATS WE USE:
-- 85% of callers never call back after hitting voicemail.
-- No-shows cost 10-15% of annual revenue.
-- 93% of consumers read reviews before choosing a local business.
-- 80% of sales require 5+ follow-ups — most businesses stop after 1.
+FOUNDING CASE STUDY:
+Santa — massage therapist, Laguna Niguel, 25 years experience. Zero digital infrastructure before us. No-shows dropped from 4/week to less than 1 in two weeks. That's the kind of result we deliver.
 
-FOUNDING CLIENT — SANTA (massage therapist, Laguna Niguel):
-- 25 years experience, zero digital infrastructure before Ops by Noell.
-- No-shows dropped from 4/week to less than 1 in two weeks of going live.
-- This is the kind of result we deliver.
-
-DATA PRIVACY:
-We don't sell visitor data. Ever. Anything shared stays between us and is only used to help them. No spam, no lists, no third-party sharing.
-
-COMPETITIVE POSITIONING:
-- We don't sell software or hand you a login. We build, install, and manage everything.
-- Local OC team. Founder-led. "We're the Noells — our name is on the door."
-- We show you the ROI math before you spend a dollar.
-- Most clients are live within two weeks.
+KEY STATS:
+- 85% of callers never call back after voicemail
+- No-shows cost 10-15% of annual revenue
+- 93% of consumers read reviews before choosing a local business
+- 80% of sales require 5+ follow-ups
 
 HOW TO RESPOND:
-- Be warm but direct. 1-4 sentences per reply max. Don't lecture.
-- No corporate speak, no jargon, no bullet lists in your replies.
-- Don't start every message with "Great question!" — vary your openers.
-- If you don't know something specific, say so and offer to connect them with James and Nikki.
-- Always guide toward the next step: book a call at https://api.leadconnectorhq.com/widget/booking/ko7eXb5zooItceadiV02 or offer to have James and Nikki reach out.
-- Never make up pricing, services, or statistics that aren't listed above.
-- If a visitor is clearly a business owner with a relevant need, be especially warm and direct — these are the people we serve.
-- Keep responses conversational. You're Nova, not a brochure.
+- Be warm but direct. 2-3 sentences per reply max. No lectures.
+- Sound like a consultant, not a salesperson. Lead with their problem, not our features.
+- If they mention their business type or a specific pain (no-shows, missed calls, reviews), address THAT specifically with relevant stats or our solution for it.
+- Naturally ask 1-2 follow-up questions to understand their situation — but only when it moves the conversation forward. Don't ask questions just to ask questions.
+- Vary your openers. Do not start with "Great question!" or "Absolutely!"
+- Guide toward booking a free 30-min intro call at opsbynoell.com/book — present it as the natural next step, not a pitch.
+- If you genuinely don't know something, say so and offer to connect them with James and Nikki.
+- Never make up pricing, services, or stats beyond what's listed above.
+- Keep it conversational. You're Nova, not a brochure.
 
 WHAT YOU ARE NOT:
-- Don't claim to be human if directly asked.
+- Don't claim to be human if asked directly.
 - Don't answer questions unrelated to Ops by Noell or AI automation for service businesses.
 - Don't give legal, financial, or medical advice.
-- Don't make promises about specific results beyond what's documented above.`;
+- Don't promise specific results beyond what's documented above.`;
 
 type ChatMessage = { role: string; content: string; createdAt?: Date | string };
 
@@ -354,12 +357,10 @@ async function generateNovaResponse(
   history: ChatMessage[],
   context: { visitorName?: string; businessType?: string }
 ): Promise<string> {
-  // Try LLM first
   try {
     const priorMessages = history.slice(0, -1);
 
     const llmMessages: Array<{ role: "user" | "assistant"; content: string }> = [];
-
     for (const msg of priorMessages) {
       if (msg.role === "visitor") {
         llmMessages.push({ role: "user", content: msg.content });
@@ -367,7 +368,6 @@ async function generateNovaResponse(
         llmMessages.push({ role: "assistant", content: msg.content });
       }
     }
-
     llmMessages.push({ role: "user", content: currentMessage });
 
     const result = await invokeLLM({
@@ -375,7 +375,7 @@ async function generateNovaResponse(
         { role: "system", content: NOVA_SYSTEM_PROMPT },
         ...llmMessages,
       ],
-      maxTokens: 300,
+      maxTokens: 280,
     });
 
     const responseContent = result.choices?.[0]?.message?.content;
@@ -389,86 +389,84 @@ async function generateNovaResponse(
   return generateKeywordFallback(currentMessage);
 }
 
+// ─── Keyword Fallback ────────────────────────────────────────────────────────
+
 const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ['what do you do', 'what is ops by noell', 'what does ops by noell do', 'tell me about', 'what you do', 'services', 'what you offer', 'what can you do'],
-    answer: "We build done-for-you AI automation systems for service businesses. Missed call text-back, AI booking, automated reminders, review generation, lead follow-up, and AI voice receptionist. We build it, it runs, you get your time back.",
+    answer: "We build done-for-you AI automation for service businesses — missed call text-back, AI booking and reminders, review generation, lead follow-up, AI voice receptionist. We build it, we manage it. You see the results. What kind of business do you run?",
   },
   {
     keywords: ['how much', 'cost', 'price', 'pricing', 'fee', 'charge', 'rate', 'package', 'tier'],
-    answer: "We have a few options. A Revenue Audit starts at $497 and gets credited toward any retainer. Monthly plans start at $797/mo for Starter and go up to $1,497/mo for Growth, which includes the AI voice receptionist. Setup fees range from $997 to $1,497 depending on the plan.",
+    answer: "Plans start at $247/mo (Entry — missed call text-back + AI voice receptionist). Starter is $797/mo, Growth is $1,497/mo for the full stack. All month-to-month. The Revenue Audit is $497 one-time and shows you exactly what your gaps are costing before you commit to anything.",
   },
   {
     keywords: ['who do you work with', 'what type of business', 'what businesses', 'industry', 'who is this for', 'med spa', 'salon', 'dental', 'massage', 'chiropractor'],
-    answer: "We work with appointment-based service businesses. Med spas, massage therapists, salons, dental practices, chiropractors, and more. If your business runs on bookings and phone calls, we can help.",
+    answer: "We work with appointment-based service businesses — med spas, massage therapists, salons, estheticians, chiropractors, dental offices. If your business runs on bookings and you're losing leads or fighting no-shows, we can almost certainly help.",
   },
   {
     keywords: ['how long', 'timeline', 'setup time', 'how soon', 'how fast', 'get started', 'onboard'],
-    answer: "Most clients are fully live within two weeks of their audit.",
+    answer: "Most clients are fully live within 7 to 14 days of signing. We handle everything. You show up for a 60-minute onboarding call. That's it.",
   },
   {
     keywords: ['tech', 'technical', 'tech-savvy', 'complicated', 'difficult', 'do i need to', 'hard to use'],
-    answer: "None at all. We build, manage, and maintain everything. You see results, not dashboards.",
+    answer: "Zero technical knowledge needed. We build it, configure it, and manage it. You won't log into dashboards or learn new software. You'll just see the results.",
   },
   {
     keywords: ['how do i start', 'next step', 'how to begin', 'sign up', 'book', 'schedule', 'call', 'consult', 'audit', 'intro'],
-    answer: "Book a free 30-minute intro call at opsbynoell.com/book. We will learn about your business and figure out if we are a fit. No pitch, no pressure.",
+    answer: "Best first step is a free 30-minute intro call at opsbynoell.com/book. We'll learn about your business and figure out where the biggest gaps are. No pitch, no pressure.",
   },
   {
     keywords: ['different', 'unique', 'why you', 'why ops by noell', 'what makes you', 'stand out', 'better than'],
-    answer: "We don't sell software or hand you a login. We build your complete automation system, install every component, and manage it ongoing. We show you the ROI math before you spend a dollar.",
+    answer: "We don't sell software. We build your complete system, install every piece, and manage it ongoing. We also show you the ROI math before you spend anything — so you know if it makes sense before you commit.",
   },
   {
-    keywords: ['missed call', 'missed calls', 'text back', 'call back', 'unanswered'],
-    answer: "Our Missed Call Text-Back system responds to every unanswered call within seconds, automatically texting the caller to keep the conversation alive. No more lost leads because you were with a client.",
+    keywords: ['missed call', 'missed calls', 'text back', 'call back', 'unanswered', 'voicemail'],
+    answer: "85% of callers who hit voicemail never call back. Our Missed Call Text-Back sends an automatic text within seconds of a missed call — keeping the conversation alive while you're with a client. It's in every package.",
   },
   {
     keywords: ['ai voice', 'voice receptionist', 'phone answering', 'answer the phone', 'receptionist'],
-    answer: "Our AI Voice Receptionist answers calls 24/7, qualifies leads, answers common questions, and books appointments without a human on the line.",
+    answer: "The AI Voice Receptionist answers calls 24/7 — qualifies callers, answers common questions, and books appointments directly. No voicemail. No missed lead. Included in the Entry package at $247/mo.",
   },
   {
     keywords: ['review', 'reviews', 'google review', 'reputation', 'rating'],
-    answer: "We automate review requests so every happy client gets a follow-up asking them to leave a Google review. Most clients see a major increase in review volume within the first 30 days.",
+    answer: "We automate review requests after every appointment. One tap takes the client straight to your Google profile. Most clients see a jump in review volume within the first 30 days. 93% of people read reviews before choosing a local service provider.",
   },
   {
     keywords: ['no-show', 'no show', 'cancellation', 'reminder', 'appointment reminder'],
-    answer: "Our automated reminder system sends SMS and email reminders before every appointment. Most clients see a 30 to 50 percent reduction in no-shows within the first month.",
+    answer: "No-shows cost most service businesses 10-15% of annual revenue. Our automated reminder sequences — SMS + email at strategic intervals — reduce no-shows by 30-50% in the first month.",
   },
   {
     keywords: ['follow up', 'follow-up', 'lead nurture', 'nurture', 'reactivate', 'past clients'],
-    answer: "We build automated follow-up sequences that re-engage past clients, nurture new leads, and keep your business top of mind without you lifting a finger.",
+    answer: "We build automated follow-up sequences that re-engage leads, nurture prospects, and reactivate past clients. 80% of sales need 5+ touches. These run automatically in the background.",
   },
   {
     keywords: ['orange county', 'oc', 'local', 'near me', 'southern california'],
-    answer: "We are based in Orange County and primarily serve local service businesses in the OC and Southern California area, though we work with clients across the US.",
+    answer: "We're based in Orange County and most of our clients are in Southern California — but we work with businesses across the US.",
   },
   {
     keywords: ['contract', 'commitment', 'lock in', 'cancel anytime', 'month to month'],
-    answer: "Our monthly retainers are month-to-month with no long-term contracts. We earn your business every month by delivering results.",
+    answer: "Month-to-month, always. 30 days notice to cancel. No lock-in, no penalties. We earn your business every month by delivering results.",
   },
   {
     keywords: ['roi', 'return on investment', 'worth it', 'results', 'guarantee', 'proof', 'case study'],
-    answer: "We show you the math before you spend a dollar. Our Revenue Audit calculates exactly what missed calls, no-shows, and lack of follow-up are costing your business so you know the ROI before we start.",
+    answer: "Our founding client Santa — massage therapist, 25 years in Laguna Niguel — went from 4 no-shows a week to less than 1 in two weeks. We show you the math before you spend anything. The Revenue Audit calculates exactly what your gaps cost.",
   },
   {
-    keywords: ['what is a revenue audit', 'revenue audit', 'audit', 'assessment'],
-    answer: "A Revenue Audit is a deep-dive into your current operations to identify exactly where you are losing revenue. We look at missed calls, no-show rates, follow-up gaps, and review volume, then show you the dollar amount. It starts at $497 and the fee is credited toward any retainer.",
-  },
-  {
-    keywords: ['data', 'privacy', 'sell my info', 'sell my data', 'spam', 'mailing list', 'safe', 'secure'],
-    answer: "We don't sell your data. Ever. Anything you share with us stays between us and is only used to help you. No spam, no lists, no third-party sharing.",
+    keywords: ['data', 'privacy', 'sell my info', 'sell my data', 'spam', 'safe', 'secure'],
+    answer: "We don't sell your data. Ever. Anything you share stays between us and is only used to help you. No spam, no lists, no third-party sharing.",
   },
   {
     keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'howdy'],
-    answer: "Hey! I'm Nova, your guide to Ops by Noell. We help service businesses automate their operations so they can focus on their clients. What can I help you with today?",
+    answer: "Hey! I'm Nova. I can answer anything about Ops by Noell — pricing, how it works, what we build. What's on your mind?",
   },
   {
     keywords: ['thank you', 'thanks', 'appreciate', 'helpful', 'great'],
-    answer: "Happy to help. If you want to take the next step, you can book a free 30-minute intro call at opsbynoell.com/book. James and Nikki would love to learn about your business.",
+    answer: "Happy to help. When you're ready to take the next step, opsbynoell.com/book gets you a free 30-minute call with James and Nikki.",
   },
 ];
 
-const FALLBACK_RESPONSE = "Good question. I'd love to connect you with James and Nikki to dig into that. You can book a free 30-minute intro call at opsbynoell.com/book, or drop your email and they'll reach out directly.";
+const FALLBACK_RESPONSE = "Good question — I want to make sure you get a real answer on that. You can book a free 30-minute intro call at opsbynoell.com/book, or drop your email and James or Nikki will reach out directly. What works better for you?";
 
 function generateKeywordFallback(message: string): string {
   const lower = message.toLowerCase();

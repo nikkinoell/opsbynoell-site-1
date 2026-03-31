@@ -27,6 +27,7 @@ type Session = {
   visitorLocation: string | null;
   humanTakeover: number;
   unreadCount: number;
+  priority: string | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -262,6 +263,9 @@ export default function ChatInbox() {
                       </span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexShrink: 0 }}>
+                      {session.priority === 'hot' && (
+                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.5rem', fontWeight: 700, color: '#FF6B6B', backgroundColor: 'rgba(255,107,107,0.12)', borderRadius: '999px', padding: '0.1rem 0.375rem', letterSpacing: '0.06em' }}>HOT</span>
+                      )}
                       {session.humanTakeover ? (
                         <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.5625rem', color: '#A78BFA', fontWeight: 600 }}>YOU</span>
                       ) : null}

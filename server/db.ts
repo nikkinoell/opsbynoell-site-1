@@ -235,7 +235,7 @@ export async function getRecentBotLeads(limit = 50): Promise<BotSession[]> {
 
 export async function upsertChatSession(
   sessionId: string,
-  data: { visitorName?: string; visitorEmail?: string; businessType?: string; visitorIp?: string; visitorLocation?: string }
+  data: { visitorName?: string; visitorEmail?: string; businessType?: string; visitorIp?: string; visitorLocation?: string; priority?: string }
 ): Promise<void> {
   const db = await getDb();
   if (!db) return;

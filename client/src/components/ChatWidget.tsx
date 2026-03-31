@@ -9,16 +9,18 @@ import { useLocation } from 'wouter';
 import { MessageCircle, X, Send, ArrowRight, ChevronDown } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
 
+// Use localStorage so the session survives page reloads within the same browser.
+// This ensures human replies always land in the correct session.
 function getSessionId(): string {
-  let id = sessionStorage.getItem('nova_session_id');
+  let id = localStorage.getItem('nova_session_id');
   if (!id) {
     id = `ws_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-    sessionStorage.setItem('nova_session_id', id);
+    localStorage.setItem('nova_session_id', id);
   }
   return id;
 }
 
-type MessageRole = 'bot' | 'user';
+type MessageRole = 'bot' | 'user' | 'human';
 
 interface ChatMessage {
   id: string;
@@ -243,27 +245,42 @@ export default function ChatWidget() {
   const submitLead = trpc.leads.submit.useMutation();
   const sendMessageMutation = trpc.chat.sendMessage.useMutation();
   const [sessionId] = useState(() => getSessionId());
-  const [lastHumanCount, setLastHumanCount] = useState(0);
+  const [syncedMessageIds, setSyncedMessageIds] = useState<Set<string>>(new Set());
+  const [humanTakeoverActive, setHumanTakeoverActive] = useState(false);
 
+  // Poll every 2 seconds (Phase 1 fix — visitor sees human reply within 2–3s).
+  // Always enabled once the widget is open, regardless of stage, so replies
+  // arrive even if the visitor is still in the intro or handoff stages.
   const { data: serverMessages } = trpc.chat.getMessages.useQuery(
     { sessionId },
-    { enabled: isOpen && stage === 'chat', refetchInterval: 5000 }
+    { enabled: isOpen, refetchInterval: 2000 }
   );
 
   useEffect(() => {
     if (!serverMessages || serverMessages.length === 0) return;
+
+    // Check if human takeover is active based on any human message in history
+    const hasHumanMsg = serverMessages.some((m: { role: string }) => m.role === 'human');
+    setHumanTakeoverActive(hasHumanMsg);
+
+    // Sync all human messages to the widget (Phase 1 fix — correct role rendering).
     const humanMsgs = serverMessages.filter((m: { role: string }) => m.role === 'human');
-    if (humanMsgs.length > lastHumanCount) {
-      const newMsgs = humanMsgs.slice(lastHumanCount);
-      setLastHumanCount(humanMsgs.length);
-      newMsgs.forEach((m: { id: number; content: string; createdAt: Date }) => {
+    humanMsgs.forEach((m: { id: number; content: string; createdAt: Date }) => {
+      const msgKey = `human_${m.id}`;
+      if (!syncedMessageIds.has(msgKey)) {
+        setSyncedMessageIds(prev => new Set([...prev, msgKey]));
         setMessages(prev => {
-          if (prev.some(p => p.id === `human_${m.id}`)) return prev;
-          return [...prev, { id: `human_${m.id}`, role: 'bot' as const, text: m.content, timestamp: new Date(m.createdAt) }];
+          if (prev.some(p => p.id === msgKey)) return prev;
+          return [...prev, {
+            id: msgKey,
+            role: 'human' as const,
+            text: m.content,
+            timestamp: new Date(m.createdAt),
+          }];
         });
-      });
-    }
-  }, [serverMessages, lastHumanCount]);
+      }
+    });
+  }, [serverMessages]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, isTyping]);
   useEffect(() => { if (isOpen && (stage === 'chat' || stage === 'handoff')) setTimeout(() => inputRef.current?.focus(), 300); }, [isOpen, stage]);
@@ -272,7 +289,7 @@ export default function ChatWidget() {
   // Proactive trigger on key pages
   useEffect(() => {
     const sessionKey = `nova_proactive_${location}`;
-    if (proactiveTriggered || sessionStorage.getItem(sessionKey)) return;
+    if (proactiveTriggered || localStorage.getItem(sessionKey)) return;
     const proactiveMessages: Record<string, string> = {
       '/services': "Trying to figure out which plan makes sense for your business? Happy to help you think it through. What type of business do you run?",
       '/book': "If you have any questions before booking, I'm here. James and Nikki will walk you through exactly where your revenue gaps are on the call. Anything I can answer first?",
@@ -281,7 +298,7 @@ export default function ChatWidget() {
     if (!message) return;
     const timer = setTimeout(() => {
       if (isOpen) return;
-      sessionStorage.setItem(sessionKey, '1');
+      localStorage.setItem(sessionKey, '1');
       setProactiveTriggered(true);
       setIsOpen(true);
       setHasUnread(false);
@@ -388,9 +405,9 @@ export default function ChatWidget() {
     } else if (captureStep === 'biz') {
       const updatedLead = { ...leadInfo, businessType: value };
       setLeadInfo(updatedLead);
-      sessionStorage.setItem('ops_lead', JSON.stringify(updatedLead));
+      localStorage.setItem('ops_lead', JSON.stringify(updatedLead));
       setStage('chat');
-      const pendingQ = sessionStorage.getItem('ops_pending_question') || '';
+      const pendingQ = localStorage.getItem('ops_pending_question') || '';
       submitLead.mutate({
         name: updatedLead.name ?? '',
         email: updatedLead.email ?? '',
@@ -408,7 +425,7 @@ export default function ChatWidget() {
     setShowQuickQ(false);
     setStage('chat');
     setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', text: q, timestamp: new Date() }]);
-    sessionStorage.setItem('ops_pending_question', q);
+    localStorage.setItem('ops_pending_question', q);
     // Use LLM for the response so the conversation flows naturally
     sendMessageMutation.mutate(
       { sessionId, message: q, visitorName: leadInfo.name, visitorEmail: leadInfo.email, businessType: leadInfo.businessType },
@@ -438,7 +455,7 @@ export default function ChatWidget() {
     if (stage === 'intro') {
       setShowQuickQ(false);
       setStage('chat');
-      sessionStorage.setItem('ops_pending_question', text);
+      localStorage.setItem('ops_pending_question', text);
 
       if (isHumanHandoffRequest(text)) {
         startHandoff(text);
@@ -617,17 +634,49 @@ export default function ChatWidget() {
           minHeight: 0, maxHeight: '320px',
           scrollbarWidth: 'thin', scrollbarColor: '#2A2A2A transparent',
         }}>
+          {/* Takeover indicator — shown when a human has joined the conversation */}
+          {humanTakeoverActive && (
+            <div style={{ display: 'flex', justifyContent: 'center', animation: 'chatFadeIn 0.3s ease-out' }}>
+              <span style={{
+                fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', color: '#A78BFA',
+                backgroundColor: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.25)',
+                borderRadius: '999px', padding: '0.25rem 0.75rem', letterSpacing: '0.04em',
+              }}>
+                You're now chatting with the Ops by Noell team
+              </span>
+            </div>
+          )}
+
           {messages.map(msg => (
-            <div key={msg.id} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start', animation: 'chatFadeIn 0.3s ease-out' }}>
+            <div key={msg.id} style={{
+              display: 'flex',
+              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              animation: 'chatFadeIn 0.3s ease-out',
+            }}>
               <div style={{
                 maxWidth: '82%', padding: '0.625rem 0.875rem',
-                backgroundColor: msg.role === 'user' ? '#A78BFA' : '#1A1A1A',
+                backgroundColor:
+                  msg.role === 'user' ? '#A78BFA' :
+                  msg.role === 'human' ? '#2A2060' :
+                  '#1A1A1A',
                 borderRadius: msg.role === 'user' ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-                borderLeft: msg.role === 'bot' ? '2px solid #2A2A2A' : 'none',
+                borderLeft: msg.role === 'bot' ? '2px solid #2A2A2A' :
+                             msg.role === 'human' ? '2px solid #A78BFA' : 'none',
               }}>
+                {msg.role === 'human' && (
+                  <p style={{
+                    fontFamily: "'Sora', sans-serif", fontSize: '0.5625rem', fontWeight: 700,
+                    letterSpacing: '0.08em', textTransform: 'uppercase', color: '#A78BFA',
+                    marginBottom: '0.25rem', margin: '0 0 0.25rem 0',
+                  }}>
+                    Nikki / James
+                  </p>
+                )}
                 <p style={{
                   fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem',
-                  color: msg.role === 'user' ? '#0A0A0A' : '#C4B5FD',
+                  color: msg.role === 'user' ? '#0A0A0A' :
+                         msg.role === 'human' ? '#E0D8FF' :
+                         '#C4B5FD',
                   lineHeight: 1.65, whiteSpace: 'pre-line', margin: 0,
                 }}>
                   {msg.text}
