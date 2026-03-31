@@ -1423,16 +1423,19 @@ async function invokeLLM(params) {
   assertApiKey();
   const {
     messages,
+    model,
     tools,
     toolChoice,
     tool_choice,
+    maxTokens,
+    max_tokens,
     outputSchema,
     output_schema,
     responseFormat,
     response_format
   } = params;
   const payload = {
-    model: "claude-haiku-4-5-20251001",
+    model: model ?? "claude-haiku-4-5-20251001",
     messages: messages.map(normalizeMessage)
   };
   if (tools && tools.length > 0) {
@@ -1445,10 +1448,7 @@ async function invokeLLM(params) {
   if (normalizedToolChoice) {
     payload.tool_choice = normalizedToolChoice;
   }
-  payload.max_tokens = 32768;
-  payload.thinking = {
-    "budget_tokens": 128
-  };
+  payload.max_tokens = maxTokens ?? max_tokens ?? 1024;
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
     response_format,
@@ -1458,12 +1458,19 @@ async function invokeLLM(params) {
   if (normalizedResponseFormat) {
     payload.response_format = normalizedResponseFormat;
   }
-  const response = await fetch(resolveApiUrl(), {
+  const apiUrl = resolveApiUrl();
+  const isAnthropic = apiUrl.includes("api.anthropic.com");
+  const headers = { "content-type": "application/json" };
+  if (isAnthropic) {
+    headers["x-api-key"] = resolveApiKey();
+    headers["anthropic-version"] = "2023-06-01";
+    // max_tokens already set correctly above
+  } else {
+    headers["authorization"] = `Bearer ${resolveApiKey()}`;
+  }
+  const response = await fetch(apiUrl, {
     method: "POST",
-    headers: {
-      "content-type": "application/json",
-      authorization: `Bearer ${resolveApiKey()}`
-    },
+    headers,
     body: JSON.stringify(payload)
   });
   if (!response.ok) {
@@ -1472,7 +1479,18 @@ async function invokeLLM(params) {
       `LLM invoke failed: ${response.status} ${response.statusText} \u2013 ${errorText}`
     );
   }
-  return await response.json();
+  const raw = await response.json();
+  // Normalize Anthropic response to OpenAI-compatible shape
+  if (isAnthropic && raw.content) {
+    return {
+      id: raw.id,
+      created: Date.now(),
+      model: raw.model,
+      choices: [{ index: 0, message: { role: "assistant", content: raw.content.map(b => b.text ?? "").join("") }, finish_reason: raw.stop_reason ?? null }],
+      usage: raw.usage
+    };
+  }
+  return raw;
 }
 
 // server/routers/chat.ts
