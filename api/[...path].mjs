@@ -2388,6 +2388,18 @@ async function handler(req, res) {
       res.status(500).json({ error: "Missing required env vars" });
       return;
     }
+    // Intent rank for deduplication comparison
+    const QL_INTENT_RANK = { hot: 2, warm: 1, low: 0 };
+    // Business/service keywords for context gate
+    const QL_BIZ_KEYWORDS = [
+      "salon","spa","med spa","medspa","dental","dentist","massage","chiropractor",
+      "chiropractic","aesthetician","esthetician","lash","nail","beauty","wellness",
+      "clinic","practice","office","studio","clients","patients","appointments",
+      "bookings","no-show","no show","missed call","follow up","follow-up","reviews",
+      "google review","lead","leads","marketing","automation","text back","voicemail",
+      "receptionist","scheduling","reminder","reminders","revenue","slow season",
+      "new clients","retention","cancellation","cancel"
+    ];
     let qlPool;
     try {
       qlPool = new Pool({ connectionString: QL_DB_URL, ssl: { rejectUnauthorized: false } });
@@ -2401,19 +2413,37 @@ async function handler(req, res) {
         return;
       }
       const sess = sessResult.rows[0];
+
+      // ── Gate 1: test session guard ──────────────────────────────────────────
+      if (qlSessionId.toLowerCase().includes("test") || (sess.visitorName || "").toLowerCase() === "test") {
+        res.status(200).json({ qualified: false, reason: "test session", intent: "low", businessType: null, painPoint: null, contactCaptured: false });
+        return;
+      }
+
       // Fetch last 15 messages
       const msgsResult = await qlPool.query(
         `SELECT role, content FROM "chatMessages" WHERE "sessionId"=$1 ORDER BY "createdAt" DESC LIMIT 15`,
         [qlSessionId]
       );
       const msgs = msgsResult.rows.reverse();
-      if (msgs.length === 0) {
-        res.status(200).json({ intent: "low", businessType: null, painPoint: null, contactCaptured: false });
+      const visitorMsgs = msgs.filter((m) => m.role === "visitor");
+
+      // ── Gate 2: visitor must have sent at least 3 messages ──────────────────
+      if (visitorMsgs.length < 3) {
+        res.status(200).json({ qualified: false, reason: "fewer than 3 visitor messages", intent: "low", businessType: null, painPoint: null, contactCaptured: false });
         return;
       }
+
+      // ── Gate 3: visitor text must mention business/service context ───────────
+      const allVisitorLower = visitorMsgs.map((m) => m.content.toLowerCase()).join(" ");
+      const hasContext = QL_BIZ_KEYWORDS.some((kw) => allVisitorLower.includes(kw));
+      if (!hasContext) {
+        res.status(200).json({ qualified: false, reason: "no business context detected", intent: "low", businessType: null, painPoint: null, contactCaptured: false });
+        return;
+      }
+
       const transcript = msgs.map((m) => `[${m.role.toUpperCase()}]: ${m.content}`).join("\n");
       // Call Anthropic
-      console.error("[QL-PRE-CALL] About to call Anthropic, transcript length=" + transcript.length + " msgs=" + msgs.length);
       const claudeRes = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
@@ -2433,45 +2463,68 @@ async function handler(req, res) {
       });
       const claudeData = await claudeRes.json();
       const rawText = claudeData?.content?.[0]?.text?.trim() ?? "";
-      // Debug: return raw response if ?debug=1
-      const qlUrlParams = new URL("https://x.com" + (req.url||"")).searchParams;
-      if (qlUrlParams.get("debug") === "1") {
-        res.status(200).json({ _debug: true, claudeStatus: claudeRes.status, rawText, claudeData: JSON.stringify(claudeData).substring(0, 500) });
-        if (qlPool) qlPool.end().catch(()=>{});
-        return;
-      }
-      console.error("[QL-POST-CALL] claudeRes.status=" + claudeRes.status + " rawText=" + rawText.substring(0, 300));
-      console.error("[QL-DEBUG] status=" + claudeRes.status + " rawText=" + rawText.substring(0, 400) + " claudeDataKeys=" + Object.keys(claudeData||{}).join(",") + " content0=" + JSON.stringify((claudeData?.content||[])[0]));
       let analysis = { intent: "low", businessType: null, painPoint: null, extractedEmail: null };
       try { const stripped = rawText.replace(/^```(?:json)?\s*/,"").replace(/\s*```$/,"").trim(); analysis = JSON.parse(stripped); } catch {}
       if (!["hot","warm","low"].includes(analysis.intent)) analysis.intent = "low";
-      // Resolve email
+
+      // ── Gate 4: intent must be hot or warm — never write low intent ──────────
+      if (analysis.intent === "low") {
+        res.status(200).json({ qualified: false, reason: "low intent", intent: "low", businessType: analysis.businessType || sess.businessType || null, painPoint: analysis.painPoint ?? null, contactCaptured: false });
+        return;
+      }
+
+      // All gates passed — resolve contact info
       const emailRegex = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
-      const allVisitorText = msgs.filter((m) => m.role === "visitor").map((m) => m.content).join(" ");
+      const allVisitorText = visitorMsgs.map((m) => m.content).join(" ");
       const extractedEmail = analysis.extractedEmail || (allVisitorText.match(emailRegex)?.[0] ?? null);
       const resolvedEmail = sess.visitorEmail || extractedEmail;
       const resolvedName = sess.visitorName || "";
       let contactCaptured = false;
+      let shouldSyncGHL = false;
+
       if (resolvedEmail) {
         try {
-          // Upsert: update intent/name if row already exists, always run GHL sync after
-          await qlPool.query(
-            `INSERT INTO "chatLeads" (name, email, "sessionId", "businessType", question, page, notified, intent, "ghlContactId")
-             VALUES ($1,$2,$3,$4,$5,$6,'no',$7,NULL)
-             ON CONFLICT DO NOTHING`,
-            [
-              resolvedName,
-              resolvedEmail,
-              qlSessionId,
-              analysis.businessType || sess.businessType || "",
-              analysis.painPoint ?? null,
-              null,
-              analysis.intent
-            ]
+          // ── Deduplication: check for existing chatLead by email ──────────────
+          const existingResult = await qlPool.query(
+            `SELECT id, intent, "ghlContactId" FROM "chatLeads" WHERE email=$1 LIMIT 1`,
+            [resolvedEmail]
           );
-          contactCaptured = true;
-          // Sync to GHL for hot/warm (always attempt — upsert ensures fresh row)
-          if (QL_GHL_KEY && (analysis.intent === "hot" || analysis.intent === "warm")) {
+          const existingLead = existingResult.rows[0] ?? null;
+
+          if (existingLead) {
+            // Only update if new intent is strictly higher
+            const newRank = QL_INTENT_RANK[analysis.intent] ?? 0;
+            const oldRank = QL_INTENT_RANK[existingLead.intent] ?? 0;
+            if (newRank > oldRank) {
+              await qlPool.query(
+                `UPDATE "chatLeads" SET intent=$1, "businessType"=$2, question=$3, name=$4 WHERE id=$5`,
+                [analysis.intent, analysis.businessType || sess.businessType || "", analysis.painPoint ?? null, resolvedName, existingLead.id]
+              );
+              contactCaptured = true;
+              shouldSyncGHL = true; // intent escalated — re-sync
+            }
+            // Same or lower intent: skip entirely
+          } else {
+            // Fresh insert
+            await qlPool.query(
+              `INSERT INTO "chatLeads" (name, email, "sessionId", "businessType", question, page, notified, intent, "ghlContactId")
+               VALUES ($1,$2,$3,$4,$5,$6,'no',$7,NULL)`,
+              [
+                resolvedName,
+                resolvedEmail,
+                qlSessionId,
+                analysis.businessType || sess.businessType || "",
+                analysis.painPoint ?? null,
+                null,
+                analysis.intent
+              ]
+            );
+            contactCaptured = true;
+            shouldSyncGHL = true;
+          }
+
+          // ── GHL sync (hot/warm guaranteed by Gate 4) ────────────────────────
+          if (shouldSyncGHL && QL_GHL_KEY) {
             try {
               const nameParts = resolvedName.trim().split(/\s+/);
               const ghlPayload = {
@@ -2492,7 +2545,7 @@ async function handler(req, res) {
                 const ghlContactId = ghlData?.contact?.id ?? null;
                 if (ghlContactId) {
                   await qlPool.query(
-                    `UPDATE "chatLeads" SET "ghlContactId"=$1, notified='yes' WHERE email=$2 AND "sessionId"=$3`,
+                    `UPDATE "chatLeads" SET "ghlContactId"=$1, notified='yes' WHERE email=$2 AND "sessionId"=$3 AND "ghlContactId" IS NULL`,
                     [ghlContactId, resolvedEmail, qlSessionId]
                   );
                 }
@@ -2504,11 +2557,12 @@ async function handler(req, res) {
             }
           }
         } catch (insertErr) {
-          console.error("chatLeads insert error:", insertErr);
+          console.error("chatLeads insert/update error:", insertErr);
           contactCaptured = false;
         }
       }
       res.status(200).json({
+        qualified: true,
         intent: analysis.intent,
         businessType: analysis.businessType || sess.businessType || null,
         painPoint: analysis.painPoint ?? null,
