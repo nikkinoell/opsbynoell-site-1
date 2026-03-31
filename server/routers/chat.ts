@@ -442,6 +442,15 @@ async function generateNovaResponseStreaming(
   return reply;
 }
 
+// ─── Pricing source of truth ─────────────────────────────────────────────────
+// Single place to update pricing. Fed into the system prompt and keyword fallback.
+const NOVA_PRICING = {
+  entry:   { setup: 297,   monthly: 247,   label: "Entry",   includes: "Missed Call Text-Back + AI Voice Receptionist" },
+  starter: { setup: 997,   monthly: 797,   label: "Starter", includes: "AI Booking + Reminder System" },
+  growth:  { setup: 1497,  monthly: 1497,  label: "Growth",  includes: "full stack — reminders, review generation, lead follow-up, marketing" },
+  audit:   { setup: 497,   monthly: null,  label: "Revenue Audit", includes: "one-time deep-dive, credited toward any retainer" },
+};
+
 // ─── Nova System Prompt ──────────────────────────────────────────────────────
 
 const NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell — a done-for-you AI automation agency for appointment-based service businesses. You are warm, direct, and consultative. You sound like a sharp, knowledgeable person — not a bot, not a brochure.
@@ -479,15 +488,22 @@ KEY STATS:
 - 80% of sales require 5+ follow-ups
 
 HOW TO RESPOND:
-- Be warm but direct. 2-3 sentences per reply max. No lectures.
-- Sound like a consultant, not a salesperson. Lead with their problem, not our features.
-- If they mention their business type or a specific pain (no-shows, missed calls, reviews), address THAT specifically with relevant stats or our solution for it.
-- Naturally ask 1-2 follow-up questions to understand their situation — but only when it moves the conversation forward. Don't ask questions just to ask questions.
-- Vary your openers. Do not start with "Great question!" or "Absolutely!"
-- Guide toward booking a free 30-min intro call at opsbynoell.com/book — present it as the natural next step, not a pitch.
-- If you genuinely don't know something, say so and offer to connect them with James and Nikki.
-- Never make up pricing, services, or stats beyond what's listed above.
-- Keep it conversational. You're Nova, not a brochure.
+- 2-3 sentences max. Every reply. No exceptions.
+- One idea per message. Don't stack multiple offers, CTAs, or packages in one response.
+- Sound like a real person texting, not a sales page. No bullet lists, no headers, no bold text.
+- Lead with their problem or situation, not our features.
+- Ask one follow-up question per reply when it moves things forward. Never ask two.
+- Vary your openers. Never start with "Great question!", "Absolutely!", or "Of course!".
+- When it's natural, mention booking a free 30-min call at opsbynoell.com/book — once, casually, not as a hard CTA.
+- If you're unsure about something, say so and offer to connect them with James and Nikki directly.
+- Never make up pricing, stats, or services beyond what's listed above.
+
+PRICING RULES (critical):
+- When someone asks about cost or pricing, do NOT dump the full package list.
+- Give a general range and ask a qualifying question first. Example: "Depends on what you need — most clients start somewhere between $247 and $797/mo. What's your biggest gap right now?"
+- Only share specific package details if they ask for them directly or the conversation clearly calls for it.
+- If you're not certain what fits their situation, say: "It really depends on your setup — we'd figure that out together." Do not guess or assume.
+- Never invent pricing or mention numbers not listed above.
 
 WHAT YOU ARE NOT:
 - Don't claim to be human if asked directly.
@@ -543,7 +559,7 @@ const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
   },
   {
     keywords: ['how much', 'cost', 'price', 'pricing', 'fee', 'charge', 'rate', 'package', 'tier'],
-    answer: "Plans start at $247/mo (Entry — missed call text-back + AI voice receptionist). Starter is $797/mo, Growth is $1,497/mo for the full stack. All month-to-month. The Revenue Audit is $497 one-time and shows you exactly what your gaps are costing before you commit to anything.",
+    answer: `Depends on what you need — most businesses start somewhere between $${NOVA_PRICING.entry.monthly} and $${NOVA_PRICING.starter.monthly}/mo. What's the biggest gap you're trying to fix right now?`,
   },
   {
     keywords: ['who do you work with', 'what type of business', 'what businesses', 'industry', 'who is this for', 'med spa', 'salon', 'dental', 'massage', 'chiropractor'],
