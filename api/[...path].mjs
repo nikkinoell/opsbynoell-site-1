@@ -2412,6 +2412,7 @@ async function handler(req, res) {
       }
       const transcript = msgs.map((m) => `[${m.role.toUpperCase()}]: ${m.content}`).join("\n");
       // Call Anthropic
+      console.error("[QL-PRE-CALL] About to call Anthropic, transcript length=" + transcript.length + " msgs=" + msgs.length);
       const claudeRes = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
@@ -2431,6 +2432,7 @@ async function handler(req, res) {
       });
       const claudeData = await claudeRes.json();
       const rawText = claudeData?.content?.[0]?.text?.trim() ?? "";
+      console.error("[QL-POST-CALL] claudeRes.status=" + claudeRes.status + " rawText=" + rawText.substring(0, 300));
       console.error("[QL-DEBUG] status=" + claudeRes.status + " rawText=" + rawText.substring(0, 400) + " claudeDataKeys=" + Object.keys(claudeData||{}).join(",") + " content0=" + JSON.stringify((claudeData?.content||[])[0]));
       let analysis = { intent: "low", businessType: null, painPoint: null, extractedEmail: null };
       try { analysis = JSON.parse(rawText); } catch {}
