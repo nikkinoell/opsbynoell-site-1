@@ -1755,8 +1755,8 @@ var SDKServer = class {
     return this.signSession(
       {
         openId,
-        appId: ENV.appId,
-        name: options.name || ""
+        appId: ENV.appId || "opsbynoell",
+        name: options.name || "Admin"
       },
       options
     );
@@ -1783,14 +1783,14 @@ var SDKServer = class {
         algorithms: ["HS256"]
       });
       const { openId, appId, name } = payload;
-      if (!isNonEmptyString2(openId) || !isNonEmptyString2(appId) || !isNonEmptyString2(name)) {
+      if (!isNonEmptyString2(openId)) {
         console.warn("[Auth] Session payload missing required fields");
         return null;
       }
       return {
         openId,
-        appId,
-        name
+        appId: appId ?? "opsbynoell",
+        name: name ?? "Admin"
       };
     } catch (error) {
       console.warn("[Auth] Session verification failed", String(error));
@@ -1826,6 +1826,17 @@ var SDKServer = class {
     const sessionUserId = session.openId;
     const signedInAt = /* @__PURE__ */ new Date();
     let user = await getUserByOpenId(sessionUserId);
+    if (!user && sessionUserId === "admin-opsbynoell") {
+      return {
+        openId: "admin-opsbynoell",
+        name: session.name || "Nikki Noell",
+        email: "hello@opsbynoell.com",
+        role: "admin",
+        loginMethod: "password",
+        lastSignedIn: signedInAt,
+        createdAt: signedInAt
+      };
+    }
     if (!user) {
       try {
         const userInfo = await this.getUserInfoWithJwt(sessionCookie ?? "");
