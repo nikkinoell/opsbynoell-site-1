@@ -2432,6 +2432,13 @@ async function handler(req, res) {
       });
       const claudeData = await claudeRes.json();
       const rawText = claudeData?.content?.[0]?.text?.trim() ?? "";
+      // Debug: return raw response if ?debug=1
+      const qlUrlParams = new URL("https://x.com" + (req.url||"")).searchParams;
+      if (qlUrlParams.get("debug") === "1") {
+        res.status(200).json({ _debug: true, claudeStatus: claudeRes.status, rawText, claudeData: JSON.stringify(claudeData).substring(0, 500) });
+        if (qlPool) qlPool.end().catch(()=>{});
+        return;
+      }
       console.error("[QL-POST-CALL] claudeRes.status=" + claudeRes.status + " rawText=" + rawText.substring(0, 300));
       console.error("[QL-DEBUG] status=" + claudeRes.status + " rawText=" + rawText.substring(0, 400) + " claudeDataKeys=" + Object.keys(claudeData||{}).join(",") + " content0=" + JSON.stringify((claudeData?.content||[])[0]));
       let analysis = { intent: "low", businessType: null, painPoint: null, extractedEmail: null };
