@@ -9642,7 +9642,7 @@ async function sendNewsletterWelcomeEmail(email) {
                 <li>Honest takes on what AI can and cannot do right now</li>
               </ul>
             </div>
-            <p style="font-size: 15px; color: #C8C0B8; line-height: 1.75; margin: 0 0 28px;">In the meantime, if you want to see what's possible for your business specifically, book a free 15-minute intro call \u2014 no pitch, no pressure.</p>
+            <p style="font-size: 15px; color: #C8C0B8; line-height: 1.75; margin: 0 0 28px;">In the meantime, if you want to see what's possible for your business specifically, book a free 30-minute intro call \u2014 no pitch, no pressure.</p>
             <a href="https://calendly.com/opsbynoell/30-minute-meeting-clone" style="display: inline-block; background: #A78BFA; color: #FFFFFF; font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 6px; text-decoration: none;">Book a Free Intro Call</a>
           </div>
           <div style="padding: 20px 32px; border-top: 1px solid #2A2A2A; font-size: 12px; color: #8A8480;">
@@ -9659,7 +9659,7 @@ async function sendNewsletterWelcomeEmail(email) {
         ``,
         `I send it when there's something worth saying. You won't hear from me on a schedule for the sake of it.`,
         ``,
-        `In the meantime, book a free 15-minute intro call: https://calendly.com/opsbynoell/30-minute-meeting-clone`,
+        `In the meantime, book a free 30-minute intro call: https://calendly.com/opsbynoell/30-minute-meeting-clone`,
         ``,
         `\u2014 Nikki`,
         `Ops by Noell \xB7 opsbynoell.com`
@@ -10074,7 +10074,7 @@ Reply from your admin inbox at opsbynoell.com/admin/inbox`
           chatHistory: history2
         })
       ]);
-      const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly. You can also book a free 15-minute call directly at opsbynoell.com/book if that's easier.";
+      const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly. You can also book a free 30-minute intro call directly at opsbynoell.com/book if that's easier.";
       await insertChatMessage(input.sessionId, "bot", handoffReply);
       return { botReply: handoffReply, humanTakeover: false };
     }
@@ -10134,7 +10134,7 @@ Reply from your admin inbox at opsbynoell.com/admin/inbox`
 });
 var NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell \u2014 an AI automation agency for appointment-based service businesses in Orange County, California. You are friendly, direct, and knowledgeable. You sound like a real person, not a bot.
 
-Your job: answer questions about Ops by Noell, qualify leads, and guide visitors toward booking a free 15-minute intro call.
+Your job: answer questions about Ops by Noell, qualify leads, and guide visitors toward booking a free 30-minute intro call.
 
 ABOUT OPS BY NOELL:
 - Founders: James and Nikki Noell, based in Lake Forest, CA. This is a family business. When visitors ask to talk to a human, they want to speak with James and Nikki.
@@ -10247,7 +10247,7 @@ var QA_PAIRS = [
   },
   {
     keywords: ["how do i start", "next step", "how to begin", "sign up", "book", "schedule", "call", "consult", "audit", "intro"],
-    answer: "Book a free 15-minute intro call at opsbynoell.com/book. We will learn about your business and figure out if we are a fit. No pitch, no pressure."
+    answer: "Book a free 30-minute intro call at opsbynoell.com/book. We will learn about your business and figure out if we are a fit. No pitch, no pressure."
   },
   {
     keywords: ["different", "unique", "why you", "why ops by noell", "what makes you", "stand out", "better than"],
@@ -10299,10 +10299,10 @@ var QA_PAIRS = [
   },
   {
     keywords: ["thank you", "thanks", "appreciate", "helpful", "great"],
-    answer: "Happy to help. If you want to take the next step, you can book a free 15-minute intro call at opsbynoell.com/book. James and Nikki would love to learn about your business."
+    answer: "Happy to help. If you want to take the next step, you can book a free 30-minute intro call at opsbynoell.com/book. James and Nikki would love to learn about your business."
   }
 ];
-var FALLBACK_RESPONSE = "Good question. I'd love to connect you with James and Nikki to dig into that. You can book a free 15-minute call at opsbynoell.com/book, or drop your email and they'll reach out directly.";
+var FALLBACK_RESPONSE = "Good question. I'd love to connect you with James and Nikki to dig into that. You can book a free 30-minute intro call at opsbynoell.com/book, or drop your email and they'll reach out directly.";
 function generateKeywordFallback(message) {
   const lower = message.toLowerCase();
   for (const qa of QA_PAIRS) {

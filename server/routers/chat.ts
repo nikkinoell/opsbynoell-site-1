@@ -130,7 +130,7 @@ export const chatRouter = router({
             chatHistory: history,
           }),
         ]);
-        const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly. You can also book a free 15-minute call directly at opsbynoell.com/book if that's easier.";
+        const handoffReply = "Of course. Let me get James and Nikki on this for you. They'll reach out shortly. You can also book a free 30-minute intro call directly at opsbynoell.com/book if that's easier.";
         await insertChatMessage(input.sessionId, "bot", handoffReply);
         return { botReply: handoffReply, humanTakeover: false };
       }
@@ -218,7 +218,7 @@ export const chatRouter = router({
 
 const NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell — an AI automation agency for appointment-based service businesses in Orange County, California. You are friendly, direct, and knowledgeable. You sound like a real person, not a bot.
 
-Your job: answer questions about Ops by Noell, qualify leads, and guide visitors toward booking a free 15-minute intro call.
+Your job: answer questions about Ops by Noell, qualify leads, and guide visitors toward booking a free 30-minute intro call.
 
 ABOUT OPS BY NOELL:
 - Founders: James and Nikki Noell, based in Lake Forest, CA. This is a family business. When visitors ask to talk to a human, they want to speak with James and Nikki.
@@ -354,7 +354,7 @@ const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
   },
   {
     keywords: ['how do i start', 'next step', 'how to begin', 'sign up', 'book', 'schedule', 'call', 'consult', 'audit', 'intro'],
-    answer: "Book a free 15-minute intro call at opsbynoell.com/book. We will learn about your business and figure out if we are a fit. No pitch, no pressure.",
+    answer: "Book a free 30-minute intro call at opsbynoell.com/book. We will learn about your business and figure out if we are a fit. No pitch, no pressure.",
   },
   {
     keywords: ['different', 'unique', 'why you', 'why ops by noell', 'what makes you', 'stand out', 'better than'],
@@ -406,11 +406,11 @@ const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
   },
   {
     keywords: ['thank you', 'thanks', 'appreciate', 'helpful', 'great'],
-    answer: "Happy to help. If you want to take the next step, you can book a free 15-minute intro call at opsbynoell.com/book. James and Nikki would love to learn about your business.",
+    answer: "Happy to help. If you want to take the next step, you can book a free 30-minute intro call at opsbynoell.com/book. James and Nikki would love to learn about your business.",
   },
 ];
 
-const FALLBACK_RESPONSE = "Good question. I'd love to connect you with James and Nikki to dig into that. You can book a free 15-minute call at opsbynoell.com/book, or drop your email and they'll reach out directly.";
+const FALLBACK_RESPONSE = "Good question. I'd love to connect you with James and Nikki to dig into that. You can book a free 30-minute intro call at opsbynoell.com/book, or drop your email and they'll reach out directly.";
 
 function generateKeywordFallback(message: string): string {
   const lower = message.toLowerCase();
