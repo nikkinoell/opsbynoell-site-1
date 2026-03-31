@@ -2375,37 +2375,38 @@ async function handler(req, res) {
       res.status(405).json({ error: "Method not allowed" });
       return;
     }
-    const { sessionId } = req.body ?? {};
-    if (!sessionId || typeof sessionId !== "string") {
+    const { sessionId: qlSessionId } = req.body ?? {};
+    if (!qlSessionId || typeof qlSessionId !== "string") {
       res.status(400).json({ error: "sessionId is required" });
       return;
     }
-    const SUPA_URL = process.env.SUPABASE_URL;
-    const SUPA_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    const ANTHRO_KEY = process.env.ANTHROPIC_API_KEY;
-    if (!SUPA_URL || !SUPA_KEY || !ANTHRO_KEY) {
+    const QL_DB_URL = process.env.DATABASE_URL;
+    const QL_ANTHRO = process.env.ANTHROPIC_API_KEY;
+    const QL_GHL_KEY = process.env.GHL_API_KEY;
+    if (!QL_DB_URL || !QL_ANTHRO) {
       res.status(500).json({ error: "Missing required env vars" });
       return;
     }
+    let qlPool;
     try {
+      qlPool = new Pool({ connectionString: QL_DB_URL, ssl: { rejectUnauthorized: false } });
       // Fetch session
-      const sessRes = await fetch(
-        `${SUPA_URL}/rest/v1/chatSessions?sessionId=eq.${encodeURIComponent(sessionId)}&limit=1`,
-        { headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` } }
+      const sessResult = await qlPool.query(
+        `SELECT "sessionId","visitorName","visitorEmail","businessType" FROM "chatSessions" WHERE "sessionId"=$1 LIMIT 1`,
+        [qlSessionId]
       );
-      const sessions = await sessRes.json();
-      if (!sessions || sessions.length === 0) {
+      if (sessResult.rows.length === 0) {
         res.status(404).json({ error: "Session not found" });
         return;
       }
-      const sess = sessions[0];
+      const sess = sessResult.rows[0];
       // Fetch last 15 messages
-      const msgsRes = await fetch(
-        `${SUPA_URL}/rest/v1/chatMessages?sessionId=eq.${encodeURIComponent(sessionId)}&order=createdAt.desc&limit=15`,
-        { headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` } }
+      const msgsResult = await qlPool.query(
+        `SELECT role, content FROM "chatMessages" WHERE "sessionId"=$1 ORDER BY "createdAt" DESC LIMIT 15`,
+        [qlSessionId]
       );
-      const msgs = (await msgsRes.json()).reverse();
-      if (!msgs || msgs.length === 0) {
+      const msgs = msgsResult.rows.reverse();
+      if (msgs.length === 0) {
         res.status(200).json({ intent: "low", businessType: null, painPoint: null, contactCaptured: false });
         return;
       }
@@ -2415,7 +2416,7 @@ async function handler(req, res) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": ANTHRO_KEY,
+          "x-api-key": QL_ANTHRO,
           "anthropic-version": "2023-06-01"
         },
         body: JSON.stringify({
@@ -2424,7 +2425,7 @@ async function handler(req, res) {
           system: "You analyze chat transcripts to qualify leads. Respond ONLY with a valid JSON object, no markdown, no explanation.",
           messages: [{
             role: "user",
-            content: `Classify the visitor's intent and extract key information from this chat transcript.\n\nINTENT DEFINITIONS:\n- hot: Visitor asked about pricing AND mentioned a specific pain point AND showed intent to move forward\n- warm: Visitor described their business or a specific problem, but has NOT asked about next steps or pricing\n- low: General curiosity, no meaningful business context shared\n\nTRANSCRIPT:\n${transcript}\n\nRespond with ONLY a valid JSON object. Example: {"intent":"warm","businessType":"med spa","painPoint":"losing clients to no-shows","extractedEmail":null}\n\nFields: intent (hot/warm/low), businessType (string or null), painPoint (string or null), extractedEmail (email string or null)`
+            content: `Classify the visitor intent and extract key info from this chat transcript.\n\nINTENT:\n- hot: asked about pricing AND mentioned a pain point AND showed intent to move forward\n- warm: described their business or a problem, but has NOT asked about next steps or pricing\n- low: general curiosity, no business context\n\nTRANSCRIPT:\n${transcript}\n\nRespond with ONLY valid JSON. Example: {"intent":"warm","businessType":"med spa","painPoint":"losing clients to no-shows","extractedEmail":null}`
           }]
         })
       });
@@ -2436,80 +2437,68 @@ async function handler(req, res) {
       // Resolve email
       const emailRegex = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
       const allVisitorText = msgs.filter((m) => m.role === "visitor").map((m) => m.content).join(" ");
-      const extractedFromMessages = (analysis.extractedEmail) || (allVisitorText.match(emailRegex)?.[0] ?? null);
-      const resolvedEmail = sess.visitorEmail || extractedFromMessages;
+      const extractedEmail = analysis.extractedEmail || (allVisitorText.match(emailRegex)?.[0] ?? null);
+      const resolvedEmail = sess.visitorEmail || extractedEmail;
       const resolvedName = sess.visitorName || "";
       let contactCaptured = false;
       if (resolvedEmail) {
-        const leadRecord = {
-          name: resolvedName,
-          email: resolvedEmail,
-          sessionId,
-          businessType: analysis.businessType || sess.businessType || "",
-          question: analysis.painPoint ?? null,
-          page: null,
-          notified: "no",
-          intent: analysis.intent,
-          ghlContactId: null
-        };
-        const insertRes = await fetch(`${SUPA_URL}/rest/v1/chatLeads`, {
-          method: "POST",
-          headers: {
-            apikey: SUPA_KEY,
-            Authorization: `Bearer ${SUPA_KEY}`,
-            "Content-Type": "application/json",
-            Prefer: "return=minimal"
-          },
-          body: JSON.stringify(leadRecord)
-        });
-        if (insertRes.ok || insertRes.status === 201) {
+        try {
+          await qlPool.query(
+            `INSERT INTO "chatLeads" (name, email, "sessionId", "businessType", question, page, notified, intent, "ghlContactId")
+             VALUES ($1,$2,$3,$4,$5,$6,'no',$7,NULL)
+             ON CONFLICT DO NOTHING`,
+            [
+              resolvedName,
+              resolvedEmail,
+              qlSessionId,
+              analysis.businessType || sess.businessType || "",
+              analysis.painPoint ?? null,
+              null,
+              analysis.intent
+            ]
+          );
           contactCaptured = true;
-          if (analysis.intent === "hot" || analysis.intent === "warm") {
+          // Sync to GHL for hot/warm
+          if (QL_GHL_KEY && (analysis.intent === "hot" || analysis.intent === "warm")) {
             try {
-              const GHL_KEY = process.env.GHL_API_KEY;
-              if (GHL_KEY) {
-                const nameParts = resolvedName.trim().split(/\s+/);
-                const ghlPayload = {
-                  firstName: nameParts[0] || "Unknown",
-                  lastName: nameParts.slice(1).join(" "),
-                  email: resolvedEmail,
-                  tags: [`nova-${analysis.intent}`, "nova-support"],
-                  customField: {
-                    lead_source: "NOVA Support",
-                    business_type: analysis.businessType || sess.businessType || "",
-                    pain_point: analysis.painPoint || "",
-                    chat_session_id: sessionId,
-                    nova_intent: analysis.intent
-                  }
-                };
-                const ghlRes = await fetch("https://rest.gohighlevel.com/v1/contacts/", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json", Authorization: `Bearer ${GHL_KEY}` },
-                  body: JSON.stringify(ghlPayload)
-                });
-                if (ghlRes.ok) {
-                  const ghlData = await ghlRes.json();
-                  const ghlContactId = ghlData?.contact?.id ?? null;
-                  if (ghlContactId) {
-                    await fetch(`${SUPA_URL}/rest/v1/chatLeads?email=eq.${encodeURIComponent(resolvedEmail)}&sessionId=eq.${encodeURIComponent(sessionId)}&ghlContactId=is.null`, {
-                      method: "PATCH",
-                      headers: {
-                        apikey: SUPA_KEY,
-                        Authorization: `Bearer ${SUPA_KEY}`,
-                        "Content-Type": "application/json",
-                        Prefer: "return=minimal"
-                      },
-                      body: JSON.stringify({ ghlContactId, notified: "yes" })
-                    });
-                  }
+              const nameParts = resolvedName.trim().split(/\s+/);
+              const ghlPayload = {
+                firstName: nameParts[0] || "Unknown",
+                lastName: nameParts.slice(1).join(" "),
+                email: resolvedEmail,
+                tags: [`nova-${analysis.intent}`, "nova-support"],
+                customField: {
+                  lead_source: "NOVA Support",
+                  business_type: analysis.businessType || sess.businessType || "",
+                  pain_point: analysis.painPoint || "",
+                  chat_session_id: qlSessionId,
+                  nova_intent: analysis.intent
                 }
+              };
+              const ghlRes = await fetch("https://rest.gohighlevel.com/v1/contacts/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${QL_GHL_KEY}` },
+                body: JSON.stringify(ghlPayload)
+              });
+              if (ghlRes.ok) {
+                const ghlData = await ghlRes.json();
+                const ghlContactId = ghlData?.contact?.id ?? null;
+                if (ghlContactId) {
+                  await qlPool.query(
+                    `UPDATE "chatLeads" SET "ghlContactId"=$1, notified='yes' WHERE email=$2 AND "sessionId"=$3 AND "ghlContactId" IS NULL`,
+                    [ghlContactId, resolvedEmail, qlSessionId]
+                  );
+                }
+              } else {
+                console.error("GHL sync failed:", ghlRes.status, await ghlRes.text());
               }
             } catch (ghlErr) {
               console.error("ghl-sync inline error:", ghlErr);
             }
           }
-        } else {
-          console.error("chatLeads insert failed:", insertRes.status, await insertRes.text());
+        } catch (insertErr) {
+          console.error("chatLeads insert error:", insertErr);
+          contactCaptured = false;
         }
       }
       res.status(200).json({
@@ -2521,6 +2510,8 @@ async function handler(req, res) {
     } catch (err) {
       console.error("qualify-lead error:", err);
       res.status(500).json({ error: "Internal server error" });
+    } finally {
+      if (qlPool) qlPool.end().catch(() => {});
     }
     return;
   }
