@@ -1,6 +1,6 @@
 /**
  * OPS BY NOELL — Admin Chat Inbox
- * Phases 2–4: polling real-time (3s/2s), deep linking, mobile-responsive UI
+ * Live monitoring: SSE-based real-time typing preview + Nova streaming
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -8,6 +8,10 @@ import { useAuth } from '@/_core/hooks/useAuth';
 import { trpc } from '@/lib/trpc';
 import { getLoginUrl } from '@/const';
 import { MessageSquare, Send, User, Bot, UserCheck, Circle, ArrowLeft } from 'lucide-react';
+
+// ─── SSE live state ───────────────────────────────────────────────────────────
+type TypingState = { isTyping: boolean; draft: string };
+type StreamState = { sessionId: string; buffer: string; done: boolean };
 
 type Message = {
   id: number;
@@ -58,6 +62,80 @@ export default function ChatInbox() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
+  // ─── SSE live state ───────────────────────────────────────────────────────
+  // Map of sessionId → typing state for visitors
+  const [visitorTyping, setVisitorTyping] = useState<Record<string, TypingState>>({});
+  // Nova streaming: one active stream at a time
+  const [novaStream, setNovaStream] = useState<StreamState | null>(null);
+  const [novaTyping, setNovaTyping] = useState<Record<string, boolean>>({});
+  const sseRef = useRef<EventSource | null>(null);
+
+  useEffect(() => {
+    if (!user || user.role !== 'admin') return;
+    const es = new EventSource('/api/chat/events', { withCredentials: true });
+    sseRef.current = es;
+
+    es.addEventListener('visitor_typing', (e) => {
+      try {
+        const { sessionId, isTyping, draft } = JSON.parse(e.data);
+        setVisitorTyping(prev => ({
+          ...prev,
+          [sessionId]: { isTyping, draft: draft ?? '' },
+        }));
+      } catch { /* ignore */ }
+    });
+
+    es.addEventListener('nova_typing', (e) => {
+      try {
+        const { sessionId, isTyping } = JSON.parse(e.data);
+        setNovaTyping(prev => ({ ...prev, [sessionId]: isTyping }));
+        if (isTyping) {
+          setNovaStream({ sessionId, buffer: '', done: false });
+        }
+      } catch { /* ignore */ }
+    });
+
+    es.addEventListener('nova_stream_chunk', (e) => {
+      try {
+        const { sessionId, chunk } = JSON.parse(e.data);
+        setNovaStream(prev =>
+          prev && prev.sessionId === sessionId
+            ? { ...prev, buffer: prev.buffer + chunk }
+            : prev
+        );
+      } catch { /* ignore */ }
+    });
+
+    es.addEventListener('nova_stream_done', (e) => {
+      try {
+        const { sessionId } = JSON.parse(e.data);
+        setNovaStream(prev =>
+          prev && prev.sessionId === sessionId ? { ...prev, done: true } : prev
+        );
+        setNovaTyping(prev => ({ ...prev, [sessionId]: false }));
+        // Clear stream bubble after a short delay then let polling pick up final message
+        setTimeout(() => {
+          setNovaStream(null);
+          refetchMessages();
+        }, 400);
+      } catch { /* ignore */ }
+    });
+
+    es.addEventListener('new_message', () => {
+      refetchMessages();
+      refetchSessions();
+    });
+
+    es.addEventListener('session_updated', () => {
+      refetchSessions();
+    });
+
+    es.onerror = () => { /* SSE will auto-reconnect */ };
+
+    return () => { es.close(); sseRef.current = null; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   // ─── Data fetching (with fallback polling) ────────────────────────────────
   const { data: sessions, refetch: refetchSessions } = trpc.chat.getSessions.useQuery(
     undefined,
@@ -107,10 +185,10 @@ export default function ChatInbox() {
     }
   }, [sessions]);
 
-  // Auto-scroll messages
+  // Auto-scroll on new messages, typing changes, or stream updates
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, novaStream?.buffer, visitorTyping, novaTyping]);
 
   // ─── Phase 4: Mobile — detect screen width reactively ────────────────────
   useEffect(() => {
@@ -353,19 +431,24 @@ export default function ChatInbox() {
                   </button>
                 </div>
 
-                {/* Takeover status banner */}
+                {/* Takeover status banner — polished, prominent */}
                 {selectedSessionData?.humanTakeover ? (
                   <div style={{
-                    backgroundColor: 'rgba(167,139,250,0.1)',
-                    borderBottom: '1px solid rgba(167,139,250,0.2)',
+                    background: 'linear-gradient(90deg, rgba(167,139,250,0.12) 0%, rgba(167,139,250,0.06) 100%)',
+                    borderBottom: '1px solid rgba(167,139,250,0.25)',
                     padding: '0.5rem 1rem',
-                    fontFamily: "'Sora', sans-serif",
-                    fontSize: '0.6875rem',
-                    color: '#A78BFA',
-                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
                     flexShrink: 0,
                   }}>
-                    Human takeover active — AI is paused. You are replying as Nova.
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#A78BFA', flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: '#A78BFA', fontWeight: 600 }}>
+                      You have control
+                    </span>
+                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', color: 'rgba(167,139,250,0.5)' }}>
+                      · Nova is paused
+                    </span>
                   </div>
                 ) : null}
 
@@ -410,7 +493,7 @@ export default function ChatInbox() {
                               color: msg.role === 'human' ? 'rgba(10,10,10,0.6)' : '#868583',
                               marginBottom: '0.2rem',
                             }}>
-                              {msg.role === 'human' ? 'You (Nova)' : 'Nova Bot'}
+                              {msg.role === 'human' ? 'You' : 'Nova'}
                             </p>
                           )}
                           <p style={{
@@ -445,8 +528,131 @@ export default function ChatInbox() {
                       </div>
                     ))
                   )}
+
+                  {/* ── Visitor typing indicator ──────────────────────────── */}
+                  {selectedSession && visitorTyping[selectedSession]?.isTyping && (
+                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.4rem' }}>
+                      <div style={{
+                        width: '24px', height: '24px', borderRadius: '50%',
+                        backgroundColor: '#1E1E1E', border: '1px solid #2A2A2A',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                      }}>
+                        <User size={12} color="#868583" />
+                      </div>
+                      <div style={{
+                        maxWidth: '78%',
+                        backgroundColor: '#141414',
+                        border: '1px solid #252525',
+                        borderRadius: '12px 12px 12px 3px',
+                        padding: '0.5rem 0.75rem',
+                      }}>
+                        <p style={{
+                          fontFamily: "'Sora', sans-serif",
+                          fontSize: '0.5625rem',
+                          color: '#5A5450',
+                          margin: '0 0 0.25rem',
+                          fontStyle: 'italic',
+                          letterSpacing: '0.02em',
+                        }}>
+                          typing…
+                        </p>
+                        {visitorTyping[selectedSession].draft && (
+                          <p style={{
+                            fontFamily: "'Sora', sans-serif",
+                            fontSize: '0.8125rem',
+                            color: 'rgba(245,240,236,0.35)',
+                            lineHeight: 1.5,
+                            whiteSpace: 'pre-wrap',
+                            margin: 0,
+                            fontStyle: 'italic',
+                          }}>
+                            {visitorTyping[selectedSession].draft}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── Nova streaming bubble ─────────────────────────────── */}
+                  {selectedSession && !selectedSessionData?.humanTakeover && (
+                    novaTyping[selectedSession] || (novaStream && novaStream.sessionId === selectedSession && !novaStream.done)
+                  ) && (
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', gap: '0.4rem' }}>
+                      <div style={{
+                        maxWidth: '78%',
+                        background: 'linear-gradient(135deg, #1E1A2E 0%, #221F30 100%)',
+                        border: '1px solid rgba(167,139,250,0.2)',
+                        borderRadius: '12px 12px 3px 12px',
+                        padding: '0.5rem 0.75rem',
+                        position: 'relative',
+                        overflow: 'hidden',
+                      }}>
+                        {/* Subtle shimmer line at top */}
+                        <div style={{
+                          position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
+                          background: 'linear-gradient(90deg, transparent, rgba(167,139,250,0.4), transparent)',
+                        }} />
+                        <p style={{
+                          fontFamily: "'Sora', sans-serif",
+                          fontSize: '0.5rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          color: 'rgba(167,139,250,0.6)',
+                          marginBottom: '0.2rem',
+                        }}>
+                          Nova
+                        </p>
+                        {novaStream && novaStream.sessionId === selectedSession && novaStream.buffer ? (
+                          <p style={{
+                            fontFamily: "'Sora', sans-serif",
+                            fontSize: '0.8125rem',
+                            color: 'rgba(245,240,236,0.85)',
+                            lineHeight: 1.5,
+                            whiteSpace: 'pre-wrap',
+                            margin: 0,
+                          }}>
+                            {novaStream.buffer}
+                            {/* blinking cursor */}
+                            <span style={{
+                              display: 'inline-block', width: '2px', height: '0.9em',
+                              backgroundColor: 'rgba(167,139,250,0.7)', marginLeft: '1px',
+                              verticalAlign: 'text-bottom',
+                              animation: 'blink 0.9s step-end infinite',
+                            }} />
+                          </p>
+                        ) : (
+                          /* pulse dots while waiting for first chunk */
+                          <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '18px' }}>
+                            {[0, 1, 2].map(i => (
+                              <div key={i} style={{
+                                width: '5px', height: '5px', borderRadius: '50%',
+                                backgroundColor: 'rgba(167,139,250,0.5)',
+                                animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite`,
+                              }} />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <div style={{
+                        width: '24px', height: '24px', borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #2A2040, #1A1A2E)',
+                        border: '1px solid rgba(167,139,250,0.3)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                      }}>
+                        <Bot size={12} color="rgba(167,139,250,0.8)" />
+                      </div>
+                    </div>
+                  )}
+
                   <div ref={messagesEndRef} />
                 </div>
+
+                {/* CSS keyframes for animations */}
+                <style>{`
+                  @keyframes blink { 0%, 100% { opacity: 1 } 50% { opacity: 0 } }
+                  @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8) } 50% { opacity: 1; transform: scale(1.1) } }
+                `}</style>
 
                 {/* Reply input */}
                 <div style={{

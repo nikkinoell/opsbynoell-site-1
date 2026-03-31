@@ -1653,16 +1653,12 @@ var chatRouter = router({
       return { botReply: handoffReply, humanTakeover: false };
     }
     const history = await getSessionMessages(input.sessionId);
-    const botReply = await generateNovaResponse(input.message, history, {
-      visitorName: input.visitorName,
-      businessType: input.businessType
-    });
-    await insertChatMessage(input.sessionId, "bot", botReply);
-    broadcastSSE("new_message", {
-      sessionId: input.sessionId,
-      role: "bot",
-      content: botReply
-    });
+    const botReply = await generateNovaResponseStreaming(
+      input.sessionId,
+      input.message,
+      history,
+      { visitorName: input.visitorName, businessType: input.businessType }
+    );
     return { botReply, humanTakeover: false };
   }),
   /**
@@ -1716,6 +1712,20 @@ var chatRouter = router({
     await setHumanTakeover(input.sessionId, input.active);
     broadcastSSE("session_updated", { sessionId: input.sessionId });
     return { success: true };
+  }),
+  visitorTyping: publicProcedure.input(
+    z2.object({
+      sessionId: z2.string().min(1).max(64),
+      draft: z2.string().max(500).optional(),
+      isTyping: z2.boolean()
+    })
+  ).mutation(async ({ input }) => {
+    broadcastSSE("visitor_typing", {
+      sessionId: input.sessionId,
+      isTyping: input.isTyping,
+      draft: input.draft ?? ""
+    });
+    return { ok: true };
   })
 });
 var NOVA_SYSTEM_PROMPT = `You are Nova, the AI assistant for Ops by Noell \u2014 an AI automation agency for appointment-based service businesses in Orange County, California. You are friendly, direct, and knowledgeable. You sound like a real person, not a bot.
@@ -1782,6 +1792,84 @@ WHAT YOU ARE NOT:
 - Don't answer questions unrelated to Ops by Noell or AI automation for service businesses.
 - Don't give legal, financial, or medical advice.
 - Don't make promises about specific results beyond what's documented above.`;
+async function generateNovaResponseStreaming(sessionId, currentMessage, history, context) {
+  broadcastSSE("nova_typing", { sessionId, isTyping: true });
+  try {
+    const priorMessages = history.slice(0, -1);
+    const llmMessages = [];
+    for (const msg of priorMessages) {
+      if (msg.role === "visitor") llmMessages.push({ role: "user", content: msg.content });
+      else if (msg.role === "bot" || msg.role === "human") llmMessages.push({ role: "assistant", content: msg.content });
+    }
+    llmMessages.push({ role: "user", content: currentMessage });
+    const apiKey = (ENV.forgeApiKey && ENV.forgeApiKey.trim()) || (ENV.anthropicApiKey && ENV.anthropicApiKey.trim());
+    const forgeUrl = ENV.forgeApiUrl && ENV.forgeApiUrl.trim();
+    if (apiKey) {
+      let apiUrl;
+      let headers;
+      let bodyPayload;
+      const isAnthropic = !forgeUrl && !!(ENV.anthropicApiKey && ENV.anthropicApiKey.trim());
+      if (isAnthropic) {
+        apiUrl = "https://api.anthropic.com/v1/messages";
+        headers = { "content-type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" };
+        bodyPayload = { model: "claude-haiku-4-5-20251001", system: NOVA_SYSTEM_PROMPT, messages: llmMessages, max_tokens: 300, stream: true };
+      } else {
+        apiUrl = forgeUrl ? `${forgeUrl.replace(/\/$/, "")}/v1/chat/completions` : "https://forge.manus.im/v1/chat/completions";
+        headers = { "content-type": "application/json", "authorization": `Bearer ${apiKey}` };
+        bodyPayload = { model: "claude-haiku-4-5-20251001", messages: [{ role: "system", content: NOVA_SYSTEM_PROMPT }, ...llmMessages], max_tokens: 300, stream: true };
+      }
+      const response = await fetch(apiUrl, { method: "POST", headers, body: JSON.stringify(bodyPayload) });
+      if (response.ok && response.body) {
+        let fullText = "";
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+          for (const line of lines) {
+            if (!line.startsWith("data: ")) continue;
+            const data = line.slice(6).trim();
+            if (data === "[DONE]") continue;
+            try {
+              const parsed = JSON.parse(data);
+              let chunk = "";
+              if (parsed.type === "content_block_delta" && parsed.delta?.type === "text_delta") {
+                chunk = parsed.delta.text ?? "";
+              } else if (parsed.choices?.[0]?.delta?.content) {
+                chunk = parsed.choices[0].delta.content;
+              }
+              if (chunk) { fullText += chunk; broadcastSSE("nova_stream_chunk", { sessionId, chunk }); }
+            } catch { /* malformed line */ }
+          }
+        }
+        if (fullText.trim()) {
+          await insertChatMessage(sessionId, "bot", fullText.trim());
+          broadcastSSE("nova_stream_done", { sessionId, content: fullText.trim() });
+          broadcastSSE("nova_typing", { sessionId, isTyping: false });
+          return fullText.trim();
+        }
+      }
+    }
+  } catch (err) {
+    console.error("[Nova] Streaming failed, falling back:", err);
+  }
+  // Fallback: non-streaming with simulated word-by-word broadcast
+  const reply = await generateNovaResponse(currentMessage, history, context);
+  await insertChatMessage(sessionId, "bot", reply);
+  const words = reply.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    const chunk = (i === 0 ? "" : " ") + words[i];
+    broadcastSSE("nova_stream_chunk", { sessionId, chunk });
+    await new Promise(r => setTimeout(r, 40));
+  }
+  broadcastSSE("nova_stream_done", { sessionId, content: reply });
+  broadcastSSE("nova_typing", { sessionId, isTyping: false });
+  return reply;
+}
 async function generateNovaResponse(currentMessage, history, context) {
   try {
     const priorMessages = history.slice(0, -1);

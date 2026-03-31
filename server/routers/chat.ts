@@ -21,6 +21,7 @@ import { sendHumanTakeoverEmail } from "../email";
 import { invokeLLM } from "../_core/llm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { ENV } from "../_core/env";
 
 // ─── SSE Event Emitter ────────────────────────────────────────────────────────
 // In-process, per Vercel instance. Works perfectly for single admin use.
@@ -216,18 +217,13 @@ export const chatRouter = router({
       });
       broadcastSSE('session_updated', { sessionId: input.sessionId });
 
-      // ── Generate Nova reply ───────────────────────────────────────────────
-      const botReply = await generateNovaResponse(input.message, allMessages, {
-        visitorName: input.visitorName,
-        businessType: input.businessType,
-      });
-      await insertChatMessage(input.sessionId, "bot", botReply);
-
-      broadcastSSE('new_message', {
-        sessionId: input.sessionId,
-        role: 'bot',
-        content: botReply,
-      });
+      // ── Generate Nova reply (streaming) ──────────────────────────────────
+      const botReply = await generateNovaResponseStreaming(
+        input.sessionId,
+        input.message,
+        allMessages,
+        { visitorName: input.visitorName, businessType: input.businessType }
+      );
 
       return { botReply, humanTakeover: false };
     }),
@@ -295,7 +291,156 @@ export const chatRouter = router({
       broadcastSSE('session_updated', { sessionId: input.sessionId });
       return { success: true };
     }),
+
+  /**
+   * Visitor sends a typing event. Broadcasts ephemeral typing state to admin.
+   * Not persisted to DB. Draft text is optional but enables live preview.
+   */
+  visitorTyping: publicProcedure
+    .input(z.object({
+      sessionId: z.string().min(1).max(64),
+      draft: z.string().max(500).optional(),
+      isTyping: z.boolean(),
+    }))
+    .mutation(async ({ input }) => {
+      broadcastSSE('visitor_typing', {
+        sessionId: input.sessionId,
+        isTyping: input.isTyping,
+        draft: input.draft ?? '',
+      });
+      return { ok: true };
+    }),
 });
+
+// ─── Nova Streaming Response ─────────────────────────────────────────────────
+
+async function generateNovaResponseStreaming(
+  sessionId: string,
+  currentMessage: string,
+  history: ChatMessage[],
+  context: { visitorName?: string; businessType?: string }
+): Promise<string> {
+  // Signal typing to admin
+  broadcastSSE('nova_typing', { sessionId, isTyping: true });
+
+  try {
+    const priorMessages = history.slice(0, -1);
+    const llmMessages: Array<{ role: "user" | "assistant"; content: string }> = [];
+    for (const msg of priorMessages) {
+      if (msg.role === "visitor") llmMessages.push({ role: "user", content: msg.content });
+      else if (msg.role === "bot" || msg.role === "human") llmMessages.push({ role: "assistant", content: msg.content });
+    }
+    llmMessages.push({ role: "user", content: currentMessage });
+
+    const apiKey = ENV.forgeApiKey?.trim() || ENV.anthropicApiKey?.trim();
+    const forgeUrl = ENV.forgeApiUrl?.trim();
+
+    if (apiKey) {
+      let apiUrl: string;
+      let headers: Record<string, string>;
+      let bodyPayload: Record<string, unknown>;
+
+      const isAnthropic = !forgeUrl && !!ENV.anthropicApiKey?.trim();
+
+      if (isAnthropic) {
+        apiUrl = "https://api.anthropic.com/v1/messages";
+        headers = {
+          "content-type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        };
+        bodyPayload = {
+          model: "claude-haiku-4-5-20251001",
+          system: NOVA_SYSTEM_PROMPT,
+          messages: llmMessages,
+          max_tokens: 300,
+          stream: true,
+        };
+      } else {
+        apiUrl = forgeUrl
+          ? `${forgeUrl.replace(/\/$/, "")}/v1/chat/completions`
+          : "https://forge.manus.im/v1/chat/completions";
+        headers = {
+          "content-type": "application/json",
+          "authorization": `Bearer ${apiKey}`,
+        };
+        bodyPayload = {
+          model: "claude-haiku-4-5-20251001",
+          messages: [{ role: "system", content: NOVA_SYSTEM_PROMPT }, ...llmMessages],
+          max_tokens: 300,
+          stream: true,
+        };
+      }
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(bodyPayload),
+      });
+
+      if (response.ok && response.body) {
+        let fullText = "";
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data: ")) continue;
+            const data = line.slice(6).trim();
+            if (data === "[DONE]") continue;
+            try {
+              const parsed = JSON.parse(data);
+              let chunk = "";
+              // Anthropic streaming format
+              if (parsed.type === "content_block_delta" && parsed.delta?.type === "text_delta") {
+                chunk = parsed.delta.text ?? "";
+              }
+              // OpenAI-compatible streaming format
+              else if (parsed.choices?.[0]?.delta?.content) {
+                chunk = parsed.choices[0].delta.content;
+              }
+              if (chunk) {
+                fullText += chunk;
+                broadcastSSE('nova_stream_chunk', { sessionId, chunk });
+              }
+            } catch { /* malformed JSON line — skip */ }
+          }
+        }
+
+        if (fullText.trim()) {
+          await insertChatMessage(sessionId, "bot", fullText.trim());
+          broadcastSSE('nova_stream_done', { sessionId, content: fullText.trim() });
+          broadcastSSE('nova_typing', { sessionId, isTyping: false });
+          return fullText.trim();
+        }
+      }
+    }
+  } catch (err) {
+    console.error("[Nova] Streaming failed, falling back:", err);
+  }
+
+  // Fallback: non-streaming
+  const reply = await generateNovaResponse(currentMessage, history, context);
+  await insertChatMessage(sessionId, "bot", reply);
+  // Simulate progressive stream for fallback so admin sees it arrive word by word
+  const words = reply.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    const chunk = (i === 0 ? "" : " ") + words[i];
+    broadcastSSE('nova_stream_chunk', { sessionId, chunk });
+    await new Promise(r => setTimeout(r, 40));
+  }
+  broadcastSSE('nova_stream_done', { sessionId, content: reply });
+  broadcastSSE('nova_typing', { sessionId, isTyping: false });
+  return reply;
+}
 
 // ─── Nova System Prompt ──────────────────────────────────────────────────────
 
