@@ -2500,13 +2500,7 @@ async function handler(req, res) {
                 email: resolvedEmail,
                 locationId: "Un5H1b2zXJM3agZ56j7c",
                 tags: ["nova-" + analysis.intent, "nova-support"],
-                customField: {
-                  lead_source: "NOVA Support",
-                  business_type: analysis.businessType || sess.businessType || "",
-                  pain_point: analysis.painPoint || "",
-                  chat_session_id: qlSessionId,
-                  nova_intent: analysis.intent
-                }
+                source: "NOVA Support Chat"
               };
               const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
                 method: "POST",
