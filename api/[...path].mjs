@@ -2375,11 +2375,14 @@ async function handler(req, res) {
     const GHL_KEY = process.env.GHL_API_KEY;
     if (!GHL_KEY) { res.status(500).json({ error: "GHL_API_KEY not set" }); return; }
     try {
-      const r = await fetch("https://rest.gohighlevel.com/v1/contacts/?limit=1", {
-        headers: { Authorization: "Bearer " + GHL_KEY }
+      const testPayload = { firstName: "NOVA", lastName: "TestContact", email: "nova-test@opsbynoell.com", locationId: "Un5H1b2zXJM3agZ56j7c", tags: ["nova-test"] };
+      const r = await fetch("https://services.leadconnectorhq.com/contacts/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + GHL_KEY, "Version": "2021-07-28" },
+        body: JSON.stringify(testPayload)
       });
       const text = await r.text();
-      res.status(200).json({ ghlStatus: r.status, ghlBody: text.substring(0, 500), keyPresent: true, keyPrefix: GHL_KEY.substring(0, 8) });
+      res.status(200).json({ ghlStatus: r.status, ghlBody: text.substring(0, 800), keyPresent: true, keyPrefix: GHL_KEY.substring(0, 8) });
     } catch(e) {
       res.status(500).json({ error: e.message });
     }
@@ -2503,9 +2506,10 @@ async function handler(req, res) {
                 }
               };
               console.error("[QL-GHL] About to call GHL, GHL_KEY_present=" + !!QL_GHL_KEY + " email=" + resolvedEmail + " intent=" + analysis.intent);
-              const ghlRes = await fetch("https://rest.gohighlevel.com/v1/contacts/", {
+              ghlPayload.locationId = "Un5H1b2zXJM3agZ56j7c";
+              const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
                 method: "POST",
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${QL_GHL_KEY}` },
+                headers: { "Content-Type": "application/json", "Authorization": "Bearer " + QL_GHL_KEY, "Version": "2021-07-28" },
                 body: JSON.stringify(ghlPayload)
               });
               console.error("[QL-GHL] Response status=" + ghlRes.status + " ok=" + ghlRes.ok);
