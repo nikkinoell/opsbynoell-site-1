@@ -2502,7 +2502,7 @@ async function handler(req, res) {
                 tags: ["nova-" + analysis.intent, "nova-support"],
                 source: "NOVA Support Chat"
               };
-              const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
+              const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/upsert", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Authorization": "Bearer " + QL_GHL_KEY, "Version": "2021-07-28" },
                 body: JSON.stringify(ghlPayload)
