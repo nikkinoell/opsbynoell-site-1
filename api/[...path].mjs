@@ -10903,14 +10903,21 @@ function registerOAuthRoutes(app2) {
       return;
     }
     const adminOpenId = "admin-opsbynoell";
-    await upsertUser({
-      openId: adminOpenId,
-      name: "Nikki Noell",
-      email: "hello@opsbynoell.com",
-      loginMethod: "password",
-      lastSignedIn: /* @__PURE__ */ new Date(),
-      role: "admin"
-    });
+    try {
+      await Promise.race([
+        upsertUser({
+          openId: adminOpenId,
+          name: "Nikki Noell",
+          email: "hello@opsbynoell.com",
+          loginMethod: "password",
+          lastSignedIn: /* @__PURE__ */ new Date(),
+          role: "admin"
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("DB timeout")), 5000))
+      ]);
+    } catch (dbErr) {
+      console.warn("[Login] DB upsert failed (non-blocking):", dbErr.message);
+    }
     const sessionToken = await sdk.createSessionToken(adminOpenId, {
       name: "Nikki Noell",
       expiresInMs: ONE_YEAR_MS
