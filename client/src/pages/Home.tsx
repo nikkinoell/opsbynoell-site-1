@@ -23,8 +23,13 @@ const STEPS = [
   },
   {
     number: '03',
-    title: 'We Build It. We Run It.',
-    desc: 'We build your system, test everything before go-live, and manage it from there. You focus on your business. We handle the backend.',
+    title: 'Build',
+    desc: 'We build your system, test everything before go-live, and hand it off running. You don\'t configure a single setting.',
+  },
+  {
+    number: '04',
+    title: 'Manage & Optimize',
+    desc: 'We manage your system from day one and optimize it as your business grows. Ongoing support, reporting, and iteration — all included.',
   },
 ];
 
@@ -141,8 +146,7 @@ export default function Home() {
             lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '1.5rem',
           }}>
             Done-for-you AI automation for{' '}
-            <GradientText>appointment-based</GradientText>
-            {' '}and service businesses.
+            <GradientText>local service businesses.</GradientText>
           </h1>
 
           {/* Sub */}
@@ -241,6 +245,34 @@ export default function Home() {
             </h2>
           </div>
 
+          {/* Case study preview — Santa */}
+          <div style={{ marginBottom: '3rem', background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.18)', borderLeft: '3px solid #A78BFA', borderRadius: '10px', padding: '2.5rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '2rem' }}>
+              {[
+                { stat: '4/wk → <1', label: 'No-show reduction' },
+                { stat: '40+', label: 'Reviews in 8 weeks' },
+                { stat: '2 weeks', label: 'Time to live' },
+              ].map(({ stat, label }) => (
+                <div key={label} style={{ textAlign: 'center', minWidth: '120px' }}>
+                  <div style={{ fontFamily: "'Nicholas', serif", fontSize: '1.75rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.1 }}>{stat}</div>
+                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', marginTop: '0.25rem' }}>{label}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+              "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <div style={{ fontFamily: "'Nicholas', serif", fontWeight: 700, color: '#ffffff', fontSize: '0.9375rem' }}>Santa</div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#A78BFA', marginTop: '0.125rem' }}>Licensed Massage Therapist, Laguna Niguel</div>
+              </div>
+              <a href="/case-study" style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#A78BFA', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                Read the full case study <ArrowRight size={12} />
+              </a>
+            </div>
+          </div>
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {TESTIMONIALS.map(({ name, role, text, stars }) => (
               <div key={name} className="testimonial-card" style={{ padding: '2rem' }}>
@@ -271,7 +303,7 @@ export default function Home() {
               Explore how this works{' '}<GradientText>for your business</GradientText>
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75 }}>
-              Every appointment-based business has the same core revenue gaps. We've built the fixes for all of them.
+              Every local service business has the same core revenue gaps. We've built the fixes for all of them.
             </p>
           </div>
 

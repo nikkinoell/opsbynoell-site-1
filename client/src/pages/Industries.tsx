@@ -96,7 +96,7 @@ export default function Industries() {
           </FadeItem>
           <FadeItem delay={0.1}>
             <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', maxWidth: '800px', marginBottom: '1.75rem' }}>
-              <span style={{ color: '#F5F0EC' }}>Built for appointment-based</span>{' '}
+              <span style={{ color: '#F5F0EC' }}>Built for local service</span>{' '}
               <span className="gradient-text-purple">businesses.</span>
             </h1>
           </FadeItem>

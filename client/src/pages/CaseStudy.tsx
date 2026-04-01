@@ -271,6 +271,45 @@ export default function CaseStudy() {
         </div>
       </section>
 
+      {/* ─── SANTA QUOTE + STATS ─── */}
+      <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'start' }} className="lg:grid-cols-2">
+            {/* Quote */}
+            <FadeItem delay={0}>
+              <div style={{ background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.15)', borderLeft: '3px solid #A78BFA', borderRadius: '8px', padding: '2.5rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.55, marginBottom: '1.5rem' }}>
+                  "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
+                </p>
+                <div>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Santa</p>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
+                    Licensed Massage Therapist, Laguna Niguel
+                  </p>
+                </div>
+              </div>
+            </FadeItem>
+            {/* Stats */}
+            <FadeItem delay={0.1}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '10px', overflow: 'hidden' }}>
+                {[
+                  { value: '4/wk → <1', label: 'No-Shows', sub: 'First two weeks' },
+                  { value: '40+', label: 'Reviews', sub: 'In 8 weeks' },
+                  { value: '2 weeks', label: 'Time to Live', sub: 'Audit to launch' },
+                  { value: '< 10s', label: 'Response Time', sub: 'Missed call text-back' },
+                ].map((s, i) => (
+                  <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '1.75rem 1.5rem' }}>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583' }}>{s.sub}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeItem>
+          </div>
+        </div>
+      </section>
+
       {/* ─── THE RESULT ─── */}
       <section style={{ padding: '6rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">

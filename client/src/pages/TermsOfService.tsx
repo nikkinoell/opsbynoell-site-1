@@ -138,7 +138,7 @@ export default function TermsOfService() {
             </p>
             <ul style={UL_STYLE}>
               <li>Email: <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a></li>
-              <li>Phone: <a href="tel:+19492429161" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 242-9161</a></li>
+              <li>Phone: <a href="tel:+19497849726" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 784-9726</a></li>
             </ul>
             <p style={P_STYLE}>
               <strong>Age restriction:</strong> You must be 18 years of age or older to opt in to SMS communications from Ops by Noell.
@@ -230,7 +230,7 @@ export default function TermsOfService() {
               Attn: Nicole (Nikki) Noell<br />
               Mission Viejo, CA<br />
               <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a><br />
-              <a href="tel:+19492429161" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 242-9161</a><br />
+              <a href="tel:+19497849726" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 784-9726</a><br />
               <a href="https://www.opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>www.opsbynoell.com</a>
             </p>
           </div>

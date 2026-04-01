@@ -51,7 +51,7 @@ const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
   },
   {
     keywords: ['who do you work with', 'what type of business', 'what businesses', 'industry', 'industries', 'who is this for', 'med spa', 'salon', 'dental', 'massage', 'chiropractor', 'home service'],
-    answer: "We work with appointment-based service businesses. Med spas, massage therapists, salons, dental offices, chiropractors, home service companies, and similar. Basically, if your business runs on bookings and phone calls, we can almost certainly help.",
+    answer: "We work with local service businesses. Med spas, massage therapists, salons, dental offices, chiropractors, home service companies, and similar. Basically, if your business runs on bookings and phone calls, we can almost certainly help.",
   },
   {
     keywords: ['how long', 'timeline', 'setup time', 'how soon', 'when will', 'how fast', 'get started', 'onboard'],

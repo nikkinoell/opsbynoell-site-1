@@ -5,7 +5,7 @@
  */
 
 import { Link } from 'wouter';
-import { Instagram, Linkedin, Facebook } from 'lucide-react';
+import { Instagram, Linkedin } from 'lucide-react';
 
 const LOGO_URL = '/logo.svg';
 
@@ -30,13 +30,14 @@ export default function Footer() {
             <div style={{ display: 'flex', gap: '0.875rem', alignItems: 'center' }}>
               {[
                 { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/opsbynoell' },
-                { icon: Linkedin, label: 'LinkedIn', href: '#' },
-                { icon: Facebook, label: 'Facebook', href: '#' },
+                { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/opsbynoell' },
               ].map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -65,39 +66,6 @@ export default function Footer() {
                   <Icon size={15} />
                 </a>
               ))}
-              {/* TikTok */}
-              <a
-                href="#"
-                aria-label="TikTok"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  border: '1px solid rgba(167,139,250,0.2)',
-                  color: 'rgba(160,168,184,0.7)',
-                  textDecoration: 'none',
-                  transition: 'border-color 0.2s ease, color 0.2s ease, background 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = '#A78BFA';
-                  el.style.color = '#C4B5FD';
-                  el.style.background = 'rgba(167,139,250,0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = 'rgba(167,139,250,0.2)';
-                  el.style.color = 'rgba(160,168,184,0.7)';
-                  el.style.background = 'transparent';
-                }}
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
-                </svg>
-              </a>
             </div>
           </div>
 
@@ -150,12 +118,12 @@ export default function Footer() {
                 hello@opsbynoell.com
               </a>
               <a
-                href="tel:+19492429161"
+                href="tel:+19497849726"
                 style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#A78BFA', textDecoration: 'none', transition: 'color 0.15s ease' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#C4B5FD'; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#A78BFA'; }}
               >
-                (949) 242-9161
+                (949) 784-9726
               </a>
             </div>
             <a href="/book" className="btn-gradient" style={{ fontSize: '0.8125rem', padding: '0.75rem 1.5rem', display: 'inline-block' }}>

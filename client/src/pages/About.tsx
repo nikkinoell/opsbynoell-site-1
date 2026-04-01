@@ -134,7 +134,7 @@ export default function About() {
                   So we built the fix. And then we built it for everyone else.
                 </p>
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                  Today, we work with appointment-based service businesses, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
+                  Today, we work with local service businesses, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
                 </p>
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8 }}>
                   Ops by Noell is our family name on the door. That means something to us. Every system we build, we build like it's our own business on the line. Because in a way, it is.

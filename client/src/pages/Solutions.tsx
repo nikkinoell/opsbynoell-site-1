@@ -187,7 +187,7 @@ const BUILDS = [
     tag: 'Reputation Management',
     title: 'Review Generation Engine',
     description: 'Automated post-appointment review request sequences across Google, Yelp, and Facebook. Sentiment filtering routes unhappy clients to a private feedback form before they go public.',
-    perfectFor: 'Any appointment-based business that wants more 5-star reviews without asking manually.',
+    perfectFor: 'Any local service business that wants more 5-star reviews without asking manually.',
     outcome: '4x review volume in 60 days',
   },
   {

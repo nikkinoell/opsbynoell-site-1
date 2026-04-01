@@ -111,10 +111,10 @@ export default function Book() {
               color: '#F5F0EC',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              maxWidth: '680px',
+              maxWidth: '780px',
               marginBottom: '1.5rem',
             }}>
-              Let's talk. 30 minutes. No pitch. No pressure.
+              See What Your Gaps Are Costing You — Free 30-Minute Call
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
@@ -140,6 +140,21 @@ export default function Book() {
             <FadeItem delay={0}>
               <div>
                 <p className="eyebrow" style={{ marginBottom: '1.5rem' }}>What to Expect</p>
+
+                {/* Key bullets */}
+                <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  {[
+                    '30 minutes, no pitch. We listen first.',
+                    'You will see the math — exactly what your gaps cost monthly.',
+                    'No obligation. If it is not the right fit, we will tell you.',
+                  ].map((bullet, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                      <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#A78BFA', flexShrink: 0, marginTop: '0.5rem' }} />
+                      <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#F5F0EC', lineHeight: 1.6, margin: 0 }}>{bullet}</p>
+                    </div>
+                  ))}
+                </div>
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                   {expectations.map((item, i) => (
                     <div

@@ -45,7 +45,7 @@ const SERVICES = [
     icon: Phone, number: '01', title: 'Missed Call Text-Back', tagline: 'Never lose a lead to voicemail again.',
     whatItDoes: 'The moment a call goes unanswered, your system fires an instant, personalized text message to the caller within seconds. The message acknowledges their call, offers to help, and guides them toward booking. No manual action required.',
     whyItMatters: "Studies show 85% of callers who don't reach a business on the first try will not call back. They call your competitor. Missed Call Text-Back eliminates that window entirely, keeping leads warm and in conversation before they disappear.",
-    bestFor: 'Any appointment-based business that receives phone calls: massage therapists, med spas, chiropractors, salons, wellness providers, consultants.',
+    bestFor: 'Any local service business that receives phone calls: massage therapists, med spas, chiropractors, salons, wellness providers, consultants.',
   },
   {
     icon: Calendar, number: '02', title: 'AI Booking + Reminder System', tagline: 'Fill your calendar without picking up the phone.',
@@ -140,7 +140,7 @@ const PACKAGES = [
     subtitle: 'Lead Capture + Booking Fix',
     price: '$797',
     period: '/mo · + $997 setup',
-    desc: 'The essential foundation for any appointment-based business. Stop losing leads from missed calls and start filling your calendar automatically.',
+    desc: 'The essential foundation for any local service business. Stop losing leads from missed calls and start filling your calendar automatically.',
     includes: ['Missed Call Text-Back', 'AI Booking + Reminder System', 'Onboarding & setup included', 'Ongoing management & maintenance'],
     cta: 'Book Intro Call',
     featured: false,
@@ -216,7 +216,7 @@ export default function Services() {
           </FadeItem>
           <FadeItem delay={0.16}>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.175rem)', color: '#868583', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto 2.5rem' }}>
-              Every system on this page is built for you, installed by us, and running before you know it. No software to learn. No setup on your end. You serve your clients — we automate everything around it.
+              Clients booked, retained, and reviewed — every system on this page is built for you, installed by us, and running before you know it. No software to learn. No setup on your end.
             </p>
           </FadeItem>
           <FadeItem delay={0.24}>
@@ -226,6 +226,17 @@ export default function Services() {
               </a>
               <a href="#pricing" className="btn-outline" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
                 View Pricing
+              </a>
+            </div>
+          </FadeItem>
+          <FadeItem delay={0.32}>
+            <div style={{ marginTop: '2.5rem', display: 'inline-block', background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '12px', padding: '1.5rem 2rem', maxWidth: '460px', textAlign: 'left' }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>Start with one system.</p>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                Missed Call Text-Back — $297 setup + $197/month. No sales call needed.
+              </p>
+              <a href="/book" className="btn-gradient" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9375rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                Get Started for $297 <ArrowRight size={14} />
               </a>
             </div>
           </FadeItem>
@@ -292,7 +303,7 @@ export default function Services() {
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <SectionBadge>Who We Serve</SectionBadge>
             <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
-              Built for <GradientText>appointment-based businesses.</GradientText>
+              Built for <GradientText>local service businesses.</GradientText>
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
               If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
