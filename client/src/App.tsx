@@ -39,6 +39,9 @@ import HomeServicesAutomation from "./pages/HomeServicesAutomation";
 import MassageTherapistCaseStudy from "./pages/MassageTherapistCaseStudy";
 // Product landing pages
 import Nova from "./pages/Nova";
+// Content pages
+import Blog from "./pages/Blog";
+import RevenueCalculatorPage from "./pages/RevenueCalculatorPage";
 
 // SEO meta per page — descriptions kept to 50–160 chars; keywords are page-specific
 const pageMeta: Record<string, { title: string; description: string; keywords: string }> = {
@@ -252,6 +255,9 @@ function Router() {
         <Route path="/case-study/massage-therapist" component={MassageTherapistCaseStudy} />
         {/* Product landing pages */}
         <Route path="/nova" component={Nova} />
+        {/* Content pages */}
+        <Route path="/blog" component={Blog} />
+        <Route path="/resources/revenue-calculator" component={RevenueCalculatorPage} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
@@ -274,3 +280,4 @@ function App() {
 }
 
 export default App;
+
