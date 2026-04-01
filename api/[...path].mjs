@@ -2488,10 +2488,16 @@ async function handler(req, res) {
           // The unique constraint on chatLeads.email makes this race-safe.
           // On conflict, only upgrade fields if the new intent outranks the stored one.
           // Intent rank: hot=2, warm=1, low=0 — encoded inline in SQL CASE.
+          // updatedAt is always stamped on conflict so we can track last-seen time.
+          // CTE captures pre-update intent so shouldSyncGHL only fires on genuine upgrades.
           const upsertResult = await qlPool.query(
-            `INSERT INTO "chatLeads" (name, email, "sessionId", "businessType", question, page, notified, intent, "ghlContactId")
+            `WITH old AS (
+               SELECT intent AS old_intent FROM "chatLeads" WHERE email = $2
+             )
+             INSERT INTO "chatLeads" (name, email, "sessionId", "businessType", question, page, notified, intent, "ghlContactId")
              VALUES ($1,$2,$3,$4,$5,$6,'no',$7,NULL)
              ON CONFLICT (email) DO UPDATE SET
+               "updatedAt"  = now(),
                name         = CASE WHEN (CASE $7 WHEN 'hot' THEN 2 WHEN 'warm' THEN 1 ELSE 0 END)
                                         > (CASE "chatLeads".intent WHEN 'hot' THEN 2 WHEN 'warm' THEN 1 ELSE 0 END)
                                    THEN EXCLUDED.name         ELSE "chatLeads".name END,
@@ -2507,7 +2513,8 @@ async function handler(req, res) {
                intent       = CASE WHEN (CASE $7 WHEN 'hot' THEN 2 WHEN 'warm' THEN 1 ELSE 0 END)
                                         > (CASE "chatLeads".intent WHEN 'hot' THEN 2 WHEN 'warm' THEN 1 ELSE 0 END)
                                    THEN EXCLUDED.intent       ELSE "chatLeads".intent END
-             RETURNING id, (xmax = 0) AS inserted, "chatLeads".intent AS final_intent`,
+             RETURNING id, (xmax = 0) AS inserted, "chatLeads".intent AS final_intent,
+               (SELECT old_intent FROM old) AS prev_intent`,
             [
               resolvedName,
               resolvedEmail,
@@ -2520,8 +2527,8 @@ async function handler(req, res) {
           );
           contactCaptured = true;
           const upsertRow = upsertResult.rows[0];
-          // Fire GHL sync on fresh insert, or if intent was upgraded (row existed but we updated it)
-          shouldSyncGHL = upsertRow.inserted || (upsertRow.final_intent === analysis.intent && !upsertRow.inserted);
+          // Fire GHL sync on fresh insert, or on genuine intent upgrade (prev differs from final)
+          shouldSyncGHL = upsertRow.inserted || (!upsertRow.inserted && upsertRow.prev_intent !== upsertRow.final_intent);
 
           // ── GHL sync (hot/warm guaranteed by Gate 4) ────────────────────────
           if (shouldSyncGHL && QL_GHL_KEY) {
