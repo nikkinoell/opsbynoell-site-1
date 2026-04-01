@@ -110,7 +110,7 @@ export default function About() {
       {/* ─── WHO WE ARE ─── */}
       <section style={{ padding: '6rem 0' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'center' }} className="lg:grid-cols-2">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }} className="lg:grid-cols-2">
             <FadeItem delay={0}>
               <div>
                 <div style={{ marginBottom: '1.25rem' }}>
@@ -133,45 +133,112 @@ export default function About() {
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   So we built the fix. And then we built it for everyone else.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                  Today, we work with local service businesses, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '2rem' }}>
+                  Today, we work with local service businesses across Orange County, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8 }}>
-                  Ops by Noell is our family name on the door. That means something to us. Every system we build, we build like it's our own business on the line. Because in a way, it is.
-                </p>
+
+                {/* Family name callout */}
+                <div style={{
+                  borderLeft: '3px solid #A78BFA',
+                  paddingLeft: '1.25rem',
+                  marginBottom: '0',
+                }}>
+                  <p style={{
+                    fontFamily: "'Nicholas', serif",
+                    fontSize: '1.1875rem',
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    lineHeight: 1.4,
+                    marginBottom: '0.5rem',
+                  }}>
+                    Our family name is on the door.
+                  </p>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.7 }}>
+                    Every system we build, we build like it's our own business on the line. Because in a way, it is.
+                  </p>
+                </div>
               </div>
             </FadeItem>
 
             <FadeItem delay={0.15}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '8px', overflow: 'hidden' }}>
-                {[
-                  { label: 'Founded', value: '2025', sub: 'Mission Viejo, CA' },
-                  { label: 'Avg. Time to Live', value: '2 wks', sub: 'From audit to launch' },
-                  { label: 'No-Show Reduction', value: '30–50%', sub: 'With automated reminders' },
-                  { label: 'Response Time', value: '< 10 sec', sub: 'Missed call text-back' },
-                ].map((stat, i) => (
-                  <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '2rem 1.5rem' }}>
-                    <p style={{
-                      fontFamily: "'Nicholas', serif",
-                      fontSize: '2rem', fontWeight: 700,
-                      color: '#ffffff', lineHeight: 1,
-                      marginBottom: '0.375rem', letterSpacing: '-0.02em',
-                    }}>
-                      {stat.value}
-                    </p>
-                    <p style={{
-                      fontFamily: "'Sora', sans-serif",
-                      fontSize: '0.6875rem', fontWeight: 600,
-                      color: '#A78BFA', letterSpacing: '0.1em',
-                      textTransform: 'uppercase', marginBottom: '0.25rem',
-                    }}>
-                      {stat.label}
-                    </p>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583' }}>
-                      {stat.sub}
-                    </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {/* Founder photo placeholder */}
+                <div style={{
+                  background: 'rgba(10, 8, 20, 0.85)',
+                  border: '1px solid rgba(167,139,250,0.4)',
+                  borderRadius: '10px',
+                  padding: '2.5rem 2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '200px',
+                  textAlign: 'center',
+                  gap: '0.75rem',
+                }}>
+                  <div style={{
+                    width: '48px', height: '48px',
+                    borderRadius: '50%',
+                    background: 'rgba(167,139,250,0.12)',
+                    border: '1px solid rgba(167,139,250,0.25)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    marginBottom: '0.25rem',
+                  }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
                   </div>
-                ))}
+                  <p style={{
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    color: '#A78BFA',
+                    letterSpacing: '0.04em',
+                  }}>
+                    Photo coming soon
+                  </p>
+                  <p style={{
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: '0.8125rem',
+                    color: '#868583',
+                    lineHeight: 1.5,
+                  }}>
+                    Nikki + James Noell, Founders
+                  </p>
+                </div>
+
+                {/* Stats grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '8px', overflow: 'hidden' }}>
+                  {[
+                    { label: 'Founded', value: '2025', sub: 'Mission Viejo, CA' },
+                    { label: 'Avg. Time to Live', value: '2 wks', sub: 'From audit to launch' },
+                    { label: 'No-Show Reduction', value: '30–50%', sub: 'With automated reminders' },
+                    { label: 'Response Time', value: '< 10 sec', sub: 'Missed call text-back' },
+                  ].map((stat, i) => (
+                    <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '2rem 1.5rem' }}>
+                      <p style={{
+                        fontFamily: "'Nicholas', serif",
+                        fontSize: '2rem', fontWeight: 700,
+                        color: '#ffffff', lineHeight: 1,
+                        marginBottom: '0.375rem', letterSpacing: '-0.02em',
+                      }}>
+                        {stat.value}
+                      </p>
+                      <p style={{
+                        fontFamily: "'Sora', sans-serif",
+                        fontSize: '0.6875rem', fontWeight: 600,
+                        color: '#A78BFA', letterSpacing: '0.1em',
+                        textTransform: 'uppercase', marginBottom: '0.25rem',
+                      }}>
+                        {stat.label}
+                      </p>
+                      <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583' }}>
+                        {stat.sub}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </FadeItem>
           </div>
