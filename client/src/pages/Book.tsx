@@ -207,22 +207,13 @@ export default function Book() {
                   borderRadius: '12px',
                   overflow: 'hidden',
                   border: '1px solid rgba(167,139,250,0.15)',
-                  background: '#0d0d14',
+                  background: '#ffffff',
                   boxShadow: '0 0 0 1px rgba(167,139,250,0.08), 0 24px 48px rgba(0,0,0,0.4)',
                   position: 'relative',
                 }}>
-                  {/* Subtle dark tint overlay — reduces white blowout without blocking interaction */}
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(1,5,9,0.08)',
-                    pointerEvents: 'none',
-                    zIndex: 1,
-                    borderRadius: '12px',
-                  }} />
                   <iframe
                     src="https://api.leadconnectorhq.com/widget/booking/ko7eXb5zooItceadiV02"
-                    style={{ width: '100%', height: '750px', border: 'none', display: 'block' }}
+                    style={{ width: '100%', height: '750px', border: 'none', display: 'block', background: '#ffffff' }}
                     scrolling="no"
                     title="Book a call with Ops by Noell"
                   />
@@ -276,3 +267,4 @@ export default function Book() {
     </div>
   );
 }
+
