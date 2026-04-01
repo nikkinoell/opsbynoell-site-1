@@ -13,23 +13,23 @@ import Footer from '@/components/Footer';
 const STEPS = [
   {
     number: '01',
-    title: 'Free 30-Minute Intro Call',
-    desc: 'A free 30-minute conversation about your business. We learn what\'s working, what isn\'t, and tell you honestly whether automation is the right fit.',
+    title: 'Audit',
+    desc: 'A free 15-minute intro call followed by a deep Revenue Audit. We map every gap in your operation, quantify what each one costs you monthly, and design your complete system before you commit to anything.',
   },
   {
     number: '02',
-    title: 'Revenue Audit',
-    desc: 'We map every revenue gap, quantify the monthly cost in dollars, and design your complete custom system on paper before you commit to building anything.',
+    title: 'Build',
+    desc: 'We scope and design your custom automation stack based on the audit. Every component is planned, mapped, and approved before we write a single line.',
   },
   {
     number: '03',
-    title: 'Build',
-    desc: 'We build your system, test everything before go-live, and hand it off running. You don\'t configure a single setting.',
+    title: 'Build (the system)',
+    desc: 'We build everything: missed call text-back, booking automation, reminders, review generation, follow-up sequences. You don\'t touch a setting. We test before go-live.',
   },
   {
     number: '04',
     title: 'Manage & Optimize',
-    desc: 'We manage your system from day one and optimize it as your business grows. Ongoing support, reporting, and iteration — all included.',
+    desc: 'Your system is live and running. We monitor performance, handle maintenance, and optimize over time. You get the results. We handle the backend.',
   },
 ];
 
@@ -146,7 +146,8 @@ export default function Home() {
             lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '1.5rem',
           }}>
             Done-for-you AI automation for{' '}
-            <GradientText>local service businesses.</GradientText>
+            <GradientText>appointment-based</GradientText>
+            {' '}and service businesses.
           </h1>
 
           {/* Sub */}
@@ -162,7 +163,7 @@ export default function Home() {
           {/* CTAs */}
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
             <a href="/book" className="btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-              Book Free 30-Minute Intro Call <ArrowRight size={16} />
+              Book Free 15-Minute Intro Call <ArrowRight size={16} />
             </a>
             <a href="/services" className="btn-outline" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
               See How It Works
@@ -245,34 +246,6 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Case study preview — Santa */}
-          <div style={{ marginBottom: '3rem', background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.18)', borderLeft: '3px solid #A78BFA', borderRadius: '10px', padding: '2.5rem' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '2rem' }}>
-              {[
-                { stat: '4/wk → <1', label: 'No-show reduction' },
-                { stat: '40+', label: 'Reviews in 8 weeks' },
-                { stat: '2 weeks', label: 'Time to live' },
-              ].map(({ stat, label }) => (
-                <div key={label} style={{ textAlign: 'center', minWidth: '120px' }}>
-                  <div style={{ fontFamily: "'Nicholas', serif", fontSize: '1.75rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.1 }}>{stat}</div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', marginTop: '0.25rem' }}>{label}</div>
-                </div>
-              ))}
-            </div>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, fontStyle: 'italic', marginBottom: '1.25rem' }}>
-              "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <div style={{ fontFamily: "'Nicholas', serif", fontWeight: 700, color: '#ffffff', fontSize: '0.9375rem' }}>Santa</div>
-                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#A78BFA', marginTop: '0.125rem' }}>Licensed Massage Therapist, Laguna Niguel</div>
-              </div>
-              <a href="/case-study" style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#A78BFA', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                Read the full case study <ArrowRight size={12} />
-              </a>
-            </div>
-          </div>
-
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {TESTIMONIALS.map(({ name, role, text, stars }) => (
               <div key={name} className="testimonial-card" style={{ padding: '2rem' }}>
@@ -303,7 +276,7 @@ export default function Home() {
               Explore how this works{' '}<GradientText>for your business</GradientText>
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.75 }}>
-              Every local service business has the same core revenue gaps. We've built the fixes for all of them.
+              Every appointment-based business has the same core revenue gaps. We've built the fixes for all of them.
             </p>
           </div>
 
@@ -351,6 +324,83 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══ CASE STUDY PREVIEW ════════════════════════════════════ */}
+      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <SectionBadge>Client Case Study</SectionBadge>
+            <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
+              From zero infrastructure to{' '}<GradientText>fully automated in 14 days.</GradientText>
+            </h2>
+          </div>
+
+          {/* Stats row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
+            {[
+              { value: '4/wk → <1', label: 'No-shows' },
+              { value: '40+', label: 'Reviews in 8 weeks' },
+              { value: '2 weeks', label: 'To go live' },
+              { value: '25 yrs', label: 'Experience. Zero prior tech.' },
+            ].map(({ value, label }) => (
+              <div key={label} style={{
+                textAlign: 'center', padding: '1.75rem',
+                background: 'rgba(167,139,250,0.04)',
+                border: '1px solid rgba(167,139,250,0.15)',
+                borderRadius: '10px',
+              }}>
+                <div style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 800, color: '#A78BFA', lineHeight: 1.1, marginBottom: '0.375rem' }}>{value}</div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583' }}>{label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Santa quote placeholder */}
+          <div style={{
+            background: 'rgba(167,139,250,0.04)',
+            border: '1px solid rgba(167,139,250,0.15)',
+            borderLeft: '3px solid #A78BFA',
+            borderRadius: '8px',
+            padding: '2.5rem',
+            marginBottom: '2.5rem',
+          }}>
+            <p style={{
+              fontFamily: "'Nicholas', serif",
+              fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
+              fontWeight: 600, color: '#ffffff',
+              lineHeight: 1.6, marginBottom: '1rem',
+              fontStyle: 'italic',
+            }}>
+              "I went from no website, no booking system, and 4 no-shows a week to a fully automated practice in 14 days. I didn't have to figure out a single thing."
+            </p>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A78BFA' }}>
+              Santa M. — Licensed Massage Therapist, Laguna Niguel CA
+            </p>
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <a href="/case-study" className="btn-outline" style={{ padding: '0.875rem 2rem', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              Read the Full Case Study <ArrowRight size={15} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ LEAD MAGNET — REVENUE CALCULATOR ══════════════════════ */}
+      <section style={{ padding: '6rem 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+          <SectionBadge>Free Tool</SectionBadge>
+          <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.025em', marginBottom: '1.25rem' }}>
+            How much are you losing{' '}<GradientText>to no-shows and missed calls?</GradientText>
+          </h2>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', lineHeight: 1.75, maxWidth: '520px', margin: '0 auto 2.25rem' }}>
+            Enter a few numbers and we'll calculate your exact monthly revenue leak — before you spend a dollar on automation.
+          </p>
+          <a href="/resources/revenue-calculator" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            Get the Calculator <ArrowRight size={17} />
+          </a>
+        </div>
+      </section>
+
       {/* ═══ FINAL CTA ══════════════════════════════════════════════ */}
       <section style={{ padding: '8rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{
@@ -363,11 +413,11 @@ export default function Home() {
             Stop losing leads to{' '}<GradientText>slow follow-up.</GradientText>
           </h2>
           <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.125rem', color: '#868583', maxWidth: '500px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-            30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
+            15 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-              Book Free 30-Minute Intro Call <ArrowRight size={17} />
+              Book Free 15-Minute Intro Call <ArrowRight size={17} />
             </a>
             <a href="/case-study" className="btn-outline" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem' }}>
               See Our Results
@@ -379,47 +429,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ LEAD MAGNET — REVENUE CALCULATOR ══════════════════════ */}
-      <section style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.02)' }}>
-        <div className="container" style={{ maxWidth: '860px', margin: '0 auto' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2.5rem',
-            flexWrap: 'wrap' as const,
-            background: 'rgba(167,139,250,0.06)',
-            border: '1px solid rgba(167,139,250,0.2)',
-            borderRadius: '20px',
-            padding: 'clamp(2rem, 4vw, 3rem)',
-          }}>
-            <div style={{ flex: '1 1 340px' }}>
-              <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '100px', fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 600, color: '#C4B5FD', letterSpacing: '0.1em', textTransform: 'uppercase' as const, marginBottom: '1.25rem' }}>
-                Free Calculator
-              </span>
-              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.625rem, 3.5vw, 2.25rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.025em', marginBottom: '0.875rem' }}>
-                Find out what your revenue gaps are costing you.
-              </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, margin: 0 }}>
-                Free calculator — takes 3 minutes.
-              </p>
-            </div>
-            <div style={{ flexShrink: 0 }}>
-              <a
-                href="/resources/revenue-calculator"
-                className="btn-gradient"
-                style={{ padding: '1.125rem 2.25rem', fontSize: '1rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' as const }}
-              >
-                Get the Calculator <ArrowRight size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       </div>
       <Footer />
     </>
   );
 }
-
