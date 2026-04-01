@@ -38,6 +38,35 @@ const stats = [
   { value: '2 weeks', label: 'To full automation' },
 ];
 
+const medSpaIndustryStats = [
+  { value: '$2K–$5K', label: 'Lost monthly to missed calls and slow follow-up — per practice' },
+  { value: '3–6 weeks', label: 'High-value clients book this far in advance. Reminders are not optional.' },
+  { value: '93%', label: 'Of med spa clients check reviews before their first appointment' },
+];
+
+const serviceDetails = [
+  {
+    number: '01',
+    title: 'Missed Call Text-Back',
+    body: 'A missed call at a med spa is not just a missed call. It is a $300–$1,000 treatment that went to the practice down the street. Automatic text-back within 60 seconds keeps the conversation and the booking with you.',
+  },
+  {
+    number: '02',
+    title: 'AI Booking + Reminder System',
+    body: 'High-value med spa clients book in advance and forget. Automated reminders 48 hours and 2 hours before every appointment cut no-shows by 30–50% and recover revenue you would otherwise lose silently.',
+  },
+  {
+    number: '03',
+    title: 'Automated Review Generation',
+    body: 'After every treatment, a review request goes out while the client is still feeling the result. 93% of consumers read reviews before booking. Consistent 5-star reviews are the highest-ROI marketing asset a med spa can build.',
+  },
+  {
+    number: '04',
+    title: 'Lead Follow-Up Automation',
+    body: 'Clients who inquire but do not book need follow-up. 80% of sales require 5 or more touch points. Automated sequences keep you top of mind without your team lifting a finger.',
+  },
+];
+
 const problems = [
   { title: 'High-value appointments lost to voicemail', detail: 'A single missed call at a med spa can represent $500–$2,000 in lost revenue. No response within minutes means no booking.' },
   { title: 'No AI receptionist answering after hours', detail: 'Prospects call at 8pm when your team is gone. Without a voice agent picking up, you lose them to whoever answers first.' },
@@ -57,6 +86,53 @@ const solutions = [
   { item: 'Online booking 24/7', detail: 'Clients book themselves after hours, on mobile, without calling. High-value appointments fill while your team is focused on in-person care.', highlight: false },
   { item: 'Lapsed client re-engagement', detail: 'Automated sequences reach out at 30, 60, and 90-day intervals with a natural, personal-feeling message. Most re-book within a week.', highlight: false },
   { item: 'Review generation', detail: 'Post-appointment review requests go out at exactly the right moment — capturing satisfied clients while the experience is still fresh.', highlight: false },
+];
+
+const packages = [
+  {
+    name: 'Entry',
+    subtitle: 'Start Here',
+    price: '$197',
+    period: '/mo',
+    setup: '+ $297 setup',
+    desc: 'The fastest way to stop losing leads to voicemail. One system, live in a week.',
+    includes: ['Missed Call Text-Back', 'AI Voice Receptionist (after-hours)', 'Onboarding & setup included', 'Ongoing management & maintenance'],
+    cta: 'Book Intro Call',
+    featured: false,
+  },
+  {
+    name: 'Starter',
+    subtitle: 'Lead Capture + Booking Fix',
+    price: '$797',
+    period: '/mo',
+    setup: '+ $997 setup',
+    desc: 'The essential foundation. Stop losing leads from missed calls and fill your calendar automatically.',
+    includes: ['Missed Call Text-Back', 'AI Booking + Reminder System', 'Onboarding & setup included', 'Ongoing management & maintenance'],
+    cta: 'Book Intro Call',
+    featured: false,
+  },
+  {
+    name: 'Growth',
+    subtitle: 'Full AI Back Office',
+    price: '$1,497',
+    period: '/mo',
+    setup: '+ $1,497 setup',
+    desc: 'Every system working together to capture, convert, retain, and grow — on autopilot.',
+    includes: ['Everything in Starter', 'Automated Review Generation', 'Lead Follow-Up Automation', 'Marketing Automation', 'Priority support & optimization'],
+    cta: 'Most Popular',
+    featured: true,
+  },
+  {
+    name: 'Revenue Audit',
+    subtitle: 'Know Your Leaks First',
+    price: '$497',
+    period: 'one-time',
+    setup: 'credited toward any package',
+    desc: 'A deep-dive into your operation to identify every revenue leak and build your custom automation roadmap.',
+    includes: ['60-minute operations deep-dive', 'Revenue leak analysis', 'Custom automation roadmap', 'ROI projections per system'],
+    cta: 'Book Revenue Audit',
+    featured: false,
+  },
 ];
 
 export default function MedSpaAutomation() {
@@ -84,7 +160,7 @@ export default function MedSpaAutomation() {
               <a href="/book" className="btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 Book Free 30-Minute Intro Call <ArrowRight size={16} />
               </a>
-              <a href="/services" className="btn-outline" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>See Pricing</a>
+              <a href="#pricing" className="btn-outline" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>See Pricing</a>
             </div>
           </FadeItem>
         </div>
@@ -98,6 +174,62 @@ export default function MedSpaAutomation() {
               <FadeItem key={i} delay={i * 0.07}>
                 <div style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: '#A78BFA', marginBottom: '0.4rem' }}>{s.value}</div>
                 <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', lineHeight: 1.5 }}>{s.label}</div>
+              </FadeItem>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Detail Section */}
+      <section style={{ padding: '7rem 0' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
+              <SectionBadge>What We Build for Med Spas</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
+                Four systems. One practice that runs itself.
+              </h2>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75 }}>
+                Every system is built specifically for the economics of a med spa, where one missed touchpoint can cost hundreds or thousands of dollars in lost revenue.
+              </p>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            {serviceDetails.map((s, i) => (
+              <FadeItem key={i} delay={i * 0.1}>
+                <div style={{ padding: '2.25rem', background: 'rgba(167,139,250,0.03)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', height: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', color: '#A78BFA', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: '6px', padding: '0.25rem 0.625rem' }}>
+                      {s.number}
+                    </div>
+                    <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff' }}>{s.title}</h3>
+                  </div>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75, flex: 1 }}>{s.body}</p>
+                </div>
+              </FadeItem>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Med Spa Industry Stat Block */}
+      <section style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.02)' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <SectionBadge>Med Spa Reality Check</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.02em', marginTop: '1rem', maxWidth: '600px', margin: '1rem auto 0' }}>
+                The numbers most med spa owners never see
+              </h2>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', maxWidth: '900px', margin: '0 auto' }}>
+            {medSpaIndustryStats.map((s, i) => (
+              <FadeItem key={i} delay={i * 0.1}>
+                <div style={{ padding: '2.25rem', background: 'rgba(167,139,250,0.05)', border: '1px solid rgba(167,139,250,0.18)', borderRadius: '12px', textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#A78BFA', marginBottom: '0.75rem', lineHeight: 1 }}>{s.value}</div>
+                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#a0a0a0', lineHeight: 1.6 }}>{s.label}</div>
+                </div>
               </FadeItem>
             ))}
           </div>
@@ -194,6 +326,57 @@ export default function MedSpaAutomation() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section id="pricing" style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+              <SectionBadge>Pricing</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
+                Simple pricing. No lock-in. Cancel anytime.
+              </h2>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '520px', margin: '0 auto' }}>
+                Every plan is month-to-month. We earn your business every month by delivering results.
+              </p>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem', maxWidth: '1100px', margin: '0 auto' }}>
+            {packages.map((pkg, i) => (
+              <FadeItem key={i} delay={i * 0.08}>
+                <div style={{ padding: '2.25rem', background: pkg.featured ? 'linear-gradient(135deg, rgba(167,139,250,0.12) 0%, rgba(167,139,250,0.06) 100%)' : 'rgba(167,139,250,0.03)', border: pkg.featured ? '1px solid rgba(167,139,250,0.4)' : '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                  {pkg.featured && (
+                    <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(90deg, #A78BFA, #C4B5FD)', borderRadius: '99px', padding: '0.25rem 1rem', fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#0a0010', whiteSpace: 'nowrap' }}>
+                      Most Popular
+                    </div>
+                  )}
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ fontFamily: "'Nicholas', serif", fontSize: '1.375rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.25rem' }}>{pkg.name}</div>
+                    <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#A78BFA', marginBottom: '1.25rem' }}>{pkg.subtitle}</div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '0.375rem' }}>
+                      <span style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2rem, 3vw, 2.5rem)', fontWeight: 800, color: '#ffffff' }}>{pkg.price}</span>
+                      <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>{pkg.period}</span>
+                    </div>
+                    <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583' }}>{pkg.setup}</div>
+                  </div>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.7, marginBottom: '1.5rem' }}>{pkg.desc}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem', flex: 1 }}>
+                    {pkg.includes.map((item, j) => (
+                      <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>
+                        <Check size={14} color="#A78BFA" style={{ marginTop: '2px', flexShrink: 0 }} />
+                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#e2e2e2', lineHeight: 1.5 }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="/book" className={pkg.featured ? 'btn-gradient' : 'btn-outline'} style={{ padding: '0.875rem 1.5rem', fontSize: '0.9375rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', textAlign: 'center' as const }}>
+                    {pkg.cta === 'Most Popular' ? 'Book Intro Call' : pkg.cta} <ArrowRight size={14} />
+                  </a>
+                </div>
+              </FadeItem>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ position: 'relative', padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
@@ -204,11 +387,16 @@ export default function MedSpaAutomation() {
               Stop losing high-value appointments to slow response times.
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto 2.5rem' }}>
-              30 minutes. Free. No obligation. We'll map your revenue gaps and show you exactly what we'd build.
+              30 minutes. Free. No obligation. We'll map your revenue gaps and show you exactly what we'd build for your practice.
             </p>
-            <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-              Book Free 30-Minute Intro Call <ArrowRight size={17} />
-            </a>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                Book Free 30-Minute Intro Call <ArrowRight size={17} />
+              </a>
+              <a href="#pricing" className="btn-outline" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem' }}>
+                View Pricing
+              </a>
+            </div>
           </FadeItem>
         </div>
       </section>
