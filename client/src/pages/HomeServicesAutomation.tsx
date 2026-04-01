@@ -4,7 +4,7 @@
  * SEO: "home services automation", "AI for HVAC plumbers electricians contractors"
  */
 
-import { ArrowRight, Check, X } from 'lucide-react';
+import { ArrowRight, Check, X, Clock, Phone, Calendar } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { useFadeIn } from '@/hooks/useFadeIn';
@@ -46,11 +46,38 @@ const solutions = [
   { item: 'Post-job review requests', detail: 'After each completed job, an automated text goes out asking for a Google review. Your reputation builds automatically as you work.' },
 ];
 
+const serviceDetails = [
+  {
+    icon: <Phone size={24} color="#A78BFA" />,
+    title: 'Missed Call Text-Back',
+    body: 'A homeowner with a burst pipe or a broken AC is calling three contractors simultaneously. Whoever responds first gets the job. An automatic text-back within 60 seconds puts you first in line even when you are on another job.',
+  },
+  {
+    icon: <ArrowRight size={24} color="#A78BFA" />,
+    title: 'Lead Follow-Up Automation',
+    body: 'Home service leads go cold in hours, not days. Automated follow-up sequences keep your business top of mind through the decision window without your team manually chasing every inquiry.',
+  },
+  {
+    icon: <Calendar size={24} color="#A78BFA" />,
+    title: 'AI Booking System',
+    body: 'Allow clients to self-schedule service calls, estimates, and follow-up appointments directly from your website or text. No back-and-forth, no phone tag.',
+  },
+];
+
+const stats = [
+  { num: '78%', label: 'of home service clients hire the first contractor who responds to their inquiry' },
+  { num: '40%', label: 'of inbound calls are missed by the average contractor while on job sites' },
+  { num: '20–40%', label: 'of leads recovered by automated follow-up that would otherwise go to a competitor' },
+];
+
+const BOOKING_LINK = 'https://api.leadconnectorhq.com/widget/booking/hxFAP5dMiIqvBj2gf8ld';
+
 export default function HomeServicesAutomation() {
   return (
     <div style={{ backgroundColor: '#010509', minHeight: '100vh' }}>
       <Nav />
 
+      {/* ── HERO ── */}
       <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(120,58,237,0.2) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
@@ -67,7 +94,7 @@ export default function HomeServicesAutomation() {
           </FadeItem>
           <FadeItem delay={0.3}>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="/book" className="btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              <a href={BOOKING_LINK} target="_blank" rel="noreferrer" className="btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 Book Free 30-Minute Intro Call <ArrowRight size={16} />
               </a>
               <a href="/services" className="btn-outline" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>See Pricing</a>
@@ -76,7 +103,151 @@ export default function HomeServicesAutomation() {
         </div>
       </section>
 
-      <section style={{ padding: '7rem 0' }}>
+      {/* ── SERVICE DETAIL SECTION ── */}
+      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+              <SectionBadge>Speed to Lead</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
+                Whoever answers first wins the job.
+              </h2>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '520px', margin: '0 auto' }}>
+                Here's what we build for home service businesses — and why each piece matters.
+              </p>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            {serviceDetails.map((svc, i) => (
+              <FadeItem key={i} delay={i * 0.1}>
+                <div style={{ padding: '2.25rem', background: 'rgba(167,139,250,0.03)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', height: '100%' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '10px', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                    {svc.icon}
+                  </div>
+                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.1875rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>{svc.title}</h3>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75 }}>{svc.body}</p>
+                </div>
+              </FadeItem>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STAT BLOCK ── */}
+      <section style={{ padding: '5rem 0', background: 'rgba(167,139,250,0.03)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <SectionBadge>Industry Data</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.02em', marginTop: '1rem' }}>
+                The numbers behind the missed revenue.
+              </h2>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+            {stats.map((s, i) => (
+              <FadeItem key={i} delay={i * 0.1}>
+                <div style={{ padding: '2rem', background: '#010509', border: '1px solid rgba(167,139,250,0.15)', borderRadius: '12px', textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, color: '#A78BFA', lineHeight: 1, marginBottom: '0.75rem', letterSpacing: '-0.03em' }}>{s.num}</div>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.6 }}>{s.label}</p>
+                </div>
+              </FadeItem>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRICING + BOOKING CTA ── */}
+      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <FadeItem delay={0}>
+            <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+              <SectionBadge>Pricing</SectionBadge>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
+                Simple pricing. No hidden fees.
+              </h2>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '500px', margin: '0 auto' }}>
+                Every plan includes setup, installation, and ongoing management. You don't touch the tech — we handle everything.
+              </p>
+            </div>
+          </FadeItem>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', maxWidth: '960px', margin: '0 auto 4rem' }}>
+            {/* Entry */}
+            <FadeItem delay={0.05}>
+              <div style={{ padding: '2rem', background: 'rgba(167,139,250,0.02)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#A78BFA', marginBottom: '0.75rem' }}>Entry</div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '2.5rem', fontWeight: 800, color: '#ffffff' }}>$197</span>
+                  <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>/mo</span>
+                </div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginBottom: '1.5rem' }}>+ $497 setup fee</div>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.65, marginBottom: '1.5rem' }}>Missed call text-back only. The single highest-ROI automation for home service businesses — deploy it in days.</p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.625rem', flex: 1 }}>
+                  {['Instant missed call text-back', 'Automated lead follow-up sequence', 'Monthly performance report'].map((f) => (
+                    <li key={f} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>
+                      <Check size={14} color="#A78BFA" style={{ marginTop: '3px', flexShrink: 0 }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href={BOOKING_LINK} target="_blank" rel="noreferrer" className="btn-outline" style={{ textAlign: 'center', padding: '0.875rem 1.5rem', fontSize: '0.9375rem', display: 'block' }}>
+                  Get Started
+                </a>
+              </div>
+            </FadeItem>
+            {/* Starter */}
+            <FadeItem delay={0.1}>
+              <div style={{ padding: '2rem', background: 'rgba(167,139,250,0.05)', border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', padding: '4px 14px', background: '#A78BFA', borderRadius: '99px', fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#010509', whiteSpace: 'nowrap' }}>Most Popular</div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#A78BFA', marginBottom: '0.75rem' }}>Starter</div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '2.5rem', fontWeight: 800, color: '#ffffff' }}>$797</span>
+                  <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>/mo</span>
+                </div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginBottom: '1.5rem' }}>+ $997 setup fee</div>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.65, marginBottom: '1.5rem' }}>Full lead capture, follow-up, booking, and review generation. The complete stack for a busy home service operation.</p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.625rem', flex: 1 }}>
+                  {['Missed call text-back (60-second response)', 'After-hours lead capture + auto-reply', 'Estimate follow-up sequences', 'AI online booking system', 'Post-job review requests', 'Monthly performance reporting'].map((f) => (
+                    <li key={f} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>
+                      <Check size={14} color="#A78BFA" style={{ marginTop: '3px', flexShrink: 0 }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href={BOOKING_LINK} target="_blank" rel="noreferrer" className="btn-gradient" style={{ textAlign: 'center', padding: '0.875rem 1.5rem', fontSize: '0.9375rem', display: 'block', fontWeight: 700 }}>
+                  Book Free Intro Call
+                </a>
+              </div>
+            </FadeItem>
+            {/* Growth */}
+            <FadeItem delay={0.15}>
+              <div style={{ padding: '2rem', background: 'rgba(167,139,250,0.02)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#A78BFA', marginBottom: '0.75rem' }}>Growth</div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '2.5rem', fontWeight: 800, color: '#ffffff' }}>$1,497</span>
+                  <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>/mo</span>
+                </div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginBottom: '1.5rem' }}>+ $1,497 setup fee</div>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.65, marginBottom: '1.5rem' }}>Everything in Starter plus AI voice agent, seasonal maintenance campaigns, and advanced pipeline management.</p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.625rem', flex: 1 }}>
+                  {['Everything in Starter', 'AI voice agent (answers calls)', 'Seasonal maintenance campaigns', 'Repeat customer win-back sequences', 'Custom CRM pipeline + reporting'].map((f) => (
+                    <li key={f} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start', fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>
+                      <Check size={14} color="#A78BFA" style={{ marginTop: '3px', flexShrink: 0 }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href={BOOKING_LINK} target="_blank" rel="noreferrer" className="btn-outline" style={{ textAlign: 'center', padding: '0.875rem 1.5rem', fontSize: '0.9375rem', display: 'block' }}>
+                  Get Started
+                </a>
+              </div>
+            </FadeItem>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROBLEM SECTION ── */}
+      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -104,6 +275,7 @@ export default function HomeServicesAutomation() {
         </div>
       </section>
 
+      {/* ── SOLUTION SECTION ── */}
       <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
@@ -132,6 +304,7 @@ export default function HomeServicesAutomation() {
         </div>
       </section>
 
+      {/* ── FINAL CTA ── */}
       <section style={{ position: 'relative', padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '680px', margin: '0 auto' }}>
@@ -143,7 +316,7 @@ export default function HomeServicesAutomation() {
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We'll show you what we'd build and what it costs.
             </p>
-            <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            <a href={BOOKING_LINK} target="_blank" rel="noreferrer" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
               Book Free 30-Minute Intro Call <ArrowRight size={17} />
             </a>
           </FadeItem>
