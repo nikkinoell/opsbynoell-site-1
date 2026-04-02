@@ -13,6 +13,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
+  { label: 'Nova', href: '/nova' },
   { label: 'Results', href: '/case-study' },
   { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
