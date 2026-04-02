@@ -395,7 +395,7 @@ export default function Home() {
               Your practice deserves a back office{' '}<GradientText>that never sleeps.</GradientText>
             </h2>
             <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', color: '#b8b6b3', maxWidth: '500px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
-              30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
+              We only take on clients we are confident we can help. If your practice is not a fit, we will tell you on the first call.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
               <img
