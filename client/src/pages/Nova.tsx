@@ -284,7 +284,7 @@ export default function Nova() {
         {/* ═══ THE PROBLEM ════════════════════════════════════════════ */}
         <RevealSection>
         <section style={{
-          padding: '7rem 0',
+          padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderTop: '1px solid rgba(167,139,250,0.08)',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
           background: 'rgba(167,139,250,0.015)',
@@ -317,9 +317,9 @@ export default function Nova() {
 
         {/* ═══ WHAT THEY GET ══════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
-            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
               <SectionBadge>What You Get</SectionBadge>
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
@@ -388,7 +388,7 @@ export default function Nova() {
         {/* ═══ LIVE DEMO ══════════════════════════════════════════════ */}
         <RevealSection>
         <section style={{
-          padding: '7rem 0',
+          padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
           background: 'rgba(167,139,250,0.015)',
           textAlign: 'center',
@@ -420,7 +420,7 @@ export default function Nova() {
 
         {/* ═══ SOCIAL PROOF ═══════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '780px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>Client Results</SectionBadge>
@@ -485,7 +485,7 @@ export default function Nova() {
         {/* ═══ PRICING ════════════════════════════════════════════════ */}
         <RevealSection>
         <section style={{
-          padding: '7rem 0',
+          padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
           background: 'rgba(167,139,250,0.015)',
           textAlign: 'center',
@@ -499,7 +499,7 @@ export default function Nova() {
               color: '#ffffff',
               lineHeight: 1.7,
               letterSpacing: '-0.02em',
-              marginBottom: '3rem',
+              marginBottom: 'clamp(1.25rem, 3vw, 3rem)',
             }}>
               Founding Client Pricing <GradientText>— Limited to 5 Businesses</GradientText>
             </h2>
@@ -585,7 +585,7 @@ export default function Nova() {
 
         {/* ═══ FAQ ════════════════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>FAQ</SectionBadge>
@@ -644,4 +644,3 @@ export default function Nova() {
     </>
   );
 }
-
