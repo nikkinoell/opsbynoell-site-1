@@ -122,7 +122,7 @@ export default function Book() {
             }}>
               <iframe
                 src="https://api.leadconnectorhq.com/widget/booking/ko7eXb5zooItceadiV02"
-                style={{ width: '100%', height: '750px', border: 'none', display: 'block', background: '#ffffff' }}
+                style={{ width: '100%', height: '700px', minHeight: '600px', border: 'none', display: 'block', background: '#ffffff' }}
                 scrolling="no"
                 title="Book a call with Ops by Noell"
               />
