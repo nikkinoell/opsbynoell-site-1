@@ -538,16 +538,16 @@ export default function ChatWidget() {
               <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 700, color: '#F5F0EC', lineHeight: 1.2 }}>
                 Ops by Noell
               </p>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#868583' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#b8b6b3' }}>
                 Typically replies in minutes
               </p>
             </div>
           </div>
           <button
             onClick={() => { setIsOpen(false); setHasManuallyClosed(true); }}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#868583', display: 'flex', alignItems: 'center', borderRadius: '4px', transition: 'color 0.15s ease' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#b8b6b3', display: 'flex', alignItems: 'center', borderRadius: '4px', transition: 'color 0.15s ease' }}
             onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EC'}
-            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#868583'}
+            onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#b8b6b3'}
             aria-label="Close chat"
           >
             <X size={16} />
@@ -586,7 +586,7 @@ export default function ChatWidget() {
                 <p style={{
                   fontFamily: "'Sora', sans-serif",
                   fontSize: '0.8125rem',
-                  color: msg.role === 'user' ? '#0A0A0A' : '#868583',
+                  color: msg.role === 'user' ? '#0A0A0A' : '#b8b6b3',
                   lineHeight: 1.6,
                   whiteSpace: 'pre-line',
                   margin: 0,
@@ -633,14 +633,14 @@ export default function ChatWidget() {
                   cursor: 'pointer',
                   fontFamily: "'Sora', sans-serif",
                   fontSize: '0.6875rem',
-                  color: '#868583',
+                  color: '#b8b6b3',
                   textDecoration: 'underline',
                   textUnderlineOffset: '3px',
                   padding: '0.25rem 0',
                   transition: 'color 0.15s ease',
                 }}
                 onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = '#A78BFA'}
-                onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#868583'}
+                onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = '#b8b6b3'}
               >
                 Still need help? Talk to a person
               </button>
@@ -659,7 +659,7 @@ export default function ChatWidget() {
               marginTop: '0.25rem',
               animation: 'chatFadeIn 0.4s ease-out',
             }}>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#868583', marginBottom: '0.625rem', lineHeight: 1.5 }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#b8b6b3', marginBottom: '0.625rem', lineHeight: 1.5 }}>
                 Want to see exactly where your revenue is leaking?
               </p>
               <button
@@ -786,3 +786,4 @@ export default function ChatWidget() {
     </>
   );
 }
+
