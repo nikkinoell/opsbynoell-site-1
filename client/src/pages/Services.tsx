@@ -9,6 +9,24 @@ import { ArrowRight, Zap, MessageSquare, Phone, Calendar, Star, Megaphone, Setti
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
+function SectionBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
+      <span style={{ display: 'inline-flex', alignItems: 'center', padding: '0.5rem 1.25rem', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '100px', fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#C4B5FD', letterSpacing: '0.1em', textTransform: 'uppercase' as const }}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
+function GradientText({ children }: { children: React.ReactNode }) {
+  return (
+    <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+      {children}
+    </span>
+  );
+}
+
 const FAQS = [
   { q: 'How long does it take to get set up?', a: "Most clients are fully live within 7–14 days of signing. We handle all the technical setup, integrations, and testing. You just need to show up for a 60-minute onboarding call." },
   { q: 'Do I need any technical knowledge?', a: "None at all. We build, manage, and maintain everything. You'll see the results, not the dashboards. If you ever want visibility into performance, we provide clear weekly or monthly reports." },
