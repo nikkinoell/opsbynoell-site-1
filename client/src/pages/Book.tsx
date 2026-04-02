@@ -49,7 +49,7 @@ export default function Book() {
   };
 
   return (
-    <div style={{ backgroundColor: '#010509', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── COMPACT CENTERED HERO ─── */}
@@ -65,7 +65,7 @@ export default function Book() {
             fontFamily: "'Nicholas', serif",
             fontSize: 'clamp(1.75rem, 5vw, 3rem)',
             fontWeight: 800,
-            color: '#F5F0EC',
+            color: '#1A1A1A',
             lineHeight: 1.7,
             letterSpacing: '-0.02em',
             marginBottom: '1rem',
@@ -76,7 +76,7 @@ export default function Book() {
             fontFamily: "'Nicholas', serif",
             fontSize: '1.0625rem',
             fontWeight: 400,
-            color: '#b8b6b3',
+            color: '#555555',
             lineHeight: 1.75,
             maxWidth: '640px',
             margin: '0 auto',
@@ -90,7 +90,7 @@ export default function Book() {
       <div className="reveal">
       <section style={{ paddingBottom: 'clamp(2rem, 4vw, 2.5rem)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <div style={{ position: 'relative', minHeight: '600px', background: '#ffffff', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(167,139,250,0.15)', boxShadow: '0 0 0 1px rgba(167,139,250,0.08), 0 24px 48px rgba(0,0,0,0.4)' }}>
+          <div style={{ position: 'relative', minHeight: '600px', background: '#ffffff', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E8E8E8', boxShadow: '0 0 0 1px rgba(167,139,250,0.08), 0 24px 48px rgba(0,0,0,0.4)' }}>
             <p style={{
               position: 'absolute',
               top: '40%',
@@ -117,7 +117,7 @@ export default function Book() {
 
       {/* ─── WHAT TO EXPECT (below fold) ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <p className="eyebrow" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>What to Expect</p>
 
@@ -130,7 +130,7 @@ export default function Book() {
             ].map((bullet, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#A78BFA', flexShrink: 0, marginTop: '0.5rem' }} />
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#F5F0EC', lineHeight: 1.6, margin: 0 }}>{bullet}</p>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#1A1A1A', lineHeight: 1.6, margin: 0 }}>{bullet}</p>
               </div>
             ))}
           </div>
@@ -163,12 +163,12 @@ export default function Book() {
                     fontFamily: "'Nicholas', serif",
                     fontSize: '1.25rem',
                     fontWeight: 600,
-                    color: '#F5F0EC',
+                    color: '#1A1A1A',
                     marginBottom: '0.375rem',
                   }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 400, color: '#555555', lineHeight: 1.7 }}>
                     {item.detail}
                   </p>
                 </div>
@@ -181,10 +181,10 @@ export default function Book() {
 
       {/* ─── Santa Testimonial (below fold) ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5', borderBottom: '1px solid #E5E5E5' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{
-            background: 'rgba(167,139,250,0.04)',
+            background: '#FAFAF8',
             border: '1px solid rgba(167,139,250,0.25)',
             borderLeft: '4px solid #A78BFA',
             borderRadius: '12px',
@@ -196,10 +196,10 @@ export default function Book() {
                 <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#A78BFA" style={{ display: 'inline-block' }}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               ))}
             </div>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.375rem)', fontWeight: 400, fontStyle: 'italic', color: '#ffffff', lineHeight: 1.65, marginBottom: '1.25rem' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.375rem)', fontWeight: 400, fontStyle: 'italic', color: '#1A1A1A', lineHeight: 1.65, marginBottom: '1.25rem' }}>
               "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
             </p>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#A78BFA' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#0CA2A2' }}>
               Santa M. — Licensed Massage Therapist, Laguna Niguel CA
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function Book() {
             fontFamily: "'Nicholas', serif",
             fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
             fontWeight: 700,
-            color: '#F5F0EC',
+            color: '#1A1A1A',
             lineHeight: 1.7,
             marginBottom: '1.25rem',
             maxWidth: '560px',
@@ -228,13 +228,13 @@ export default function Book() {
             fontFamily: "'Nicholas', serif",
             fontSize: '1rem',
             fontWeight: 400,
-            color: '#b8b6b3',
+            color: '#555555',
             lineHeight: 1.75,
             maxWidth: '420px',
             margin: '0 auto 2.5rem',
           }}>
             Reach out directly at{' '}
-            <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>
+            <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>
               hello@opsbynoell.com
             </a>
             {' '}or book your free intro call above.
