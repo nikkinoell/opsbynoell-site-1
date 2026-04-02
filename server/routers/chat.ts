@@ -84,6 +84,7 @@ export const chatRouter = router({
         visitorName: z.string().max(128).optional(),
         visitorEmail: z.string().email().max(320).optional(),
         businessType: z.string().max(256).optional(),
+        page: z.string().max(256).optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -223,7 +224,8 @@ export const chatRouter = router({
         input.sessionId,
         input.message,
         allMessages,
-        { visitorName: input.visitorName, businessType: input.businessType }
+        { visitorName: input.visitorName, businessType: input.businessType },
+        input.page
       );
 
       // ── GHL sync for hot chat leads ──────────────────────────────────────
@@ -344,7 +346,8 @@ async function generateNovaResponseStreaming(
   sessionId: string,
   currentMessage: string,
   history: ChatMessage[],
-  context: { visitorName?: string; businessType?: string }
+  context: { visitorName?: string; businessType?: string },
+  page?: string
 ): Promise<string> {
   // Signal typing to admin
   broadcastSSE('nova_typing', { sessionId, isTyping: true });
@@ -357,6 +360,13 @@ async function generateNovaResponseStreaming(
       else if (msg.role === "bot" || msg.role === "human") llmMessages.push({ role: "assistant", content: msg.content });
     }
     llmMessages.push({ role: "user", content: currentMessage });
+
+    // Add page context if available
+    if (page) {
+      const pageContext = `[System note: This visitor is currently viewing the ${page} page on the Ops by Noell website.]`;
+      llmMessages.unshift({ role: "user", content: pageContext });
+      llmMessages.unshift({ role: "assistant", content: "Understood, I'll tailor my response accordingly." });
+    }
 
     const apiKey = ENV.forgeApiKey?.trim() || ENV.anthropicApiKey?.trim();
     const forgeUrl = ENV.forgeApiUrl?.trim();
