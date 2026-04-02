@@ -34,26 +34,12 @@ const STEPS = [
 ];
 
 
-const TESTIMONIALS = [
-  {
-    name: 'Maria S.',
-    role: 'Med Spa Owner, Irvine CA',
-    text: "We were losing leads every weekend when the front desk wasn't available. Noell set up a missed-call text system and booking automation — we booked 11 new clients in the first 30 days without changing anything else.",
-    stars: 5,
-  },
-  {
-    name: 'James K.',
-    role: 'HVAC Company, Orange County',
-    text: "The follow-up sequences alone paid for the entire setup. Leads that went cold for 2 weeks started booking. We've recaptured thousands in revenue we would have just left on the table.",
-    stars: 5,
-  },
-  {
-    name: 'Rachel T.',
-    role: 'Dental Practice, San Diego',
-    text: "Our no-show rate dropped from 22% to under 10% in the first month. The reminder sequences are exactly what we needed. Setup was seamless and Noell handled everything.",
-    stars: 5,
-  },
-];
+const SANTA_TESTIMONIAL = {
+  name: 'Santa M.',
+  role: 'Licensed Massage Therapist, Laguna Niguel CA',
+  text: "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore.",
+  stars: 5,
+};
 
 
 /* ─── SHARED BADGE COMPONENT ────────────────────────────────────── */
@@ -235,34 +221,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS ══════════════════════════════════════════ */}
+      {/* ═══ SANTA TESTIMONIAL (LEAD PROOF) ══════════════════════ */}
       <section style={{ padding: '7rem 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <SectionBadge>Client Results</SectionBadge>
-            <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-              Real businesses.{' '}<GradientText>Measurable results.</GradientText>
-            </h2>
+        <div className="container" style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <SectionBadge>Real Client Result</SectionBadge>
           </div>
+          <div style={{
+            background: 'rgba(167,139,250,0.04)',
+            border: '1px solid rgba(167,139,250,0.25)',
+            borderLeft: '4px solid #A78BFA',
+            borderRadius: '12px',
+            padding: '2.5rem 3rem',
+            textAlign: 'center',
+          }}>
+            <div style={{ display: 'flex', gap: '0.25rem', justifyContent: 'center', marginBottom: '1.5rem' }}>
+              {Array.from({ length: SANTA_TESTIMONIAL.stars }).map((_, i) => (
+                <Star key={i} size={16} style={{ color: '#A78BFA', fill: '#A78BFA' }} />
+              ))}
+            </div>
+            <p style={{
+              fontFamily: "'Nicholas', serif",
+              fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
+              fontWeight: 600, color: '#ffffff',
+              lineHeight: 1.65, marginBottom: '1.5rem',
+              fontStyle: 'italic',
+            }}>
+              "{SANTA_TESTIMONIAL.text}"
+            </p>
+            <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#A78BFA' }}>
+              {SANTA_TESTIMONIAL.name} — {SANTA_TESTIMONIAL.role}
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-            {TESTIMONIALS.map(({ name, role, text, stars }) => (
-              <div key={name} className="testimonial-card" style={{ padding: '2rem' }}>
-                <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1.25rem' }}>
-                  {Array.from({ length: stars }).map((_, i) => (
-                    <Star key={i} size={15} style={{ color: '#A78BFA', fill: '#A78BFA' }} />
-                  ))}
-                </div>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75, marginBottom: '1.5rem', fontStyle: 'italic' }}>
-                  "{text}"
-                </p>
-                <div>
-                  <div style={{ fontFamily: "'Nicholas', serif", fontWeight: 700, color: '#ffffff', fontSize: '0.9375rem' }}>{name}</div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '0.125rem' }}>{role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* ═══ THE PROBLEM ═══════════════════════════════════════════ */}
+      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+          <SectionBadge>The Problem</SectionBadge>
+          <h2 style={{
+            fontFamily: "'Nicholas', serif",
+            fontSize: 'clamp(1.875rem, 4vw, 3rem)',
+            fontWeight: 700, color: '#ffffff',
+            lineHeight: 1.15, letterSpacing: '-0.02em',
+            marginTop: '1.25rem', marginBottom: '1.5rem',
+          }}>
+            You didn't start your practice to spend your nights chasing leads.
+          </h2>
+          <p style={{
+            fontFamily: "'Sora', sans-serif",
+            fontSize: 'clamp(1rem, 1.5vw, 1.125rem)',
+            color: '#868583', lineHeight: 1.85,
+            marginBottom: '0',
+          }}>
+            You're in back-to-back sessions. Your phone rings. You can't answer. By the time you call back, they've already booked somewhere else. That's not a people problem. That's a systems problem. And it's costing you $2,000 to $5,000 a month you don't even know you're missing.
+          </p>
         </div>
       </section>
 
