@@ -12,10 +12,10 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-      padding: '0.5rem 1.25rem', borderRadius: '999px',
-      border: '1px solid rgba(167,139,250,0.2)', background: 'rgba(167,139,250,0.1)',
+      padding: '0.5rem 1.25rem', borderRadius: '4px',
+      border: '1px solid #E8E8E8', background: 'rgba(12,162,162,0.06)',
       fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600,
-      letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#C4B5FD',
+      letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#0CA2A2',
     }}>
       {children}
     </span>
@@ -41,7 +41,7 @@ const built = [
 
 export default function CaseStudy() {
   return (
-    <div style={{ backgroundColor: '#010509', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
@@ -72,8 +72,8 @@ export default function CaseStudy() {
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
               maxWidth: '860px', marginBottom: '2.5rem', marginLeft: 'auto', marginRight: 'auto',
             }}>
-              <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>25 years of expertise.</span>{' '}
-              <span style={{ color: '#ffffff' }}>Zero infrastructure.</span>
+              <span style={{ background: 'linear-gradient(90deg, #0CA2A2 0%, #0DCFCF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>25 years of expertise.</span>{' '}
+              <span style={{ color: '#1A1A1A' }}>Zero infrastructure.</span>
             </h1>
 
 
@@ -85,10 +85,10 @@ export default function CaseStudy() {
                 { label: 'Timeline', value: '2 Weeks to Live' },
               ].map((item, i) => (
                 <div key={i} className="feature-card" style={{ padding: '1rem 1.5rem' }}>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#A78BFA', marginBottom: '0.25rem' }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0CA2A2', marginBottom: '0.25rem' }}>
                     {item.label}
                   </p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 700, color: '#1A1A1A' }}>
                     {item.value}
                   </p>
                 </div>
@@ -111,39 +111,39 @@ export default function CaseStudy() {
                 <h2 style={{
                   fontFamily: "'Nicholas', serif",
                   fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                  fontWeight: 700, color: '#ffffff',
+                  fontWeight: 700, color: '#1A1A1A',
                   lineHeight: 1.7, marginBottom: '1.5rem',
                 }}>
                   A master of her craft. Invisible to the internet.
                 </h2>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#555555', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   Santa is a licensed massage therapist based in Laguna Niguel with over 25 years of experience. Her clients are loyal. Her work is exceptional. Her reputation, built entirely through word of mouth, is impeccable.
                 </p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#555555', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   But Santa had zero digital infrastructure. No website. No online booking. No automated follow-up. No review system. Every new client had to find her through a personal referral, and even then, they had to navigate a booking process that relied entirely on phone calls and memory.
                 </p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8 }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#555555', lineHeight: 1.8 }}>
                   She was excellent at her work. Her operations were silently costing her thousands every month in missed opportunities.
                 </p>
               </div>
             </div>
 
             <div className="reveal" style={{
-              background: 'rgba(167,139,250,0.04)',
-              border: '1px solid rgba(167,139,250,0.15)',
-              borderLeft: '3px solid #A78BFA',
+              background: '#FAFAF8',
+              border: '1px solid #E8E8E8',
+              borderLeft: '3px solid #0CA2A2',
               borderRadius: '8px',
               padding: '3rem',
             }}>
               <p style={{
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(1.25rem, 2vw, 1.625rem)',
-                fontWeight: 600, color: '#ffffff',
+                fontWeight: 600, color: '#1A1A1A',
                 lineHeight: 1.7, marginBottom: '1.5rem',
               }}>
                 "25 years of exceptional client work. Zero digital infrastructure. Santa was our founding client partner and the perfect proof of concept for what AI automation could do for a solo service business."
               </p>
-              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A78BFA' }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0CA2A2' }}>
                 Ops by Noell Assessment
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function CaseStudy() {
 
       {/* ─── THE GAPS ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div className="reveal" style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
             <div style={{ marginBottom: '1.25rem' }}>
@@ -163,12 +163,12 @@ export default function CaseStudy() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-              fontWeight: 700, color: '#ffffff',
+              fontWeight: 700, color: '#1A1A1A',
               lineHeight: 1.7, marginBottom: '1rem',
             }}>
               Six operational gaps. Each one costing revenue daily.
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#555555', lineHeight: 1.75 }}>
               When we sat down with Santa, we mapped every gap in her operation and quantified what each one was costing her monthly.
             </p>
           </div>
@@ -184,11 +184,11 @@ export default function CaseStudy() {
                   }}>
                     <X size={12} color="#ff6b6b" />
                   </div>
-                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff' }}>
+                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#1A1A1A' }}>
                     {gap.label}
                   </h3>
                 </div>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#555555', lineHeight: 1.7 }}>
                   {gap.detail}
                 </p>
               </div>
@@ -200,7 +200,7 @@ export default function CaseStudy() {
 
       {/* ─── WHAT WE BUILT ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div className="reveal" style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
             <div style={{ marginBottom: '1.25rem' }}>
@@ -209,17 +209,17 @@ export default function CaseStudy() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-              fontWeight: 700, color: '#ffffff',
+              fontWeight: 700, color: '#1A1A1A',
               lineHeight: 1.7, marginBottom: '1rem',
             }}>
               A complete operational back office. Built in two weeks.
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#555555', lineHeight: 1.75 }}>
               We designed and installed every component of Santa's automation system. She didn't configure a single setting. She was live and capturing leads within 14 days of her audit.
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(167,139,250,0.1)', borderRadius: '12px', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(12,162,162,0.06)', borderRadius: '12px', overflow: 'hidden' }}>
             {built.map((item, i) => (
               <div key={i} className="reveal" style={{
                 background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'rgba(167,139,250,0.04)',
@@ -228,16 +228,16 @@ export default function CaseStudy() {
               }}>
                 <div style={{
                   width: '32px', height: '32px', borderRadius: '8px',
-                  background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.3)',
+                  background: '#E5E5E5', border: '1px solid rgba(167,139,250,0.3)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px',
                 }}>
                   <Check size={16} color="#A78BFA" />
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.375rem' }}>
+                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.25rem', fontWeight: 700, color: '#1A1A1A', marginBottom: '0.375rem' }}>
                     {item.item}
                   </h3>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#555555', lineHeight: 1.7 }}>
                     {item.detail}
                   </p>
                 </div>
@@ -250,23 +250,23 @@ export default function CaseStudy() {
 
       {/* ─── SANTA QUOTE + STATS ─── */}
       <div className="reveal">
-      <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: '4rem 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'start' }} className="lg:grid-cols-2">
             {/* Quote */}
-            <div className="reveal" style={{ background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.15)', borderLeft: '3px solid #A78BFA', borderRadius: '8px', padding: '2.5rem' }}>
-              <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.55, marginBottom: '1.5rem' }}>
+            <div className="reveal" style={{ background: '#FAFAF8', border: '1px solid #E8E8E8', borderLeft: '3px solid #0CA2A2', borderRadius: '8px', padding: '2.5rem' }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, color: '#1A1A1A', lineHeight: 1.55, marginBottom: '1.5rem' }}>
                 "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
               </p>
               <div>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Santa</p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#1A1A1A' }}>Santa</p>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#0CA2A2', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
                   Licensed Massage Therapist, Laguna Niguel
                 </p>
               </div>
             </div>
             {/* Stats */}
-            <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '10px', overflow: 'hidden' }}>
+            <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#E5E5E5', borderRadius: '10px', overflow: 'hidden' }}>
               {[
                 { value: '4/wk → <1', label: 'No-Shows', sub: 'First two weeks' },
                 { value: '40+', label: 'Reviews', sub: 'In 8 weeks' },
@@ -274,9 +274,9 @@ export default function CaseStudy() {
                 { value: '< 10s', label: 'Response Time', sub: 'Missed call text-back' },
               ].map((s, i) => (
                 <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '1.75rem 1.5rem' }}>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', color: '#b8b6b3' }}>{s.sub}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#1A1A1A', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, color: '#0CA2A2', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', color: '#555555' }}>{s.sub}</p>
                 </div>
               ))}
             </div>
@@ -288,7 +288,7 @@ export default function CaseStudy() {
 
       {/* ─── RESULTS METRICS TABLE ─── */}
       <div className="reveal">
-      <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: '4rem 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
             <SectionBadge>By the Numbers</SectionBadge>
@@ -298,7 +298,7 @@ export default function CaseStudy() {
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(167,139,250,0.2)' }}>
                   {['Metric', 'Before', 'After', 'Timeline'].map((h) => (
-                    <th key={h} style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#A78BFA' }}>{h}</th>
+                    <th key={h} style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#0CA2A2' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -309,11 +309,11 @@ export default function CaseStudy() {
                   { metric: 'Google reviews', before: 'Starting from zero', after: '40+ reviews', timeline: '8 weeks' },
                   { metric: 'Time to go live', before: '—', after: '14 days total', timeline: 'Audit to automation' },
                 ].map((row, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid rgba(167,139,250,0.08)', background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'transparent' }}>
-                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#ffffff', fontWeight: 600 }}>{row.metric}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#b8b6b3' }}>{row.before}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#A78BFA', fontWeight: 600 }}>{row.after}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#b8b6b3' }}>{row.timeline}</td>
+                  <tr key={i} style={{ borderBottom: '1px solid #E5E5E5', background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'transparent' }}>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#1A1A1A', fontWeight: 600 }}>{row.metric}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#555555' }}>{row.before}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#0CA2A2', fontWeight: 600 }}>{row.after}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#555555' }}>{row.timeline}</td>
                   </tr>
                 ))}
               </tbody>
@@ -325,7 +325,7 @@ export default function CaseStudy() {
 
       {/* ─── THE RESULT ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div className="reveal" style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
             <div style={{ marginBottom: '1.25rem' }}>
@@ -334,17 +334,17 @@ export default function CaseStudy() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-              fontWeight: 700, color: '#ffffff',
+              fontWeight: 700, color: '#1A1A1A',
               lineHeight: 1.7, marginBottom: '1rem',
             }}>
               Before and after.
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#555555', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
               The operational transformation: from zero infrastructure to a fully automated business back office.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '12px', overflow: 'hidden' }} className="md:grid-cols-2">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1px', background: '#E5E5E5', borderRadius: '12px', overflow: 'hidden' }} className="md:grid-cols-2">
             {/* Before */}
             <div className="reveal" style={{ background: 'rgba(255,255,255,0.01)', padding: '2.5rem', height: '100%' }}>
               <p style={{
@@ -372,20 +372,20 @@ export default function CaseStudy() {
                   }}>
                     <X size={11} color="rgba(255,100,100,0.6)" />
                   </div>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{item}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#555555', lineHeight: 1.7 }}>{item}</p>
                 </div>
               ))}
             </div>
 
             {/* After */}
             <div className="reveal" style={{
-              background: 'rgba(167,139,250,0.04)',
+              background: '#FAFAF8',
               borderLeft: '2px solid rgba(167,139,250,0.4)',
               padding: '2.5rem', height: '100%',
             }}>
               <p style={{
                 fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
-                letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A78BFA',
+                letterSpacing: '0.18em', textTransform: 'uppercase', color: '#0CA2A2',
                 marginBottom: '1.5rem', paddingBottom: '1rem',
                 borderBottom: '1px solid rgba(167,139,250,0.2)',
               }}>
@@ -406,7 +406,7 @@ export default function CaseStudy() {
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
                   <div style={{
                     width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
-                    background: 'rgba(167,139,250,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: '#E5E5E5', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     <Check size={11} color="#A78BFA" />
                   </div>
@@ -421,7 +421,7 @@ export default function CaseStudy() {
 
       {/* ─── CTA ─── */}
       <div className="reveal">
-      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="reveal" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
@@ -432,13 +432,13 @@ export default function CaseStudy() {
             fontSize: 'clamp(2rem, 4vw, 3.5rem)',
             fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em',
             marginBottom: '1.25rem', maxWidth: '700px', margin: '0 auto 1.25rem',
-            background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
+            background: 'linear-gradient(90deg, #0CA2A2 0%, #0DCFCF 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             display: 'block',
           }}>
             If your business looks like Santa's did before we started, here's what the first step looks like.
           </h2>
-          <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+          <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#555555', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
             30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
           </p>
           <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem', fontWeight: 600 }}>
