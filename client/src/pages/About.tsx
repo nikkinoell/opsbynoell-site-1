@@ -90,7 +90,7 @@ export default function About() {
           <div>
             <h1 style={{
               fontFamily: "'Nicholas', serif",
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontSize: 'clamp(1.75rem, 4.5vw, 2.75rem)',
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
               maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff',
             }}>
@@ -119,7 +119,7 @@ export default function About() {
                 </div>
                 <h2 style={{
                   fontFamily: "'Nicholas', serif",
-                  fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                  fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
                   fontWeight: 700, color: '#ffffff',
                   lineHeight: 1.7, marginBottom: '1.75rem',
                 }}>
@@ -231,7 +231,7 @@ export default function About() {
               </div>
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
-                fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
                 fontWeight: 700, color: '#ffffff', lineHeight: 1.7,
               }}>
                 Four things that make us different.
