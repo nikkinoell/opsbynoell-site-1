@@ -15,7 +15,7 @@ const H2_STYLE: React.CSSProperties = {
   fontFamily: "'Nicholas', serif",
   fontSize: '1.25rem',
   fontWeight: 700,
-  color: '#F5F0EC',
+  color: '#1A1A1A',
   marginBottom: '0.875rem',
   letterSpacing: '-0.02em',
 };
@@ -43,7 +43,7 @@ const CALLOUT_STYLE: React.CSSProperties = {
   color: 'rgba(245,240,235,0.8)',
   lineHeight: 1.8,
   backgroundColor: 'rgba(167,139,250,0.06)',
-  borderLeft: '3px solid #A78BFA',
+  borderLeft: '3px solid #0CA2A2',
   padding: '1rem 1.25rem',
   marginBottom: '1rem',
   borderRadius: '0 6px 6px 0',
@@ -51,18 +51,18 @@ const CALLOUT_STYLE: React.CSSProperties = {
 
 export default function PrivacyPolicy() {
   return (
-    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
 
       {/* Hero */}
-      <section style={{ backgroundColor: '#0A0A0A', paddingTop: '7rem', paddingBottom: '4rem' }}>
+      <section style={{ backgroundColor: '#FFFFFF', paddingTop: '7rem', paddingBottom: '4rem' }}>
         <div className="container">
-          <p className="eyebrow" style={{ color: '#A78BFA', marginBottom: '1rem' }}>Legal</p>
+          <p className="eyebrow" style={{ color: '#0CA2A2', marginBottom: '1rem' }}>Legal</p>
           <h1 style={{
             fontFamily: "'Nicholas', serif",
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            color: '#F5F0EC',
+            color: '#1A1A1A',
             lineHeight: 1.1,
             marginBottom: '1rem',
             letterSpacing: '-0.03em',
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* Content */}
-      <section style={{ paddingTop: '4rem', paddingBottom: '5rem', backgroundColor: '#0A0A0A' }}>
+      <section style={{ paddingTop: '4rem', paddingBottom: '5rem', backgroundColor: '#FFFFFF' }}>
         <div className="container" style={{ maxWidth: '760px', margin: '0 auto' }}>
 
           <div style={SECTION_STYLE}>
@@ -84,11 +84,11 @@ export default function PrivacyPolicy() {
               Ops by Noell ("we," "us," or "our") is an AI automation agency owned and operated by Nicole (Nikki) Noell, based in Mission Viejo, CA. This Privacy Policy explains how we collect, use, and protect information you provide when visiting <strong>opsbynoell.com</strong> or engaging with our services.
             </p>
             <p style={P_STYLE}>
-              By using this website or submitting information through any of our forms, you agree to the practices described in this policy. If you have questions, contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a>.
+              By using this website or submitting information through any of our forms, you agree to the practices described in this policy. If you have questions, contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a>.
             </p>
           </div>
 
-          <div style={{ ...SECTION_STYLE, backgroundColor: 'rgba(167,139,250,0.06)', borderLeft: '3px solid #A78BFA', padding: '1rem 1.25rem', borderRadius: '0 6px 6px 0' }}>
+          <div style={{ ...SECTION_STYLE, backgroundColor: 'rgba(167,139,250,0.06)', borderLeft: '3px solid #0CA2A2', padding: '1rem 1.25rem', borderRadius: '0 6px 6px 0' }}>
             <p style={{ ...P_STYLE, marginBottom: 0, color: 'rgba(245,240,235,0.9)' }}>
               <strong>We do not share your SMS opt-in data or phone number with third parties for marketing or promotional purposes.</strong>
             </p>
@@ -174,7 +174,7 @@ export default function PrivacyPolicy() {
           <div style={SECTION_STYLE}>
             <h2 style={H2_STYLE}>6. Your Rights</h2>
             <p style={P_STYLE}>
-              You have the right to access, update, or request deletion of the personal information we hold about you. To exercise any of these rights, please email us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a> with your request. We will respond within 30 days.
+              You have the right to access, update, or request deletion of the personal information we hold about you. To exercise any of these rights, please email us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a> with your request. We will respond within 30 days.
             </p>
             <ul style={UL_STYLE}>
               <li><strong>Access:</strong> request a copy of the information we have on file for you</li>
@@ -187,7 +187,7 @@ export default function PrivacyPolicy() {
           <div style={SECTION_STYLE}>
             <h2 style={H2_STYLE}>7. Data Retention</h2>
             <p style={P_STYLE}>
-              We retain your personal information for as long as necessary to fulfill the purposes described in this policy, or as required by law. If you would like us to delete your information, please contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a> and we will respond within 30 days.
+              We retain your personal information for as long as necessary to fulfill the purposes described in this policy, or as required by law. If you would like us to delete your information, please contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a> and we will respond within 30 days.
             </p>
           </div>
 
@@ -221,8 +221,8 @@ export default function PrivacyPolicy() {
               <strong>Ops by Noell</strong><br />
               Attn: Nicole (Nikki) Noell<br />
               Mission Viejo, CA<br />
-              <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a><br />
-              <a href="https://www.opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>www.opsbynoell.com</a>
+              <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a><br />
+              <a href="https://www.opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>www.opsbynoell.com</a>
             </p>
           </div>
 
