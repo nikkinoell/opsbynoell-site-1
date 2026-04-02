@@ -427,6 +427,97 @@ export default function RevenueCalculator() {
               </div>
             </div>
 
+            {/* Contextual framing */}
+            <p style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: '0.9375rem',
+              color: '#A78BFA',
+              lineHeight: 1.75,
+              marginBottom: '1.5rem',
+              fontStyle: 'italic',
+            }}>
+              At ${'{'}fmt(costs.total){'}'}/month in preventable losses, your revenue leak is larger than the cost of the full automation stack.
+            </p>
+
+            {/* Email capture */}
+            <div style={{
+              background: 'rgba(167,139,250,0.04)',
+              border: '1px solid rgba(167,139,250,0.2)',
+              borderRadius: '10px',
+              padding: '1.5rem',
+              marginBottom: '1.5rem',
+            }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#c4c4c4', lineHeight: 1.7, marginBottom: '1rem' }}>
+                Want a copy of your results? Enter your email and we'll send your personalized revenue leak report.
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  const emailInput = form.elements.namedItem('calc_email') as HTMLInputElement;
+                  const email = emailInput?.value;
+                  if (!email) return;
+                  fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email,
+                      source: 'revenue_calculator',
+                      calculatorResults: {
+                        total: costs.total,
+                        missedCalls: costs.missedCallLoss,
+                        noShows: costs.noShowLoss,
+                        followUp: costs.followUpLoss,
+                        reviews: costs.reviewLoss,
+                        marketing: costs.marketingLoss,
+                      },
+                    }),
+                  }).catch(() => {});
+                  emailInput.value = '';
+                  emailInput.placeholder = 'Report sent!';
+                  emailInput.disabled = true;
+                  (form.querySelector('button') as HTMLButtonElement).disabled = true;
+                }}
+                style={{ display: 'flex', gap: '0.625rem', flexWrap: 'wrap' as const }}
+              >
+                <input
+                  type="email"
+                  name="calc_email"
+                  placeholder="your@email.com"
+                  required
+                  style={{
+                    flex: 1,
+                    minWidth: '180px',
+                    padding: '0.75rem 1rem',
+                    background: 'rgba(10,8,20,0.8)',
+                    border: '1px solid rgba(167,139,250,0.25)',
+                    borderRadius: '6px',
+                    color: '#ffffff',
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                  }}
+                />
+                <button
+                  type="submit"
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    background: '#A78BFA',
+                    color: '#0A0A0A',
+                    border: 'none',
+                    borderRadius: '6px',
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: '0.875rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap' as const,
+                  }}
+                >
+                  Send My Report
+                </button>
+              </form>
+            </div>
+
             {/* CTA */}
             <div>
               <p style={{
