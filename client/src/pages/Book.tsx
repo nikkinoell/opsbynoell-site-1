@@ -110,7 +110,7 @@ export default function Book() {
 
       {/* ─── GHL BOOKING WIDGET (above fold) ─── */}
       <RevealSection>
-      <section style={{ paddingBottom: '5rem' }}>
+      <section style={{ paddingBottom: 'clamp(2rem, 5vw, 5rem)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <FadeItem delay={0.3}>
             <div style={{
@@ -134,7 +134,7 @@ export default function Book() {
 
       {/* ─── WHAT TO EXPECT (below fold) ─── */}
       <RevealSection>
-      <section style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 5vw, 5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <FadeItem delay={0}>
             <p className="eyebrow" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>What to Expect</p>
@@ -273,4 +273,3 @@ export default function Book() {
     </div>
   );
 }
-
