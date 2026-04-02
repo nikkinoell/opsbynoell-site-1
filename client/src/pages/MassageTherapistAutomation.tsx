@@ -140,7 +140,7 @@ export default function MassageTherapistAutomation() {
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
           <div style={{ marginBottom: '1.5rem' }}><SectionBadge>Massage Therapist Automation</SectionBadge></div>
           
-            <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2.75rem, 6.5vw, 5rem)', fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
+            <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.75rem, 5vw, 3.5rem)', fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
               <GradientText>Your hands are full.</GradientText>{' '}<span style={{ color: '#ffffff' }}>We answer your phone.</span>
             </h1>
           
@@ -182,7 +182,7 @@ export default function MassageTherapistAutomation() {
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ marginBottom: '1rem' }}><SectionBadge>Client Results</SectionBadge></div>
-            <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '780px', marginBottom: '4rem' }}>
+            <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '780px', marginBottom: '4rem' }}>
               From 4 no-shows a week to less than 1. In 2 weeks.
             </h2>
           </FadeItem>
@@ -233,7 +233,7 @@ export default function MassageTherapistAutomation() {
           <FadeItem delay={0}>
             <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
               <SectionBadge>What We Build</SectionBadge>
-              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
                 Done-for-you automation. We build it. We run it.
               </h2>
               <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
@@ -267,7 +267,7 @@ export default function MassageTherapistAutomation() {
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>The Numbers</SectionBadge>
-              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem' }}>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem' }}>
                 The revenue leaks in every solo practice
               </h2>
             </div>
@@ -293,7 +293,7 @@ export default function MassageTherapistAutomation() {
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>Pricing</SectionBadge>
-              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '0.75rem' }}>
+              <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '0.75rem' }}>
                 Simple, flat-rate pricing. No surprises.
               </h2>
               <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75 }}>
