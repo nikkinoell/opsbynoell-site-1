@@ -8,6 +8,17 @@ import { ArrowRight, Check, X, Clock, Phone, Calendar } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
+function SectionBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
+      <span style={{ display: 'inline-flex', alignItems: 'center', padding: '0.5rem 1.25rem', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '100px', fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#C4B5FD', letterSpacing: '0.1em', textTransform: 'uppercase' as const }}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
+
 const problems = [
   { title: 'No system to capture after-hours leads', detail: 'After-hours inquiries go unanswered until morning. By then, someone else has already won the job.' },
   { title: 'Cold estimates that never convert', detail: 'You sent 20 estimates last month. Half never responded. Nobody followed up. That revenue is gone.' },
