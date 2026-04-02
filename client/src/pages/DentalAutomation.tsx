@@ -233,7 +233,7 @@ export default function DentalAutomation() {
               const Icon = svc.icon;
               return (
                 <FadeItem key={i} delay={i * 0.1}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '2rem', padding: '2rem 2.5rem', background: 'rgba(167,139,250,0.03)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', alignItems: 'start' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', padding: '2rem 2.5rem', background: 'rgba(167,139,250,0.03)', border: '1px solid rgba(167,139,250,0.12)', borderRadius: '12px', alignItems: 'start', maxWidth: '100%', boxSizing: 'border-box' as const }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', marginBottom: '0.875rem' }}>
                         <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -243,7 +243,7 @@ export default function DentalAutomation() {
                       </div>
                       <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '640px' }}>{svc.description}</p>
                     </div>
-                    <div style={{ flexShrink: 0, background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: '10px', padding: '1rem 1.25rem', textAlign: 'center', minWidth: '180px' }}>
+                    <div style={{ background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: '10px', padding: '1rem 1.25rem', textAlign: 'center' }}>
                       <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.06em', textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Key Stat</p>
                       <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.7 }}>{svc.stat}</p>
                     </div>
