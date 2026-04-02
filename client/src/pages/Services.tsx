@@ -9,6 +9,7 @@ import { ArrowRight, Zap, MessageSquare, Phone, Calendar, Star, Megaphone, Setti
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { useFadeIn } from '@/hooks/useFadeIn';
+import { RevealSection } from '@/components/RevealSection'
 
 function FadeItem({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
   const { ref, visible } = useFadeIn(0.1);
@@ -302,6 +303,7 @@ export default function Services() {
 
 
       {/* ─── Santa Testimonial ─── */}
+      <RevealSection>
       <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{
@@ -326,8 +328,10 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ═══ SERVICE CARDS — compact 7-service overview ══════════════ */}
+      <RevealSection>
       <section style={{ borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.015)' }}>
         <div className="container" style={{ paddingTop: '6rem', paddingBottom: '6rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -362,8 +366,10 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ═══ WHO WE SERVE — 6 industries ═══════════════════════════ */}
+      <RevealSection>
       <section style={{ padding: '6rem 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -400,8 +406,10 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ═══ PACKAGES / PRICING ═════════════════════════════════════ */}
+      <RevealSection>
       <section id="pricing" style={{ padding: '6rem 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -449,8 +457,10 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ═══ FAQ ════════════════════════════════════════════════════ */}
+      <RevealSection>
       <section style={{ padding: '6rem 0' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -476,8 +486,10 @@ export default function Services() {
           ))}
         </div>
       </section>
+      </RevealSection>
 
       {/* ═══ CTA ════════════════════════════════════════════════════ */}
+      <RevealSection>
       <section style={{ padding: '7rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.12) 0%, transparent 65%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '660px', margin: '0 auto' }}>
@@ -495,6 +507,7 @@ export default function Services() {
           <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#4B5563', marginTop: '0.625rem' }}>We don't sell your data. Ever. We build systems for your business, not a database for ours.</p>
         </div>
       </section>
+      </RevealSection>
 
       <Footer />
     </div>
