@@ -37,89 +37,7 @@ interface LeadInfo {
   businessType: string;
 }
 
-// ─── Bot Response Logic ───────────────────────────────────────────────────────
-// Approved Q&A responses for Nova
-
-const QA_PAIRS: Array<{ keywords: string[]; answer: string }> = [
-  {
-    keywords: ['what do you do', 'what is ops by noell', 'what does ops by noell do', 'tell me about', 'what you do', 'services', 'what you offer', 'what can you do'],
-    answer: "Good question. We build done-for-you AI systems for service businesses. Things like missed call text-back, automated booking and reminders, review requests, lead follow-up, and an AI voice receptionist. The key thing is we don't just hand you a tool. We build it, we manage it, and it runs in the background while you focus on your clients.",
-  },
-  {
-    keywords: ['how much', 'cost', 'price', 'pricing', 'fee', 'charge', 'rate', 'package', 'tier', 'affordable', 'expensive'],
-    answer: "Here's how it works. A Revenue Audit starts at $497 and that's where most clients begin. If you want to move fast, the Activation Sprint is $1,500 flat to get one system live in two weeks. Monthly retainers start at $797/mo for Starter, $1,197/mo for Growth, and $1,497/mo for Scale, which includes the AI voice receptionist. If you start with an Activation Sprint, that setup fee gets credited toward your retainer.",
-  },
-  {
-    keywords: ['who do you work with', 'what type of business', 'what businesses', 'industry', 'industries', 'who is this for', 'med spa', 'salon', 'dental', 'massage', 'chiropractor', 'home service'],
-    answer: "We work with appointment-based service businesses. Med spas, massage therapists, salons, dental offices, chiropractors, home service companies, and similar. Basically, if your business runs on bookings and phone calls, we can almost certainly help.",
-  },
-  {
-    keywords: ['how long', 'timeline', 'setup time', 'how soon', 'when will', 'how fast', 'get started', 'onboard'],
-    answer: "Faster than most people expect. Most clients are fully live within two weeks of completing their audit. We handle all the setup so there's nothing on your end to figure out.",
-  },
-  {
-    keywords: ['tech', 'technical', 'tech-savvy', 'complicated', 'difficult', 'do i need to', 'hard to use'],
-    answer: "Not at all. That's honestly one of the things people appreciate most. We build everything, configure everything, and manage it ongoing. You don't log into dashboards or learn new software. You just see the results.",
-  },
-  {
-    keywords: ['how do i start', 'next step', 'how to begin', 'sign up', 'book', 'schedule', 'call', 'consult', 'audit', 'intro'],
-    answer: "The easiest way is to book a free 30-minute intro call at opsbynoell.com/book. It's a quick conversation, no pitch, no pressure. We just want to understand your business and see if we're a good fit.",
-  },
-  {
-    keywords: ['different', 'unique', 'why you', 'why ops by noell', 'what makes you', 'stand out', 'better than', 'compared to', 'versus'],
-    answer: "Honestly, the biggest difference is that we don't sell you software. A lot of companies hand you a login and wish you luck. We design your system, build every piece of it, and then stay on to manage it. We also show you the math upfront so you know exactly what your gaps are costing you before you spend anything.",
-  },
-  {
-    keywords: ['missed call', 'missed calls', 'text back', 'call back', 'unanswered'],
-    answer: "Every missed call gets an automatic text back within seconds. So even if you're with a client and can't pick up, the person who called gets a message right away and the conversation stays alive. It's one of the fastest ways to stop losing leads.",
-  },
-  {
-    keywords: ['ai voice', 'voice receptionist', 'phone answering', 'answer the phone', 'receptionist', 'front desk'],
-    answer: "The AI Voice Receptionist answers calls around the clock, qualifies leads, answers common questions, and books appointments without anyone needing to be on the phone. It's included in the Scale package at $1,497/mo and it's genuinely impressive once it's running.",
-  },
-  {
-    keywords: ['review', 'reviews', 'google review', 'reputation', 'testimonial', 'rating'],
-    answer: "We set up automated review requests that go out after every appointment. Happy clients get a gentle follow-up asking them to share their experience on Google. Most clients see a real jump in review volume within the first 30 days.",
-  },
-  {
-    keywords: ['no-show', 'no show', 'cancellation', 'cancel', 'reminder', 'reminders', 'appointment reminder'],
-    answer: "We build automated reminder sequences that go out via SMS and email before every appointment. Most clients see no-shows drop by 30 to 50 percent within the first month. It adds up fast.",
-  },
-  {
-    keywords: ['follow up', 'follow-up', 'lead nurture', 'nurture', 'reactivate', 'win back', 'past clients'],
-    answer: "We build follow-up sequences that re-engage past clients, stay in touch with new leads, and keep your business top of mind. All of it runs automatically so you're not manually chasing anyone.",
-  },
-  {
-    keywords: ['orange county', 'oc', 'local', 'near me', 'southern california', 'socal', 'california'],
-    answer: "We're based in Orange County and most of our clients are in the OC and Southern California area. That said, we work with businesses across the US, so location isn't a barrier.",
-  },
-  {
-    keywords: ['contract', 'commitment', 'lock in', 'cancel anytime', 'month to month', 'long term'],
-    answer: "Month-to-month, no long-term contracts. We want to earn your business every month by actually delivering results, not by locking you in.",
-  },
-  {
-    keywords: ['roi', 'return on investment', 'worth it', 'results', 'guarantee', 'proof', 'case study'],
-    answer: "We show you the math before you spend anything. The Revenue Audit calculates exactly what missed calls, no-shows, and gaps in follow-up are costing your business each month. You see the numbers. You decide if it makes sense.",
-  },
-  {
-    keywords: ['what is a revenue audit', 'revenue audit', 'audit', 'assessment', 'analysis'],
-    answer: "The Revenue Audit is a deep look at your current operations. We map out where you're losing revenue, whether that's missed calls, no-shows, weak follow-up, or lack of reviews, and we put a dollar figure on each gap. It starts at $497 and the fee gets credited if you move forward with a retainer.",
-  },
-  {
-    keywords: ['activation sprint', 'sprint', 'one system', 'quick start', 'fast start'],
-    answer: "The Activation Sprint is $1,500 flat to get one automation system built and live in two weeks. It's the fastest way to see results. And if you decide to move to a monthly retainer after that, the setup fee is credited.",
-  },
-  {
-    keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'howdy'],
-    answer: "Hey! I'm Nova. Nikki and James built me to help answer questions about Ops by Noell. What's on your mind?",
-  },
-  {
-    keywords: ['thank you', 'thanks', 'appreciate', 'helpful', 'great'],
-    answer: "Of course, happy to help! If anything else comes up, just ask. And whenever you're ready to take the next step, you can book a free 30-minute call at opsbynoell.com/book.",
-  },
-];
-
-const FALLBACK_RESPONSE = "That's a good one. I want to make sure you get a real answer on that, so let me connect you with Nikki directly. You can book a free 30-minute call at opsbynoell.com/book, or drop your email and she'll reach out to you. What works best?";
+// ─── Human Handoff ───────────────────────────────────────────────────────────
 
 const HUMAN_HANDOFF_KEYWORDS = [
   'talk to a person', 'talk to someone', 'speak to a person', 'speak to someone',
@@ -133,24 +51,6 @@ function isHumanHandoffRequest(input: string): boolean {
 }
 
 const HUMAN_HANDOFF_RESPONSE = "Totally understand. I'll flag this for Nikki right now and she'll be in touch soon. You're also welcome to grab a time directly at opsbynoell.com/book if that's easier.";
-
-function getBotResponse(input: string): string {
-  const lower = input.toLowerCase();
-  for (const qa of QA_PAIRS) {
-    if (qa.keywords.some(kw => lower.includes(kw))) {
-      return qa.answer;
-    }
-  }
-  return FALLBACK_RESPONSE;
-}
-
-// ─── Quick Question Chips ─────────────────────────────────────────────────────
-
-const QUICK_QUESTIONS = [
-  'What do you actually build?',
-  'How does the process start?',
-  'What kinds of businesses do you work with?',
-];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -179,14 +79,12 @@ function TypingIndicator() {
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(true);
-  const [stage, setStage] = useState<'intro' | 'answer' | 'capture' | 'chat'>('intro');
+  const [stage, setStage] = useState<'chat'>('chat');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [leadInfo, setLeadInfo] = useState<Partial<LeadInfo>>({});
-  const [captureStep, setCaptureStep] = useState<'name' | 'email' | 'biz'>('name');
-  const [captureInput, setCaptureInput] = useState('');
-  const [showQuickQ, setShowQuickQ] = useState(true);
+
   const [proactiveTriggered, setProactiveTriggered] = useState(false);
   // Hover tooltip
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -202,15 +100,15 @@ export default function ChatWidget() {
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  const submitLead = trpc.leads.submit.useMutation();
+
   const sendMessageMutation = trpc.chat.sendMessage.useMutation();
   const [sessionId] = useState(() => getSessionId());
   const [lastHumanCount, setLastHumanCount] = useState(0);
 
-  // Poll for human replies every 5 seconds when chat is open and in chat stage
+  // Poll for human replies every 5 seconds when chat is open
   const { data: serverMessages } = trpc.chat.getMessages.useQuery(
     { sessionId },
-    { enabled: isOpen && stage === 'chat', refetchInterval: 5000 }
+    { enabled: isOpen, refetchInterval: 5000 }
   );
 
   // Sync human replies from server into local messages
@@ -240,10 +138,10 @@ export default function ChatWidget() {
   }, [messages, isTyping]);
 
   useEffect(() => {
-    if (isOpen && stage === 'chat') {
+    if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
-  }, [isOpen, stage]);
+  }, [isOpen]);
 
   useEffect(() => {
     const timer = setTimeout(() => setHasUnread(true), 3000);
@@ -297,11 +195,10 @@ export default function ChatWidget() {
         sessionStorage.setItem('nova_auto_opened', '1');
         setHasOpenedOnce(true);
         setHasUnread(false);
-        setStage('intro');
         setMessages([{
           id: 'auto_open_1',
           role: 'bot',
-          text: `Hey! I'm Nova. Nikki and James set me up to answer questions about Ops by Noell.\n\nWhat's on your mind?`,
+          text: `Hey! Quick question — is there something specific going on in your business right now that brought you here, or are you still figuring out if this is the right fit?`,
           timestamp: new Date(),
         }]);
         return true;
@@ -335,11 +232,11 @@ export default function ChatWidget() {
     setHasUnread(false);
     setHasOpenedOnce(true);
     setAutoOpenTriggered(true); // prevent auto-open from firing if visitor opens manually first
-    if (stage === 'intro') {
+    if (messages.length === 0) {
       setMessages([{
         id: '1',
         role: 'bot',
-        text: `Hey! I'm Nova. Nikki and James set me up to answer questions about Ops by Noell.\n\nWhat's on your mind?`,
+        text: `Hey! Quick question — is there something specific going on in your business right now that brought you here, or are you still figuring out if this is the right fit?`,
         timestamp: new Date(),
       }]);
     }
@@ -354,77 +251,9 @@ export default function ChatWidget() {
     }, 1200 + Math.random() * 600);
   }
 
-  function handleQuickQuestion(q: string) {
-    setShowQuickQ(false);
-    setStage('answer');
-    setMessages(prev => [...prev, {
-      id: Date.now().toString(),
-      role: 'user',
-      text: q,
-      timestamp: new Date(),
-    }]);
-    sessionStorage.setItem('ops_pending_question', q);
-    // Answer first, then ask for contact info
-    const response = getBotResponse(q);
-    setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
-      const answerId = Date.now().toString();
-      setMessages(prev => [...prev, { id: answerId, role: 'bot', text: response, timestamp: new Date() }]);
-      // After answer, transition to capture
-      setTimeout(() => {
-        setStage('capture');
-        setCaptureStep('name');
-        addBotMessage(`Before I forget, I'd love to grab your info so Nikki can follow up with you personally.\n\nWhat's your first name?`);
-      }, 800);
-    }, 1200 + Math.random() * 600);
-  }
 
-  function handleCaptureSubmit() {
-    if (!captureInput.trim()) return;
-    const value = captureInput.trim();
-    setCaptureInput('');
 
-    setMessages(prev => [...prev, {
-      id: Date.now().toString(),
-      role: 'user',
-      text: value,
-      timestamp: new Date(),
-    }]);
 
-    if (captureStep === 'name') {
-      setLeadInfo(prev => ({ ...prev, name: value }));
-      setCaptureStep('email');
-      setTimeout(() => {
-        addBotMessage(`Nice to meet you, ${value}! What email address should Nikki use to reach you?`);
-      }, 400);
-    } else if (captureStep === 'email') {
-      setLeadInfo(prev => ({ ...prev, email: value }));
-      setCaptureStep('biz');
-      setTimeout(() => {
-        addBotMessage(`Got it. And what kind of business do you run?`);
-      }, 400);
-    } else if (captureStep === 'biz') {
-      const updatedLead = { ...leadInfo, businessType: value };
-      setLeadInfo(updatedLead);
-      sessionStorage.setItem('ops_lead', JSON.stringify(updatedLead));
-      setStage('chat');
-
-      const pendingQ = sessionStorage.getItem('ops_pending_question') || '';
-      submitLead.mutate({
-        name: updatedLead.name ?? '',
-        email: updatedLead.email ?? '',
-        businessType: value,
-        question: pendingQ || undefined,
-        page: typeof window !== 'undefined' ? window.location.pathname : undefined,
-      });
-
-      // Answer was already given before capture — just thank them and invite more questions
-      setTimeout(() => {
-        addBotMessage(`Thanks, ${updatedLead.name ?? 'there'}! I've sent your info to Nikki and she'll be in touch. In the meantime, feel free to keep asking questions or grab a time at opsbynoell.com/book whenever it works for you.`);
-      }, 400);
-    }
-  }
 
   function handleSendMessage() {
     if (!inputValue.trim()) return;
@@ -437,30 +266,9 @@ export default function ChatWidget() {
       timestamp: new Date(),
     }]);
 
-    // If visitor types their own question in the intro stage, answer first then capture
-    if (stage === 'intro') {
-      setShowQuickQ(false);
-      setStage('answer');
-      sessionStorage.setItem('ops_pending_question', text);
-      const response = getBotResponse(text);
-      setIsTyping(true);
-      setTimeout(() => {
-        setIsTyping(false);
-        const answerId = Date.now().toString();
-        setMessages(prev => [...prev, { id: answerId, role: 'bot', text: response, timestamp: new Date() }]);
-        setTimeout(() => {
-          setStage('capture');
-          setCaptureStep('name');
-          addBotMessage(`Before I forget, I'd love to grab your info so Nikki can follow up with you personally.\n\nWhat's your first name?`);
-        }, 800);
-      }, 1200 + Math.random() * 600);
-      return;
-    }
-
-    // Detect human handoff request before sending to bot
+    // Detect human handoff request
     if (isHumanHandoffRequest(text)) {
       addBotMessage(HUMAN_HANDOFF_RESPONSE);
-      // Notify owner via backend (fire-and-forget)
       sendMessageMutation.mutate({
         sessionId,
         message: `[HUMAN HANDOFF REQUEST] ${text}`,
@@ -471,7 +279,7 @@ export default function ChatWidget() {
       return;
     }
 
-    // Persist to backend and get bot response (handles human takeover too)
+    // All messages go through backend Claude
     sendMessageMutation.mutate(
       {
         sessionId,
@@ -483,7 +291,6 @@ export default function ChatWidget() {
       {
         onSuccess: (data) => {
           if (!data.humanTakeover && data.botReply) {
-            // Bot responded — show it
             const id = Date.now().toString();
             setIsTyping(true);
             setTimeout(() => {
@@ -494,9 +301,8 @@ export default function ChatWidget() {
           // If humanTakeover, the polling will pick up the human reply
         },
         onError: () => {
-          // Fallback to local bot response if backend unavailable
-          const response = getBotResponse(text);
-          addBotMessage(response);
+          // If backend fails, show a graceful error
+          addBotMessage("I'm having trouble connecting right now. You can reach Nikki directly at hello@opsbynoell.com or book a time at opsbynoell.com/book.");
         },
       }
     );
@@ -505,11 +311,7 @@ export default function ChatWidget() {
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      if (stage === 'capture') {
-        handleCaptureSubmit();
-      } else {
-        handleSendMessage();
-      }
+      handleSendMessage();
     }
   }
 
@@ -523,7 +325,7 @@ export default function ChatWidget() {
     }
   }
 
-  const isCapturing = stage === 'capture';
+
   // Once a visitor has sent at least one message, only the X button can close the widget.
   // Clicking the floating toggle or outside the panel should not collapse it.
   const hasEngaged = messages.some(m => m.role === 'user');
@@ -783,47 +585,10 @@ export default function ChatWidget() {
             </div>
           )}
 
-          {/* Quick questions — shown once on intro stage, hidden after selection */}
-          {showQuickQ && stage === 'intro' && messages.length > 0 && !isTyping && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
-              {QUICK_QUESTIONS.map((q, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleQuickQuestion(q)}
-                  style={{
-                    textAlign: 'left',
-                    backgroundColor: 'transparent',
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    borderColor: '#2A2A2A',
-                    borderRadius: '8px',
-                    padding: '0.5rem 0.75rem',
-                    cursor: 'pointer',
-                    fontFamily: "'Sora', sans-serif",
-                    fontSize: '0.75rem',
-                    color: '#868583',
-                    lineHeight: 1.4,
-                    transition: 'background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(167,139,250,0.08)';
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = '#A78BFA';
-                    (e.currentTarget as HTMLButtonElement).style.color = '#F5F0EC';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = '#2A2A2A';
-                    (e.currentTarget as HTMLButtonElement).style.color = '#868583';
-                  }}
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          )}
+
 
           {/* Still need help? Talk to a person — shown after 3+ exchanges in chat stage */}
-          {stage === 'chat' && messages.filter(m => m.role === 'user').length >= 3 && !isTyping && (
+          {messages.filter(m => m.role === 'user').length >= 3 && !isTyping && (
             <div style={{
               display: 'flex',
               justifyContent: 'center',
@@ -863,7 +628,7 @@ export default function ChatWidget() {
           )}
 
           {/* Book CTA after chat */}
-          {stage === 'chat' && messages.length >= 4 && !isTyping && (
+          {messages.length >= 4 && !isTyping && (
             <div style={{
               backgroundColor: '#141414',
               borderWidth: '1px',
@@ -921,17 +686,12 @@ export default function ChatWidget() {
         }}>
           <input
             ref={inputRef}
-            type={isCapturing && captureStep === 'email' ? 'email' : 'text'}
-            value={isCapturing ? captureInput : inputValue}
-            onChange={e => isCapturing ? setCaptureInput(e.target.value) : setInputValue(e.target.value)}
+            type="text"
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={
-              isCapturing
-                ? captureStep === 'name' ? 'Your first name...'
-                  : captureStep === 'email' ? 'Your email address...'
-                  : 'Type of business...'
-                : 'Ask a question...'
-            }
+            placeholder="Ask a question..."
+
             style={{
               flex: 1,
               borderWidth: '1px',
@@ -950,20 +710,20 @@ export default function ChatWidget() {
             onBlur={e => (e.target as HTMLInputElement).style.borderColor = '#2A2A2A'}
           />
           <button
-            onClick={isCapturing ? handleCaptureSubmit : handleSendMessage}
-            disabled={isCapturing ? !captureInput.trim() : !inputValue.trim()}
+            onClick={handleSendMessage}
+            disabled={!inputValue.trim()}
             style={{
               width: '36px',
               height: '36px',
               backgroundColor: '#A78BFA',
               border: 'none',
               borderRadius: '8px',
-              cursor: (isCapturing ? !captureInput.trim() : !inputValue.trim()) ? 'not-allowed' : 'pointer',
+              cursor: !inputValue.trim() ? 'not-allowed' : 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              opacity: (isCapturing ? !captureInput.trim() : !inputValue.trim()) ? 0.4 : 1,
+              opacity: !inputValue.trim() ? 0.4 : 1,
               transition: 'opacity 0.2s ease',
             }}
             aria-label="Send message"
@@ -972,22 +732,7 @@ export default function ChatWidget() {
           </button>
         </div>
 
-        {/* Consent line — shown only during lead capture */}
-        {isCapturing && (
-          <div style={{
-            padding: '0.375rem 0.75rem 0',
-            backgroundColor: '#141414',
-            textAlign: 'center',
-            flexShrink: 0,
-          }}>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', color: '#4A4A4A', lineHeight: 1.5 }}>
-              By continuing, you agree to our{' '}
-              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#A78BFA', textDecoration: 'underline' }}>Privacy Policy</a>
-              {' '}and{' '}
-              <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: '#A78BFA', textDecoration: 'underline' }}>Terms of Service</a>.
-            </p>
-          </div>
-        )}
+
 
         {/* Footer */}
         <div style={{
