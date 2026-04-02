@@ -89,7 +89,7 @@ export default function About() {
           <FadeItem delay={0.1}>
             <h1 style={{
               fontFamily: "'Nicholas', serif",
-              fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)',
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em',
               maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff',
             }}>
@@ -345,5 +345,7 @@ export default function About() {
     </div>
   );
 }
+
+
 
 
