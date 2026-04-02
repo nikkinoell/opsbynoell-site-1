@@ -81,7 +81,7 @@ export default function HomeServicesAutomation() {
       {/* ── HERO ── */}
       <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(120,58,237,0.2) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '5.5rem' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(2rem, 5vw, 5rem)', paddingBottom: '5.5rem' }}>
           <div style={{ marginBottom: '1.5rem' }}><SectionBadge>Home Services Automation</SectionBadge></div>
           
             <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.75rem, 5vw, 3.5rem)', fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
@@ -106,7 +106,7 @@ export default function HomeServicesAutomation() {
 
       {/* ── SERVICE DETAIL SECTION ── */}
       <RevealSection>
-      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -138,10 +138,10 @@ export default function HomeServicesAutomation() {
 
       {/* ── STAT BLOCK ── */}
       <RevealSection>
-      <section style={{ padding: '5rem 0', background: 'rgba(167,139,250,0.03)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 5vw, 5rem) 0', background: 'rgba(167,139,250,0.03)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.25rem, 3vw, 3rem)' }}>
               <SectionBadge>Industry Data</SectionBadge>
               <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem' }}>
                 The numbers behind the missed revenue.
@@ -193,7 +193,7 @@ export default function HomeServicesAutomation() {
 
       {/* ── PRICING + BOOKING CTA ── */}
       <RevealSection>
-      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -284,7 +284,7 @@ export default function HomeServicesAutomation() {
 
       {/* ── PROBLEM SECTION ── */}
       <RevealSection>
-      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -315,7 +315,7 @@ export default function HomeServicesAutomation() {
 
       {/* ── SOLUTION SECTION ── */}
       <RevealSection>
-      <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
@@ -346,7 +346,7 @@ export default function HomeServicesAutomation() {
 
       {/* ── FINAL CTA ── */}
       <RevealSection>
-      <section style={{ position: 'relative', padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '680px', margin: '0 auto' }}>
           <FadeItem delay={0}>
@@ -369,4 +369,3 @@ export default function HomeServicesAutomation() {
     </div>
   );
 }
-
