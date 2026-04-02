@@ -163,7 +163,7 @@ export default function Home() {
 
         {/* ═══ CASE STUDY ════════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>Client Case Study</SectionBadge>
@@ -173,7 +173,7 @@ export default function Home() {
             </div>
 
             {/* Stats row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: 'clamp(1.25rem, 3vw, 3rem)' }}>
               {[
                 { value: '4/wk → <1', label: 'No-shows' },
                 { value: '40+', label: 'Reviews in 8 weeks' },
@@ -233,7 +233,7 @@ export default function Home() {
 
         {/* ═══ CALCULATOR CTA ══════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '6rem 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
             <SectionBadge>Free Tool</SectionBadge>
             <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 800, color: '#ffffff', overflowWrap: 'break-word', wordBreak: 'break-word', lineHeight: 1.7, letterSpacing: '-0.025em', marginBottom: '1.25rem' }}>
@@ -251,9 +251,9 @@ export default function Home() {
 
         {/* ═══ HOW IT WORKS ══════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container">
-            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
               <SectionBadge>How It Works</SectionBadge>
               <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em' }}>
                 From audit to autopilot{' '}<GradientText>in 14 days</GradientText>
@@ -323,7 +323,7 @@ export default function Home() {
 
         {/* ═══ INDUSTRIES ════════════════════════════════════════════ */}
         <RevealSection>
-        <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container">
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <SectionBadge>Industries We Serve</SectionBadge>
