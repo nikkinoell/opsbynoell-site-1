@@ -20,10 +20,10 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
       fontFamily: "'Nicholas', serif",
       letterSpacing: '0.08em',
       textTransform: 'uppercase' as const,
-      color: '#C4B5FD',
-      background: 'rgba(167, 139, 250, 0.1)',
+      color: '#0CA2A2',
+      background: 'rgba(12,162,162,0.06)',
       border: '1px solid rgba(167, 139, 250, 0.2)',
-      borderRadius: '999px',
+      borderRadius: '4px',
     }}>
       {children}
     </span>
@@ -56,7 +56,7 @@ const differentiators = [
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: '#010509', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
 
       {/* ─── HERO ─── */}
@@ -80,15 +80,15 @@ export default function About() {
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.75rem, 4.5vw, 2.75rem)',
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
-              maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff', margin: '0 auto 1.75rem',
+              maxWidth: '800px', marginBottom: '1.75rem', color: '#1A1A1A', margin: '0 auto 1.75rem',
             }}>
-              <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ background: 'linear-gradient(90deg, #0CA2A2 0%, #0DCFCF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 We've spent years building the fix for businesses exactly like yours.
               </span>
             </h1>
           </div>
           <div>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', fontWeight: 400, color: '#555555', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
               We're Nikki and James Noell, and we put our last name on this for a reason.
             </p>
           </div>
@@ -112,10 +112,10 @@ export default function About() {
           }}
         />
         <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginTop: '1rem' }}>
-          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Nikki Noell</span>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#1A1A1A' }}>Nikki Noell</span>
           <span style={{ color: 'rgba(167,139,250,0.4)', fontSize: '0.9375rem' }}>&amp;</span>
-          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>James Noell</span>
-          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.1em', textTransform: 'uppercase' as const, alignSelf: 'center', marginLeft: '0.25rem' }}>Co-Founders</span>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#1A1A1A' }}>James Noell</span>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#0CA2A2', letterSpacing: '0.1em', textTransform: 'uppercase' as const, alignSelf: 'center', marginLeft: '0.25rem' }}>Co-Founders</span>
         </div>
       </div>
 
@@ -128,7 +128,7 @@ export default function About() {
             <div className="reveal">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Stats grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '8px', overflow: 'hidden' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1px', background: '#E5E5E5', borderRadius: '8px', overflow: 'hidden' }}>
                   {[
                     { label: 'Founded', value: '2025', sub: 'Mission Viejo, CA' },
                     { label: 'Avg. Time to Live', value: '2 wks', sub: 'From audit to launch' },
@@ -139,7 +139,7 @@ export default function About() {
                       <p style={{
                         fontFamily: "'Nicholas', serif",
                         fontSize: '2rem', fontWeight: 600,
-                        color: '#ffffff', lineHeight: 1,
+                        color: '#1A1A1A', lineHeight: 1,
                         marginBottom: '0.375rem', letterSpacing: '-0.02em',
                       }}>
                         {stat.value}
@@ -147,12 +147,12 @@ export default function About() {
                       <p style={{
                         fontFamily: "'Nicholas', serif",
                         fontSize: '0.6875rem', fontWeight: 600,
-                        color: '#A78BFA', letterSpacing: '0.1em',
+                        color: '#0CA2A2', letterSpacing: '0.1em',
                         textTransform: 'uppercase', marginBottom: '0.25rem',
                       }}>
                         {stat.label}
                       </p>
-                      <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 400, color: '#b8b6b3' }}>
+                      <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 400, color: '#555555' }}>
                         {stat.sub}
                       </p>
                     </div>
@@ -169,21 +169,21 @@ export default function About() {
                 <h2 style={{
                   fontFamily: "'Nicholas', serif",
                   fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                  fontWeight: 700, color: '#ffffff',
+                  fontWeight: 700, color: '#1A1A1A',
                   lineHeight: 1.7, marginBottom: '1.75rem',
                 }}>
                   We come from operations. We build what actually works.
                 </h2>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#555555', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   If you're reading this, you're probably a great service business owner running without a real back office. You're answering your own calls when you can, following up on leads when you remember, hoping clients show up. We've spent years watching that exact pattern cost service business owners thousands of dollars a month in preventable gaps. So we built the systems to fix it, and now we build them for you.
                 </p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.8, marginBottom: '2rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#555555', lineHeight: 1.8, marginBottom: '2rem' }}>
                   We're Nikki and James Noell, based in Mission Viejo, Orange County. Our name is on the door because every system we build, we stand behind.
                 </p>
 
                 {/* Family name callout */}
                 <div style={{
-                  borderLeft: '3px solid #A78BFA',
+                  borderLeft: '3px solid #0CA2A2',
                   paddingLeft: '1.25rem',
                   marginBottom: '0',
                 }}>
@@ -191,13 +191,13 @@ export default function About() {
                     fontFamily: "'Nicholas', serif",
                     fontSize: '1.1875rem',
                     fontWeight: 700,
-                    color: '#ffffff',
+                    color: '#1A1A1A',
                     lineHeight: 1.7,
                     marginBottom: '0.5rem',
                   }}>
                     Our family name is on the door.
                   </p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#555555', lineHeight: 1.7 }}>
                     Every system we build, we build like it's our own business on the line. Because in a way, it is.
                   </p>
                 </div>
@@ -211,7 +211,7 @@ export default function About() {
 
       {/* ─── DIFFERENTIATORS ─── */}
       <div className="reveal">
-      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5' }}>
         <div className="container">
           <div className="reveal">
             <div style={{ maxWidth: '520px', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -221,7 +221,7 @@ export default function About() {
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700, color: '#ffffff', lineHeight: 1.7,
+                fontWeight: 700, color: '#1A1A1A', lineHeight: 1.7,
               }}>
                 Four things that make us different.
               </h2>
@@ -245,9 +245,9 @@ export default function About() {
                         fontFamily: "'Nicholas', serif",
                         fontSize: '0.5625rem', fontWeight: 600,
                         letterSpacing: '0.15em', textTransform: 'uppercase',
-                        color: '#A78BFA', border: '1px solid rgba(167,139,250,0.3)',
+                        color: '#0CA2A2', border: '1px solid rgba(167,139,250,0.3)',
                         padding: '0.25rem 0.625rem', borderRadius: '4px',
-                        background: 'rgba(167,139,250,0.08)',
+                        background: '#F5F5F5',
                       }}>
                         Signature Promise
                       </span>
@@ -255,7 +255,7 @@ export default function About() {
                   )}
                   <div style={{
                     width: '48px', height: '48px', borderRadius: '12px',
-                    background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.2)',
+                    background: 'rgba(12,162,162,0.06)', border: '1px solid #E8E8E8',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     marginBottom: '1.5rem',
                   }}>
@@ -264,11 +264,11 @@ export default function About() {
                   <h3 style={{
                     fontFamily: "'Nicholas', serif",
                     fontSize: '1.25rem', fontWeight: 700,
-                    color: '#ffffff', lineHeight: 1.7, marginBottom: '1rem',
+                    color: '#1A1A1A', lineHeight: 1.7, marginBottom: '1rem',
                   }}>
                     {d.title}
                   </h3>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#555555', lineHeight: 1.75 }}>
                     {d.body}
                   </p>
                   {d.highlight && (
@@ -278,7 +278,7 @@ export default function About() {
                         fontFamily: "'Nicholas', serif",
                         fontSize: '0.75rem', fontWeight: 600,
                         letterSpacing: '0.08em', textTransform: 'uppercase',
-                        color: '#A78BFA', textDecoration: 'none',
+                        color: '#0CA2A2', textDecoration: 'none',
                         transition: 'color 0.15s ease',
                       }}
                         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#C4B5FD'; }}
@@ -298,7 +298,7 @@ export default function About() {
 
       {/* ─── CTA ─── */}
       <div className="reveal">
-      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
+      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid #E5E5E5', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="reveal">
@@ -310,13 +310,13 @@ export default function About() {
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em',
               marginBottom: '1.25rem', maxWidth: '600px', margin: '0 auto 1.25rem',
-              background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
+              background: 'linear-gradient(90deg, #0CA2A2 0%, #0DCFCF 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               display: 'block',
             }}>
               Ready to see what we'd build for your business?
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#555555', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 600, padding: '1rem 2.25rem' }}>
