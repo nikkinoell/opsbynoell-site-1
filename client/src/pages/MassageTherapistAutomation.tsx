@@ -140,7 +140,7 @@ export default function MassageTherapistAutomation() {
           <FadeItem delay={0}><div style={{ marginBottom: '1.5rem' }}><SectionBadge>Massage Therapist Automation</SectionBadge></div></FadeItem>
           <FadeItem delay={0.1}>
             <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2.75rem, 6.5vw, 5rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
-              <GradientText>AI receptionist and automation</GradientText>{' '}<span style={{ color: '#ffffff' }}>for massage therapists. Stop losing clients to voicemail.</span>
+              <GradientText>Your hands are full.</GradientText>{' '}<span style={{ color: '#ffffff' }}>We answer your phone.</span>
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
