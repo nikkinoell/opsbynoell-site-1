@@ -228,7 +228,7 @@ export default function MedSpaAutomation() {
               <FadeItem key={i} delay={i * 0.1}>
                 <div style={{ padding: '2.25rem', background: 'rgba(167,139,250,0.05)', border: '1px solid rgba(167,139,250,0.18)', borderRadius: '12px', textAlign: 'center' }}>
                   <div style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#A78BFA', marginBottom: '0.75rem', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#a0a0a0', lineHeight: 1.6 }}>{s.label}</div>
+                  <div style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#a0a7b4', lineHeight: 1.6 }}>{s.label}</div>
                 </div>
               </FadeItem>
             ))}
@@ -259,7 +259,7 @@ export default function MedSpaAutomation() {
                 {['Books appointments in real time', 'Answers service and pricing questions', 'Handles after-hours calls automatically', 'Warm handoff to staff when needed'].map((feat, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
                     <Check size={14} color="#A78BFA" />
-                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#e2e2e2' }}>{feat}</span>
+                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#c8cdd6' }}>{feat}</span>
                   </div>
                 ))}
               </div>
@@ -390,7 +390,7 @@ export default function MedSpaAutomation() {
                     {pkg.includes.map((item, j) => (
                       <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>
                         <Check size={14} color="#A78BFA" style={{ marginTop: '2px', flexShrink: 0 }} />
-                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#e2e2e2', lineHeight: 1.5 }}>{item}</span>
+                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#c8cdd6', lineHeight: 1.5 }}>{item}</span>
                       </div>
                     ))}
                   </div>
