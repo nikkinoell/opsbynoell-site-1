@@ -126,7 +126,7 @@ export default function DentalAutomation() {
       {/* ═══ HERO ═══════════════════════════════════════════════════ */}
       <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(120,58,237,0.2) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '3rem' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(2rem, 5vw, 5rem)', paddingBottom: '3rem' }}>
           <div style={{ marginBottom: '1.5rem' }}><SectionBadge>Dental Office Automation</SectionBadge></div>
           <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.75rem, 5vw, 3.5rem)', fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
             <GradientText>Cut no-shows. Automate recall.</GradientText>{' '}<span style={{ color: '#ffffff' }}>Fill your schedule.</span>
@@ -161,10 +161,10 @@ export default function DentalAutomation() {
 
       {/* ═══ PAIN + SOLUTION (2-COLUMN) ═════════════════════════════ */}
       <RevealSection>
-      <section style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2rem, 5vw, 5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.25rem, 3vw, 3rem)' }}>
               <SectionBadge>What We Fix</SectionBadge>
               <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem' }}>
                 Every gap is costing you patients.
@@ -215,10 +215,10 @@ export default function DentalAutomation() {
 
       {/* ═══ WHAT WE BUILD ══════════════════════════════════════════ */}
       <RevealSection>
-      <section style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.015)' }}>
+      <section style={{ padding: 'clamp(2rem, 5vw, 5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.015)' }}>
         <div className="container">
           <FadeItem delay={0}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.25rem, 3vw, 3rem)' }}>
               <SectionBadge>What We Build For You</SectionBadge>
               <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.375rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.7, letterSpacing: '-0.02em', marginTop: '1rem', marginBottom: '1rem' }}>
                 Three systems. <GradientText>Immediate impact.</GradientText>
@@ -288,7 +288,7 @@ export default function DentalAutomation() {
 
       {/* ═══ PRICING ════════════════════════════════════════════════ */}
       <RevealSection>
-      <section id="pricing" style={{ padding: '5rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section id="pricing" style={{ padding: 'clamp(2rem, 5vw, 5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
