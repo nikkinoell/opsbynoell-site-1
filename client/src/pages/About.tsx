@@ -81,7 +81,7 @@ export default function About() {
         <div style={{ position: 'absolute', top: '-80px', left: '-100px', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ position: 'absolute', top: '60px', right: '-80px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: '5rem', paddingBottom: '3rem' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(2rem, 5vw, 5rem)', paddingBottom: '3rem' }}>
           <div>
             <div style={{ marginBottom: '2rem' }}>
               <SectionBadge>About Ops by Noell</SectionBadge>
@@ -222,10 +222,10 @@ export default function About() {
 
       {/* ─── DIFFERENTIATORS ─── */}
       <RevealSection>
-      <section style={{ padding: '6rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
-            <div style={{ maxWidth: '520px', marginBottom: '4rem' }}>
+            <div style={{ maxWidth: '520px', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
               <div style={{ marginBottom: '1.25rem' }}>
                 <SectionBadge>Why Ops by Noell</SectionBadge>
               </div>
@@ -309,7 +309,7 @@ export default function About() {
 
       {/* ─── CTA ─── */}
       <RevealSection>
-      <section style={{ position: 'relative', padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeItem delay={0}>
@@ -352,10 +352,3 @@ export default function About() {
     </div>
   );
 }
-
-
-
-
-
-
-
