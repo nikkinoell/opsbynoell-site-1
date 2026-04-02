@@ -272,7 +272,7 @@ export default function Services() {
             </h1>
           </FadeItem>
           <FadeItem delay={0.16}>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.175rem)', color: '#868583', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.175rem)', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto 2.5rem' }}>
               Clients booked, retained, and reviewed — every system on this page is built for you, installed by us, and running before you know it. No software to learn. No setup on your end.
             </p>
           </FadeItem>
@@ -289,7 +289,7 @@ export default function Services() {
           <FadeItem delay={0.32}>
             <div style={{ marginTop: '2.5rem', display: 'inline-block', background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '12px', padding: '1.5rem 2rem', maxWidth: '460px', textAlign: 'left' }}>
               <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>Start with one system.</p>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7, marginBottom: '1.25rem' }}>
                 Missed Call Text-Back — $297 setup + $197/month. No sales call needed.
               </p>
               <a href="/book" className="btn-gradient" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9375rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -335,7 +335,7 @@ export default function Services() {
             <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
               Seven systems. <GradientText>One integrated operation.</GradientText>
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#b8b6b3', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
               Each service is done-for-you from day one — designed, built, and managed by us. You don't touch a single setting.
             </p>
           </div>
@@ -351,7 +351,7 @@ export default function Services() {
                     </div>
                     <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.0625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.25, margin: 0 }}>{title}</h3>
                   </div>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#868583', lineHeight: 1.65, margin: 0 }}>{desc}</p>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#b8b6b3', lineHeight: 1.65, margin: 0 }}>{desc}</p>
                   <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#A78BFA', margin: 0 }}>{stat}</p>
                   <a href={href} style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#C4B5FD', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginTop: 'auto' }}>
                     See how it works <ArrowRight size={12} />
@@ -371,7 +371,7 @@ export default function Services() {
             <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
               Built for <GradientText>local service businesses.</GradientText>
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#b8b6b3', maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
               If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
             </p>
           </div>
@@ -386,7 +386,7 @@ export default function Services() {
                       <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem' }}>{name}</h3>
                       <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#A78BFA' }}>{tagline}</p>
                     </div>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#868583', lineHeight: 1.7, flex: 1 }}>{desc}</p>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9rem', color: '#b8b6b3', lineHeight: 1.7, flex: 1 }}>{desc}</p>
                     <div style={{ borderTop: '1px solid rgba(167,139,250,0.12)', paddingTop: '1rem', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '1rem' }}>
                       <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#C4B5FD', lineHeight: 1.65, fontStyle: 'italic', flex: 1 }}>{outcome}</p>
                       <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', fontWeight: 600, color: '#A78BFA', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.25rem', flexShrink: 0 }}>
@@ -409,7 +409,7 @@ export default function Services() {
             <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '1rem' }}>
               Start with what matters most. <GradientText>Scale from there.</GradientText>
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#b8b6b3', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
               Every package is 100% done-for-you. We build it, connect it to your business, and once it's live, it runs. You don't touch a setting.
             </p>
           </div>
@@ -428,14 +428,14 @@ export default function Services() {
                     <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '1rem' }}>{subtitle}</p>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.375rem', marginBottom: '0.375rem' }}>
                       <span style={{ fontFamily: "'Nicholas', serif", fontSize: '2.25rem', fontWeight: 800, color: '#ffffff' }}>{price}</span>
-                      <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583' }}>{period}</span>
+                      <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#b8b6b3' }}>{period}</span>
                     </div>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583', lineHeight: 1.6, marginBottom: '1.5rem' }}>{desc}</p>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.6, marginBottom: '1.5rem' }}>{desc}</p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.75rem' }}>
                       {includes.map((item) => (
                         <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>
                           <Check size={14} style={{ color: '#A78BFA', flexShrink: 0, marginTop: '3px' }} />
-                          <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#868583' }}>{item}</span>
+                          <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#b8b6b3' }}>{item}</span>
                         </div>
                       ))}
                     </div>
@@ -469,7 +469,7 @@ export default function Services() {
               </button>
               {openFaq === i && (
                 <div style={{ paddingBottom: '1.5rem' }}>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#868583', lineHeight: 1.75 }}>{a}</p>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>{a}</p>
                 </div>
               )}
             </div>
@@ -485,13 +485,13 @@ export default function Services() {
           <h2 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2rem, 5vw, 3.25rem)', fontWeight: 800, color: '#ffffff', lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: '1.25rem' }}>
             Not sure where to start?<br /><GradientText>Let's talk for 30 minutes.</GradientText>
           </h2>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#868583', maxWidth: '480px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1.0625rem', color: '#b8b6b3', maxWidth: '480px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
             A free intro call is the lowest-risk way to find out if automation is right for your business. No pitch. No pressure. Just a real conversation.
           </p>
           <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             Book a Free 30-Minute Audit <ArrowRight size={17} />
           </a>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#868583', marginTop: '1.25rem' }}>No commitment. No credit card. Just a conversation.</p>
+          <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#b8b6b3', marginTop: '1.25rem' }}>No commitment. No credit card. Just a conversation.</p>
           <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.8125rem', color: '#4B5563', marginTop: '0.625rem' }}>We don't sell your data. Ever. We build systems for your business, not a database for ours.</p>
         </div>
       </section>
@@ -500,3 +500,4 @@ export default function Services() {
     </div>
   );
 }
+
