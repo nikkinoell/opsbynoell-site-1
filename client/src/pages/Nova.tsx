@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { ArrowRight, Bot, Clock, Bell, UserCheck, Database, Zap, Star, ChevronDown } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import { RevealSection } from '@/components/RevealSection'
 
 /* ─── TYPES ────────────────────────────────────────────────────── */
 interface FaqItem {
@@ -281,6 +282,7 @@ export default function Nova() {
         </section>
 
         {/* ═══ THE PROBLEM ════════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{
           padding: '7rem 0',
           borderTop: '1px solid rgba(167,139,250,0.08)',
@@ -311,8 +313,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ WHAT THEY GET ══════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -379,8 +383,10 @@ export default function Nova() {
             </div>
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ LIVE DEMO ══════════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{
           padding: '7rem 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
@@ -410,8 +416,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ SOCIAL PROOF ═══════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '780px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -472,8 +480,10 @@ export default function Nova() {
             </div>
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ PRICING ════════════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{
           padding: '7rem 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
@@ -571,8 +581,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ FAQ ════════════════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{ padding: '7rem 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -591,8 +603,10 @@ export default function Nova() {
             <FaqAccordion items={FAQS} />
           </div>
         </section>
+        </RevealSection>
 
         {/* ═══ FINAL CTA ══════════════════════════════════════════════ */}
+        <RevealSection>
         <section style={{ padding: '8rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           <div style={{
             position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -623,6 +637,7 @@ export default function Nova() {
             </p>
           </div>
         </section>
+        </RevealSection>
 
       </div>
       <Footer />
