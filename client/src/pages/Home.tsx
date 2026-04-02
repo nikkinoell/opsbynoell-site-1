@@ -388,6 +388,23 @@ export default function Home() {
             <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', color: '#b8b6b3', maxWidth: '500px', margin: '0 auto 2.5rem', lineHeight: 1.75 }}>
               30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
             </p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
+              <img
+                src="/images/noell-family.jpg"
+                alt="Nikki Noell"
+                style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '2px solid rgba(167,139,250,0.3)',
+                  flexShrink: 0,
+                }}
+              />
+              <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', fontWeight: 400, textAlign: 'left' }}>
+                You'll talk directly with Nikki. 30 minutes. Free. No obligation.
+              </span>
+            </div>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="/book" className="btn-gradient" style={{ padding: '1.125rem 2.25rem', fontSize: '1.0625rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 Book a Free 30-Minute Audit <ArrowRight size={17} />
