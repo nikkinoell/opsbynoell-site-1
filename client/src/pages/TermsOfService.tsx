@@ -15,7 +15,7 @@ const H2_STYLE: React.CSSProperties = {
   fontFamily: "'Nicholas', serif",
   fontSize: '1.25rem',
   fontWeight: 700,
-  color: '#F5F0EC',
+  color: '#1A1A1A',
   marginBottom: '0.875rem',
   letterSpacing: '-0.02em',
 };
@@ -43,7 +43,7 @@ const CALLOUT_STYLE: React.CSSProperties = {
   color: 'rgba(245,240,235,0.8)',
   lineHeight: 1.8,
   backgroundColor: 'rgba(167,139,250,0.06)',
-  borderLeft: '3px solid #A78BFA',
+  borderLeft: '3px solid #0CA2A2',
   padding: '1rem 1.25rem',
   marginBottom: '1rem',
   borderRadius: '0 6px 6px 0',
@@ -51,18 +51,18 @@ const CALLOUT_STYLE: React.CSSProperties = {
 
 export default function TermsOfService() {
   return (
-    <div style={{ backgroundColor: '#0A0A0A', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Nav />
 
       {/* Hero */}
-      <section style={{ backgroundColor: '#0A0A0A', paddingTop: '7rem', paddingBottom: '4rem' }}>
+      <section style={{ backgroundColor: '#FFFFFF', paddingTop: '7rem', paddingBottom: '4rem' }}>
         <div className="container">
-          <p className="eyebrow" style={{ color: '#A78BFA', marginBottom: '1rem' }}>Legal</p>
+          <p className="eyebrow" style={{ color: '#0CA2A2', marginBottom: '1rem' }}>Legal</p>
           <h1 style={{
             fontFamily: "'Nicholas', serif",
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            color: '#F5F0EC',
+            color: '#1A1A1A',
             lineHeight: 1.1,
             marginBottom: '1rem',
             letterSpacing: '-0.03em',
@@ -76,7 +76,7 @@ export default function TermsOfService() {
       </section>
 
       {/* Content */}
-      <section style={{ paddingTop: '4rem', paddingBottom: '5rem', backgroundColor: '#0A0A0A' }}>
+      <section style={{ paddingTop: '4rem', paddingBottom: '5rem', backgroundColor: '#FFFFFF' }}>
         <div className="container" style={{ maxWidth: '760px', margin: '0 auto' }}>
 
           <div style={SECTION_STYLE}>
@@ -137,8 +137,8 @@ export default function TermsOfService() {
               <strong>For help:</strong> Reply <strong>HELP</strong> for assistance, or contact us directly at:
             </p>
             <ul style={UL_STYLE}>
-              <li>Email: <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a></li>
-              <li>Phone: <a href="tel:+19497849726" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 784-9726</a></li>
+              <li>Email: <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a></li>
+              <li>Phone: <a href="tel:+19497849726" style={{ color: '#0CA2A2', textDecoration: 'none' }}>(949) 784-9726</a></li>
             </ul>
             <p style={P_STYLE}>
               <strong>Age restriction:</strong> You must be 18 years of age or older to opt in to SMS communications from Ops by Noell.
@@ -148,7 +148,7 @@ export default function TermsOfService() {
             </p>
             <p style={P_STYLE}>
               For information on how we handle your phone number and SMS consent data, please review our{' '}
-              <a href="/privacy-policy" style={{ color: '#A78BFA', textDecoration: 'none', fontWeight: 600 }}>Privacy Policy</a>.
+              <a href="/privacy-policy" style={{ color: '#0CA2A2', textDecoration: 'none', fontWeight: 600 }}>Privacy Policy</a>.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export default function TermsOfService() {
               Fees for our services are due at the time of the service agreement unless otherwise specified in writing. By agreeing to our services, you authorize us to collect payment in accordance with the pricing outlined in your service proposal or agreement.
             </p>
             <p style={P_STYLE}>
-              All fees are non-refundable unless otherwise stated in your service agreement. If you have questions about pricing or billing, please contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a> before engaging our services.
+              All fees are non-refundable unless otherwise stated in your service agreement. If you have questions about pricing or billing, please contact us at <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a> before engaging our services.
             </p>
           </div>
 
@@ -229,9 +229,9 @@ export default function TermsOfService() {
               <strong>Ops by Noell</strong><br />
               Attn: Nicole (Nikki) Noell<br />
               Mission Viejo, CA<br />
-              <a href="mailto:hello@opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>hello@opsbynoell.com</a><br />
-              <a href="tel:+19497849726" style={{ color: '#A78BFA', textDecoration: 'none' }}>(949) 784-9726</a><br />
-              <a href="https://www.opsbynoell.com" style={{ color: '#A78BFA', textDecoration: 'none' }}>www.opsbynoell.com</a>
+              <a href="mailto:hello@opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>hello@opsbynoell.com</a><br />
+              <a href="tel:+19497849726" style={{ color: '#0CA2A2', textDecoration: 'none' }}>(949) 784-9726</a><br />
+              <a href="https://www.opsbynoell.com" style={{ color: '#0CA2A2', textDecoration: 'none' }}>www.opsbynoell.com</a>
             </p>
           </div>
 
