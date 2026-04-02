@@ -778,4 +778,12 @@
   flex-shrink: 0;
 }
 
+/* Hero gradient pulse animation */
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.12; }
+  50%       { opacity: 0.25; }
+}
 
+.hero-glow {
+  animation: heroPulse 4s ease-in-out infinite;
+}
