@@ -117,7 +117,7 @@ export default function SalonAutomation() {
           <FadeItem delay={0}><div style={{ marginBottom: '1.5rem' }}><SectionBadge>Salon Automation</SectionBadge></div></FadeItem>
           <FadeItem delay={0.1}>
             <h1 style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(2.75rem, 6.5vw, 5rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', maxWidth: '820px', marginBottom: '1.75rem' }}>
-              <GradientText>AI automation</GradientText>{' '}<span style={{ color: '#ffffff' }}>for salons. Fill your chair. Keep it full.</span>
+              <GradientText>Your chair shouldn't sit empty</GradientText>{' '}<span style={{ color: '#ffffff' }}>because you were too busy to answer the phone.</span>
             </h1>
           </FadeItem>
           <FadeItem delay={0.2}>
