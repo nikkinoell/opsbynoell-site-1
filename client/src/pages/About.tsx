@@ -93,9 +93,9 @@ export default function About() {
               fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em',
               maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff',
             }}>
-              Built by The Noells.{' '}
+              You're losing clients to missed calls and forgotten follow-ups.{' '}
               <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Powered by automation.
+                We've spent years building the fix, for businesses exactly like yours.
               </span>
             </h1>
           </FadeItem>
@@ -125,16 +125,10 @@ export default function About() {
                   We come from operations. We build what actually works.
                 </h2>
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                  We're Nikki and James Noell, a husband-and-wife team from Mission Viejo, California. We've spent years inside fast-growing companies building systems, managing operations, and fixing what was broken. That's just how we're wired.
-                </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                  We kept seeing the same thing: talented people running great businesses, losing clients not because of bad service, but because nothing happened after the call. No follow-up. No reminder. No review request. The work was excellent. The systems behind it were nonexistent.
-                </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '1.25rem' }}>
-                  So we built the fix. And then we built it for everyone else.
+                  If you're reading this, you're probably a great service business owner running without a real back office. You're answering your own calls when you can, following up on leads when you remember, hoping clients show up. We've spent years watching that exact pattern cost service business owners thousands of dollars a month in preventable gaps. So we built the systems to fix it, and now we build them for you.
                 </p>
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.8, marginBottom: '2rem' }}>
-                  Today, we work with local service businesses across Orange County, from wellness practices and salons to dental offices and home services. If your business runs on bookings and phone calls, we build the AI systems that make sure nothing falls through the cracks.
+                  We're Nikki and James Noell, based in Mission Viejo, Orange County. Our name is on the door because every system we build, we stand behind.
                 </p>
 
                 {/* Family name callout */}
@@ -162,66 +156,29 @@ export default function About() {
 
             <FadeItem delay={0.15}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {/* Founder photo placeholders — two side by side */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  {[
-                    { name: 'Nikki Noell', role: 'Co-Founder' },
-                    { name: 'James Noell', role: 'Co-Founder' },
-                  ].map((founder, i) => (
-                    <div key={i} style={{
-                      background: 'rgba(10, 8, 20, 0.85)',
-                      border: '1px solid rgba(167,139,250,0.4)',
-                      borderRadius: '10px',
-                      padding: '1.75rem 1.25rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textAlign: 'center',
-                      gap: '0.625rem',
-                    }}>
-                      <div style={{
-                        width: '56px', height: '56px',
-                        borderRadius: '50%',
-                        background: 'rgba(167,139,250,0.1)',
-                        border: '1px solid rgba(167,139,250,0.25)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginBottom: '0.125rem',
-                      }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                          <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                      </div>
-                      <p style={{
-                        fontFamily: "'Nicholas', serif",
-                        fontSize: '0.9375rem',
-                        fontWeight: 700,
-                        color: '#ffffff',
-                        lineHeight: 1.2,
-                      }}>
-                        {founder.name}
-                      </p>
-                      <p style={{
-                        fontFamily: "'Sora', sans-serif",
-                        fontSize: '0.6875rem',
-                        fontWeight: 600,
-                        color: '#A78BFA',
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase' as const,
-                      }}>
-                        {founder.role}
-                      </p>
-                      <p style={{
-                        fontFamily: "'Sora', sans-serif",
-                        fontSize: '0.6875rem',
-                        color: '#555351',
-                        letterSpacing: '0.05em',
-                      }}>
-                        Photo coming soon
-                      </p>
-                    </div>
-                  ))}
+                {/* Founder photo */}
+                <div style={{
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(167,139,250,0.25)',
+                  lineHeight: 0,
+                }}>
+                  <img
+                    src="/images/noell-family.jpg"
+                    alt="Nikki and James Noell, founders of Ops by Noell"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block',
+                      objectFit: 'cover',
+                    }}
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Nikki Noell</span>
+                  <span style={{ color: 'rgba(167,139,250,0.4)', fontSize: '0.9375rem' }}>&amp;</span>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>James Noell</span>
+                  <span style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.1em', textTransform: 'uppercase' as const, alignSelf: 'center', marginLeft: '0.25rem' }}>Co-Founders</span>
                 </div>
 
                 {/* Stats grid */}
@@ -363,13 +320,13 @@ export default function About() {
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               display: 'block',
             }}>
-              Let's find out what your gaps are costing you.
+              Ready to see what we'd build for your business?
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
-              Book Free Intro Call <ArrowRight size={16} />
+              Book a Free 30-Minute Call <ArrowRight size={16} />
             </a>
           </FadeItem>
         </div>
