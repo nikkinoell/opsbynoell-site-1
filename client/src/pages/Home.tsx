@@ -145,6 +145,19 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ═══ TRUST STRIP ═══════════════════════════════════════════ */}
+        <div style={{
+          textAlign: 'center',
+          padding: '2rem 0',
+          fontFamily: "'Nicholas', serif",
+          fontSize: '0.875rem',
+          fontWeight: 400,
+          color: '#a0a7b4',
+          letterSpacing: '0.02em',
+        }}>
+          Trusted by massage therapists, dental practices, and med spas across Orange County.
+        </div>
+
         {/* ═══ CASE STUDY ════════════════════════════════════════════ */}
         <RevealSection>
         <section style={{ padding: '7rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
