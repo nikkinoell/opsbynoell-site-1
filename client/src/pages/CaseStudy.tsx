@@ -32,7 +32,7 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
       display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
       padding: '0.375rem 1rem', borderRadius: '99px',
       border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(167,139,250,0.08)',
-      fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 600,
+      fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600,
       letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#A78BFA',
     }}>
       <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#A78BFA', display: 'inline-block' }} />
@@ -77,7 +77,7 @@ export default function CaseStudy() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
               <SectionBadge>Case Study · Laguna Niguel, CA</SectionBadge>
               <span style={{
-                fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 700,
+                fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 700,
                 letterSpacing: '0.12em', textTransform: 'uppercase', color: '#010509',
                 background: 'linear-gradient(135deg, #A78BFA, #C4B5FD)',
                 padding: '0.3rem 0.875rem', borderRadius: '99px',
@@ -88,7 +88,7 @@ export default function CaseStudy() {
             <h1 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(2.75rem, 6.5vw, 5.5rem)',
-              fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em',
+              fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
               maxWidth: '860px', marginBottom: '2.5rem',
             }}>
               <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>25 years of expertise.</span>{' '}
@@ -104,7 +104,7 @@ export default function CaseStudy() {
                 { label: 'Timeline', value: '2 Weeks to Live' },
               ].map((item, i) => (
                 <div key={i} className="feature-card" style={{ padding: '1rem 1.5rem' }}>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#A78BFA', marginBottom: '0.25rem' }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#A78BFA', marginBottom: '0.25rem' }}>
                     {item.label}
                   </p>
                   <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
@@ -130,17 +130,17 @@ export default function CaseStudy() {
                   fontFamily: "'Nicholas', serif",
                   fontSize: 'clamp(2rem, 3.5vw, 3rem)',
                   fontWeight: 700, color: '#ffffff',
-                  lineHeight: 1.1, marginBottom: '1.5rem',
+                  lineHeight: 1.7, marginBottom: '1.5rem',
                 }}>
                   A master of her craft. Invisible to the internet.
                 </h2>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   Santa is a licensed massage therapist based in Laguna Niguel with over 25 years of experience. Her clients are loyal. Her work is exceptional. Her reputation, built entirely through word of mouth, is impeccable.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   But Santa had zero digital infrastructure. No website. No online booking. No automated follow-up. No review system. Every new client had to find her through a personal referral, and even then, they had to navigate a booking process that relied entirely on phone calls and memory.
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8 }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8 }}>
                   She was excellent at her work. Her operations were silently costing her thousands every month in missed opportunities.
                 </p>
               </div>
@@ -158,11 +158,11 @@ export default function CaseStudy() {
                   fontFamily: "'Nicholas', serif",
                   fontSize: 'clamp(1.25rem, 2vw, 1.625rem)',
                   fontWeight: 600, color: '#ffffff',
-                  lineHeight: 1.5, marginBottom: '1.5rem',
+                  lineHeight: 1.7, marginBottom: '1.5rem',
                 }}>
                   "25 years of exceptional client work. Zero digital infrastructure. Santa was our founding client partner and the perfect proof of concept for what AI automation could do for a solo service business."
                 </p>
-                <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A78BFA' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A78BFA' }}>
                   Ops by Noell Assessment
                 </p>
               </div>
@@ -183,11 +183,11 @@ export default function CaseStudy() {
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(2rem, 3.5vw, 3rem)',
                 fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.1, marginBottom: '1rem',
+                lineHeight: 1.7, marginBottom: '1rem',
               }}>
                 Six operational gaps. Each one costing revenue daily.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
                 When we sat down with Santa, we mapped every gap in her operation and quantified what each one was costing her monthly.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function CaseStudy() {
                       {gap.label}
                     </h3>
                   </div>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.7 }}>
                     {gap.detail}
                   </p>
                 </div>
@@ -231,11 +231,11 @@ export default function CaseStudy() {
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(2rem, 3.5vw, 3rem)',
                 fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.1, marginBottom: '1rem',
+                lineHeight: 1.7, marginBottom: '1rem',
               }}>
                 A complete operational back office. Built in two weeks.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
                 We designed and installed every component of Santa's automation system. She didn't configure a single setting. She was live and capturing leads within 14 days of her audit.
               </p>
             </div>
@@ -260,7 +260,7 @@ export default function CaseStudy() {
                     <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.375rem' }}>
                       {item.item}
                     </h3>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
                       {item.detail}
                     </p>
                   </div>
@@ -283,7 +283,7 @@ export default function CaseStudy() {
                 </p>
                 <div>
                   <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Santa</p>
-                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
                     Licensed Massage Therapist, Laguna Niguel
                   </p>
                 </div>
@@ -300,8 +300,8 @@ export default function CaseStudy() {
                 ].map((s, i) => (
                   <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '1.75rem 1.5rem' }}>
                     <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.75rem', color: '#b8b6b3' }}>{s.sub}</p>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', color: '#b8b6b3' }}>{s.sub}</p>
                   </div>
                 ))}
               </div>
@@ -318,7 +318,7 @@ export default function CaseStudy() {
             <SectionBadge>By the Numbers</SectionBadge>
           </div>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Sora', sans-serif" }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Nicholas', serif" }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(167,139,250,0.2)' }}>
                   {['Metric', 'Before', 'After', 'Timeline'].map((h) => (
@@ -358,11 +358,11 @@ export default function CaseStudy() {
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
                 fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.1, marginBottom: '1rem',
+                lineHeight: 1.7, marginBottom: '1rem',
               }}>
                 Before and after.
               </h2>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
                 The operational transformation: from zero infrastructure to a fully automated business back office.
               </p>
             </div>
@@ -373,7 +373,7 @@ export default function CaseStudy() {
             <FadeItem delay={0}>
               <div style={{ background: 'rgba(255,255,255,0.01)', padding: '2.5rem', height: '100%' }}>
                 <p style={{
-                  fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 600,
+                  fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
                   letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
                   marginBottom: '1.5rem', paddingBottom: '1rem',
                   borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -397,7 +397,7 @@ export default function CaseStudy() {
                     }}>
                       <X size={11} color="rgba(255,100,100,0.6)" />
                     </div>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{item}</p>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{item}</p>
                   </div>
                 ))}
               </div>
@@ -411,7 +411,7 @@ export default function CaseStudy() {
                 padding: '2.5rem', height: '100%',
               }}>
                 <p style={{
-                  fontFamily: "'Sora', sans-serif", fontSize: '0.625rem', fontWeight: 600,
+                  fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
                   letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A78BFA',
                   marginBottom: '1.5rem', paddingBottom: '1rem',
                   borderBottom: '1px solid rgba(167,139,250,0.2)',
@@ -437,7 +437,7 @@ export default function CaseStudy() {
                     }}>
                       <Check size={11} color="#A78BFA" />
                     </div>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>{item}</p>
+                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7 }}>{item}</p>
                   </div>
                 ))}
               </div>
@@ -457,7 +457,7 @@ export default function CaseStudy() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em',
+              fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em',
               marginBottom: '1.25rem', maxWidth: '700px', margin: '0 auto 1.25rem',
               background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
@@ -465,7 +465,7 @@ export default function CaseStudy() {
             }}>
               If your business looks like Santa's did before we started, here's what the first step looks like.
             </h2>
-            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
