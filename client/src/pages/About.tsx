@@ -7,36 +7,24 @@
 import { ArrowRight, Zap, Shield, Target, TrendingUp } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { useFadeIn } from '@/hooks/useFadeIn';
-import { RevealSection } from '@/components/RevealSection'
-
-function FadeItem({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
-  const { ref, visible } = useFadeIn(0.1);
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(24px)',
-        transition: `opacity 0.65s ease-out ${delay}s, transform 0.65s ease-out ${delay}s`,
-        ...style,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-      padding: '0.375rem 1rem', borderRadius: '99px',
-      border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(167,139,250,0.08)',
-      fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600,
-      letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#A78BFA',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.5rem 1.25rem',
+      fontSize: '0.75rem',
+      fontWeight: 600,
+      fontFamily: "'Nicholas', serif",
+      letterSpacing: '0.08em',
+      textTransform: 'uppercase' as const,
+      color: '#C4B5FD',
+      background: 'rgba(167, 139, 250, 0.1)',
+      border: '1px solid rgba(167, 139, 250, 0.2)',
+      borderRadius: '999px',
     }}>
-      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#A78BFA', display: 'inline-block' }} />
       {children}
     </span>
   );
@@ -72,7 +60,7 @@ export default function About() {
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', paddingTop: '80px', textAlign: 'center', overflow: 'hidden' }}>
         {/* Hero gradient bg */}
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
@@ -92,7 +80,7 @@ export default function About() {
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.75rem, 4.5vw, 2.75rem)',
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
-              maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff',
+              maxWidth: '800px', marginBottom: '1.75rem', color: '#ffffff', margin: '0 auto 1.75rem',
             }}>
               <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 We've spent years building the fix for businesses exactly like yours.
@@ -100,45 +88,45 @@ export default function About() {
             </h1>
           </div>
           <div>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '580px' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1rem, 1.4vw, 1.1875rem)', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
               We're Nikki and James Noell, and we put our last name on this for a reason.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ─── WHO WE ARE ─── */}
-      <RevealSection>
-      <section style={{ padding: '4rem 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'start' }} className="lg:grid-cols-2">
-            <FadeItem delay={0}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {/* Founder photo */}
-                <div style={{
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(167,139,250,0.25)',
-                  lineHeight: 0,
-                }}>
-                  <img
-                    src="/images/noell-family.jpg"
-                    alt="Nikki and James Noell, founders of Ops by Noell"
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      display: 'block',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
-                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Nikki Noell</span>
-                  <span style={{ color: 'rgba(167,139,250,0.4)', fontSize: '0.9375rem' }}>&amp;</span>
-                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>James Noell</span>
-                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.1em', textTransform: 'uppercase' as const, alignSelf: 'center', marginLeft: '0.25rem' }}>Co-Founders</span>
-                </div>
+      {/* ─── FOUNDER PHOTO ─── */}
+      <div style={{ textAlign: 'center', padding: '0 1.25rem 1.5rem' }}>
+        <img
+          src="/images/noell-family.jpg"
+          alt="Nikki and James Noell, founders of Ops by Noell"
+          style={{
+            maxWidth: '600px',
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            objectFit: 'cover',
+            borderRadius: '12px',
+            margin: '0 auto',
+            border: '1px solid rgba(167,139,250,0.25)',
+          }}
+        />
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginTop: '1rem' }}>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Nikki Noell</span>
+          <span style={{ color: 'rgba(167,139,250,0.4)', fontSize: '0.9375rem' }}>&amp;</span>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>James Noell</span>
+          <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.1em', textTransform: 'uppercase' as const, alignSelf: 'center', marginLeft: '0.25rem' }}>Co-Founders</span>
+        </div>
+      </div>
 
+      {/* ─── WHO WE ARE ─── */}
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }} className="lg:grid-cols-2">
+
+            <div className="reveal">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Stats grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '8px', overflow: 'hidden' }}>
                   {[
@@ -150,7 +138,7 @@ export default function About() {
                     <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '2rem 1.5rem' }}>
                       <p style={{
                         fontFamily: "'Nicholas', serif",
-                        fontSize: '2rem', fontWeight: 700,
+                        fontSize: '2rem', fontWeight: 600,
                         color: '#ffffff', lineHeight: 1,
                         marginBottom: '0.375rem', letterSpacing: '-0.02em',
                       }}>
@@ -164,16 +152,16 @@ export default function About() {
                       }}>
                         {stat.label}
                       </p>
-                      <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3' }}>
+                      <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', fontWeight: 400, color: '#b8b6b3' }}>
                         {stat.sub}
                       </p>
                     </div>
                   ))}
                 </div>
               </div>
-            </FadeItem>
+            </div>
 
-            <FadeItem delay={0.1}>
+            <div className="reveal">
               <div>
                 <div style={{ marginBottom: '1.25rem' }}>
                   <SectionBadge>Who We Are</SectionBadge>
@@ -186,10 +174,10 @@ export default function About() {
                 }}>
                   We come from operations. We build what actually works.
                 </h2>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.8, marginBottom: '1.25rem' }}>
                   If you're reading this, you're probably a great service business owner running without a real back office. You're answering your own calls when you can, following up on leads when you remember, hoping clients show up. We've spent years watching that exact pattern cost service business owners thousands of dollars a month in preventable gaps. So we built the systems to fix it, and now we build them for you.
                 </p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.8, marginBottom: '2rem' }}>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.8, marginBottom: '2rem' }}>
                   We're Nikki and James Noell, based in Mission Viejo, Orange County. Our name is on the door because every system we build, we stand behind.
                 </p>
 
@@ -209,23 +197,23 @@ export default function About() {
                   }}>
                     Our family name is on the door.
                   </p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.7 }}>
                     Every system we build, we build like it's our own business on the line. Because in a way, it is.
                   </p>
                 </div>
               </div>
-            </FadeItem>
+            </div>
 
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── DIFFERENTIATORS ─── */}
-      <RevealSection>
-      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
-          <FadeItem delay={0}>
+          <div className="reveal">
             <div style={{ maxWidth: '520px', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
               <div style={{ marginBottom: '1.25rem' }}>
                 <SectionBadge>Why Ops by Noell</SectionBadge>
@@ -238,11 +226,11 @@ export default function About() {
                 Four things that make us different.
               </h2>
             </div>
-          </FadeItem>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }} className="md:grid-cols-2">
             {differentiators.map((d, i) => (
-              <FadeItem key={i} delay={i * 0.1}>
+              <div className="reveal" key={i} style={{ animationDelay: `${i * 0.08}s` }}>
                 <div
                   className="feature-card"
                   style={{
@@ -280,7 +268,7 @@ export default function About() {
                   }}>
                     {d.title}
                   </h3>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75 }}>
                     {d.body}
                   </p>
                   {d.highlight && (
@@ -301,19 +289,19 @@ export default function About() {
                     </div>
                   )}
                 </div>
-              </FadeItem>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── CTA ─── */}
-      <RevealSection>
-      <section style={{ position: 'relative', padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden' }}>
+      <div className="reveal">
+      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <FadeItem delay={0}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="reveal">
             <div style={{ marginBottom: '1.5rem' }}>
               <SectionBadge>Work With Us</SectionBadge>
             </div>
@@ -328,16 +316,16 @@ export default function About() {
             }}>
               Ready to see what we'd build for your business?
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', fontWeight: 400, color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We learn about your business, you learn about us, and figure out together if we're the right fit.
             </p>
-            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
+            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 600, padding: '1rem 2.25rem' }}>
               Book a Free 30-Minute Audit <ArrowRight size={16} />
             </a>
-          </FadeItem>
+          </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       <Footer />
 

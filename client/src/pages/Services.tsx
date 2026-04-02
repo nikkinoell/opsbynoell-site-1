@@ -8,235 +8,7 @@ import { useState } from 'react';
 import { ArrowRight, Zap, MessageSquare, Phone, Calendar, Star, Megaphone, Settings, ChevronDown, Check, Scissors, Heart, Smile, Home as HomeIcon, Dumbbell, Stethoscope } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { useFadeIn } from '@/hooks/useFadeIn';
-import { RevealSection } from '@/components/RevealSection'
 
-function FadeItem({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
-  const { ref, visible } = useFadeIn(0.1);
-  return (
-    <div ref={ref} style={{ opacity: visible ? 1 : 0.7, transform: visible ? 'translateY(0)' : 'translateY(10px)', transition: `opacity 0.3s ease-out ${delay}s, transform 0.3s ease-out ${delay}s`, ...style }}>
-      {children}
-    </div>
-  );
-}
-
-function SectionBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
-      <span style={{ display: 'inline-block', padding: '0.3rem 0.875rem', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '100px', fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#C4B5FD', letterSpacing: '0.08em', textTransform: 'uppercase' as const }}>
-        {children}
-      </span>
-    </div>
-  );
-}
-
-function GradientText({ children }: { children: React.ReactNode }) {
-  return (
-    <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-      {children}
-    </span>
-  );
-}
-
-/* ─── DATA ─────────────────────────────────────────────────────── */
-
-/*
- * FULL SERVICE CONTENT — moved to vertical landing pages (do not delete)
- * Use this data when populating /dental-automation, /med-spa-automation,
- * /massage-therapist-automation, /salon-automation, /home-services-automation
- *
- * SERVICES_FULL = [
- *   {
- *     icon: Phone, number: '01', title: 'Missed Call Text-Back',
- *     tagline: 'Never lose a lead to voicemail again.',
- *     whatItDoes: 'The moment a call goes unanswered, your system fires an instant, personalized text message to the caller within seconds. The message acknowledges their call, offers to help, and guides them toward booking. No manual action required.',
- *     whyItMatters: "Studies show 85% of callers who don't reach a business on the first try will not call back. They call your competitor. Missed Call Text-Back eliminates that window entirely, keeping leads warm and in conversation before they disappear.",
- *     bestFor: 'Any local service business that receives phone calls: massage therapists, med spas, chiropractors, salons, wellness providers, consultants.',
- *   },
- *   {
- *     icon: Calendar, number: '02', title: 'AI Booking + Reminder System',
- *     tagline: 'Fill your calendar without picking up the phone.',
- *     whatItDoes: 'A fully automated booking system that allows clients to schedule appointments 24/7 from your website, text, or social media. Automated reminders go out via text and email at strategic intervals before each appointment.',
- *     whyItMatters: 'No-shows cost local service businesses an estimated 10–15% of annual revenue. Automated reminders reduce no-shows by 30–50%. Combined with 24/7 booking, you capture clients who decide to book at 10pm on a Sunday.',
- *     bestFor: 'Any business with a calendar: spas, clinics, salons, wellness studios, consultants, coaches.',
- *   },
- *   {
- *     icon: Star, number: '03', title: 'Automated Review Generation',
- *     tagline: 'Turn every satisfied client into a five-star review.',
- *     whatItDoes: 'After each appointment, your system automatically sends a review request via text, timed for peak response rates. Clients are guided to your preferred platform (Google, Yelp, etc.) with a frictionless one-tap experience.',
- *     whyItMatters: '93% of consumers read online reviews before choosing a local service provider. Businesses with consistent review generation outrank competitors and convert more website visitors. Most businesses never ask, and lose the compounding benefit of social proof.',
- *     bestFor: 'Every local service business. Reviews are the single highest-ROI reputation asset you can build.',
- *   },
- *   {
- *     icon: MessageSquare, number: '04', title: 'Lead Follow-Up Automation',
- *     tagline: 'Most businesses follow up once. We follow up until it converts.',
- *     whatItDoes: "Multi-touch follow-up sequences that activate when a lead doesn't book, when a client hasn't returned, or when a prospect goes cold. Personalized messages go out at the right intervals via text, email, or both.",
- *     whyItMatters: "80% of sales require 5+ follow-up touches. Most businesses follow up once, if at all. Automated follow-up sequences recover revenue that would otherwise be permanently lost, from leads who were interested but got busy.",
- *     bestFor: 'Businesses with longer sales cycles, high-value services, or clients who need multiple touchpoints before committing.',
- *   },
- *   {
- *     icon: Megaphone, number: '05', title: 'Marketing Automation',
- *     tagline: 'Stay top of mind without lifting a finger.',
- *     whatItDoes: 'Automated campaigns that re-engage past clients, promote seasonal offers, and keep your brand present between appointments. Includes birthday messages, win-back sequences, referral requests, and consistent outreach to your existing client base.',
- *     whyItMatters: 'Acquiring a new client costs 5–7x more than retaining an existing one. Your past clients are your most valuable asset, and most businesses never market to them systematically. Marketing automation turns your client list into a recurring revenue engine.',
- *     bestFor: 'Established businesses with an existing client base looking to increase lifetime value and referrals.',
- *   },
- *   {
- *     icon: Zap, number: '06', title: 'AI Voice Receptionist',
- *     tagline: 'A real voice. Available 24/7. Never on hold.',
- *     whatItDoes: 'A conversational AI voice agent that answers your phone after hours, handles basic FAQs, captures caller information, and routes inquiries, all without a human on the other end. Powered by Synthflow AI and fully integrated into your booking system.',
- *     whyItMatters: 'Most missed calls happen outside business hours. An AI receptionist picks up every single time, qualifies the caller, and books them directly into your calendar. No voicemail. No message. No lost lead.',
- *     bestFor: 'Practices with high after-hours call volume, solo operators, or any business that wants 24/7 coverage without staffing for it.',
- *   },
- *   {
- *     icon: Settings, number: '07', title: 'Custom Operations Buildout',
- *     tagline: "If it's a repeatable process, it can be automated.",
- *     whatItDoes: "Your business doesn't fit a template. We scope and build exactly what you need: internal process automation, team workflows, client onboarding systems, reporting, integrations, and beyond. Every custom buildout starts with a deep-dive into your current operations to identify every manual step that can be systematized.",
- *     whyItMatters: 'Most automation agencies stop at lead capture. We go further. The real leverage in a growing business is in the back office: the handoffs, the follow-through, the reporting, the onboarding. When those run automatically, you scale without adding headcount.',
- *     bestFor: "Growing businesses with complex operations, multiple team members, or unique workflows that off-the-shelf tools can't handle.",
- *   },
- * ];
- */
-
-const SERVICES = [
-  {
-    icon: Phone, number: '01', title: 'Missed Call Text-Back',
-    desc: 'Fires a personalized text to missed callers within seconds, before they dial your competitor.',
-    stat: '85% of callers never call back after voicemail.',
-    href: '/dental-automation',
-  },
-  {
-    icon: Calendar, number: '02', title: 'AI Booking + Reminder System',
-    desc: 'Lets clients book 24/7 and automatically sends reminders that cut no-shows in half.',
-    stat: 'No-shows cost 10–15% of annual revenue.',
-    href: '/massage-therapist-automation',
-  },
-  {
-    icon: Star, number: '03', title: 'Automated Review Generation',
-    desc: 'Sends a timed review request after every appointment, turning satisfied clients into five-star proof.',
-    stat: '93% of consumers read reviews before choosing.',
-    href: '/med-spa-automation',
-  },
-  {
-    icon: MessageSquare, number: '04', title: 'Lead Follow-Up Automation',
-    desc: 'Multi-touch sequences that re-engage cold leads and win-back clients who went quiet.',
-    stat: '80% of sales need 5+ follow-up touches.',
-    href: '/salon-automation',
-  },
-  {
-    icon: Megaphone, number: '05', title: 'Marketing Automation',
-    desc: 'Keeps your brand in front of past clients with birthday messages, win-backs, and referral asks — automatically.',
-    stat: 'New clients cost 5–7x more than repeat ones.',
-    href: '/home-services-automation',
-  },
-  {
-    icon: Zap, number: '06', title: 'AI Voice Receptionist',
-    desc: 'Answers every call after hours, handles FAQs, and books directly into your calendar — no voicemail.',
-    stat: 'Most missed calls happen outside business hours.',
-    href: '/book',
-  },
-  {
-    icon: Settings, number: '07', title: 'Custom Operations Buildout',
-    desc: 'We scope and build the exact workflows your business needs: onboarding, handoffs, reporting, and beyond.',
-    stat: 'Built around your operation, not a template.',
-    href: '/book',
-  },
-];
-
-const INDUSTRIES = [
-  {
-    icon: Scissors, name: 'Salons & Spas', tagline: 'Fill your chair. Keep it full.',
-    href: '/salon-automation',
-    desc: 'Missed calls, last-minute cancellations, and clients who never come back are the three biggest revenue leaks in salon and spa businesses. We automate the entire client lifecycle — from the first call to the fifth visit.',
-    outcome: 'Salons using our systems typically see 30–50% fewer no-shows and a measurable increase in repeat bookings within 60 days.',
-  },
-  {
-    icon: Heart, name: 'Wellness & Massage', tagline: 'Your practice, running on autopilot.',
-    href: '/massage-therapist-automation',
-    desc: 'Solo practitioners and small wellness studios lose clients not because of bad service, but because nothing happens between appointments. No follow-up. No reminders. No review requests. We fix the invisible gaps.',
-    outcome: 'Our founding client, a 25-year massage therapist in Laguna Niguel, went from zero digital infrastructure to a fully automated practice in two weeks.',
-  },
-  {
-    icon: Smile, name: 'Dental & Med Spa', tagline: 'Every missed call is a missed patient.',
-    href: '/dental-automation',
-    desc: 'Dental offices and med spas run on high-value appointments. A single missed call can cost $500–$2,000 in lost revenue. We install systems that respond instantly, confirm appointments automatically, and keep your schedule full.',
-    outcome: 'Automated appointment confirmation and recall systems reduce no-shows and recover patients who would otherwise churn silently.',
-  },
-  {
-    icon: HomeIcon, name: 'Home Services', tagline: 'Never miss a job request again.',
-    href: '/home-services-automation',
-    desc: "Plumbers, HVAC technicians, electricians, and contractors lose jobs every day to missed calls and slow response times. The first company to respond wins the job. We make sure that company is yours.",
-    outcome: 'Home service businesses using missed call text-back and automated follow-up recover 20–40% of leads that would otherwise go to a competitor.',
-  },
-  {
-    icon: Dumbbell, name: 'Fitness & Personal Training', tagline: 'Fill your classes. Retain your members.',
-    href: '/book',
-    desc: "Gyms, studios, and personal trainers face constant churn. Members stop showing up before they cancel, and by then it's too late. We build re-engagement systems that catch at-risk clients before they leave.",
-    outcome: 'Automated re-engagement sequences and milestone-based review requests improve retention and build social proof consistently.',
-  },
-  {
-    icon: Stethoscope, name: 'Healthcare & Chiropractic', tagline: 'Reduce no-shows. Improve patient retention.',
-    href: '/book',
-    desc: "Healthcare practices lose thousands monthly to no-shows and patients who don't return for follow-up care. We build HIPAA-aware automation systems that reduce no-shows, automate recall, and keep your schedule optimized.",
-    outcome: 'Automated appointment reminders and recall sequences reduce no-shows by 30–50% and recover patients who would otherwise churn.',
-  },
-];
-
-const PACKAGES = [
-  {
-    name: 'Entry',
-    subtitle: 'AI Receptionist — Start Here',
-    price: '$197',
-    period: '/mo · + $297 setup',
-    desc: 'The fastest way to stop losing leads to voicemail. One system, done for you, live in a week. A great first step before committing to a full stack.',
-    includes: ['Missed Call Text-Back', 'AI Voice Receptionist (after-hours)', 'Onboarding & setup included', 'Ongoing management & maintenance'],
-    cta: 'Book a Free 30-Minute Audit',
-    featured: false,
-  },
-  {
-    name: 'Starter',
-    subtitle: 'Lead Capture + Booking Fix',
-    price: '$797',
-    period: '/mo · + $997 setup',
-    desc: 'The essential foundation for any local service business. Stop losing leads from missed calls and start filling your calendar automatically.',
-    includes: ['Missed Call Text-Back', 'AI Booking + Reminder System', 'Onboarding & setup included', 'Ongoing management & maintenance'],
-    cta: 'Book a Free 30-Minute Audit',
-    featured: false,
-  },
-  {
-    name: 'Growth',
-    subtitle: 'Full AI Back Office',
-    price: '$1,497',
-    period: '/mo · + $1,497 setup',
-    desc: 'The complete operational transformation. Every system working together to capture, convert, retain, and grow, on autopilot.',
-    includes: ['Everything in Starter', 'Automated Review Generation', 'Lead Follow-Up Automation', 'Marketing Automation', 'Priority support & optimization'],
-    cta: 'Most Popular',
-    featured: true,
-  },
-  {
-    name: 'Revenue Audit',
-    subtitle: 'Know exactly where you\'re leaking',
-    price: '$497',
-    period: 'one-time',
-    desc: 'A deep-dive into your current operations to identify every revenue leak, prioritize the highest-impact fixes, and build a custom automation roadmap.',
-    includes: ['60-minute operations deep-dive', 'Revenue leak analysis', 'Custom automation roadmap', 'ROI projections per system', 'Credited toward any package'],
-    cta: 'Book Revenue Audit',
-    featured: false,
-  },
-  {
-    name: 'Custom',
-    subtitle: 'Full Operations Buildout',
-    price: 'Scoped',
-    period: 'pricing after audit',
-    desc: 'For businesses with complex or unique operational needs. We scope, build, and manage a fully custom automation stack: internal workflows, integrations, team systems, and beyond.',
-    includes: ['Deep-dive operations scoping', 'Custom workflow & process automation', 'Team systems & internal integrations', 'Client onboarding automation', 'Reporting & data pipelines', 'Ongoing management & iteration'],
-    cta: 'Book a Scoping Call',
-    featured: false,
-  },
-];
-
-const FAQS = [
-  { q: 'Do I need to sign a long-term contract?', a: "No. All plans are month-to-month. We earn your business every month by delivering results. You can cancel anytime with 30 days notice. No penalties, no lock-in." },
   { q: 'How long does it take to get set up?', a: "Most clients are fully live within 7–14 days of signing. We handle all the technical setup, integrations, and testing. You just need to show up for a 60-minute onboarding call." },
   { q: 'Do I need any technical knowledge?', a: "None at all. We build, manage, and maintain everything. You'll see the results, not the dashboards. If you ever want visibility into performance, we provide clear weekly or monthly reports." },
   { q: 'What if I already use a CRM or booking software?', a: "We integrate with the tools you already use: HubSpot, Calendly, Acuity, Jane App, Mindbody, and more. If you already have a CRM, we'll build around it rather than replace it. We'll scope the integration during your free intro call." },
@@ -303,7 +75,7 @@ export default function Services() {
 
 
       {/* ─── Santa Testimonial ─── */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{
@@ -328,10 +100,10 @@ export default function Services() {
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ═══ SERVICE CARDS — compact 7-service overview ══════════════ */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)', background: 'rgba(167,139,250,0.015)' }}>
         <div className="container" style={{ paddingTop: 'clamp(2.5rem, 6vw, 6rem)', paddingBottom: 'clamp(2.5rem, 6vw, 6rem)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -346,7 +118,7 @@ export default function Services() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
             {SERVICES.map(({ icon: Icon, number, title, desc, stat, href }, i) => (
-              <FadeItem key={number} delay={i * 0.06}>
+              <div className="reveal">
                 <div className="feature-card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%', boxSizing: 'border-box' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 800, color: 'rgba(167,139,250,0.25)', lineHeight: 1, flexShrink: 0 }}>{number}</span>
@@ -361,15 +133,15 @@ export default function Services() {
                     See how it works <ArrowRight size={12} />
                   </a>
                 </div>
-              </FadeItem>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ═══ WHO WE SERVE — 6 industries ═══════════════════════════ */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -384,7 +156,7 @@ export default function Services() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {INDUSTRIES.map(({ icon: Icon, name, tagline, desc, outcome, href }, i) => (
-              <FadeItem key={name} delay={i * 0.07}>
+              <div className="reveal">
                 <a href={href} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
                   <div className="feature-card" style={{ padding: '2rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '1rem', cursor: 'pointer', transition: 'border-color 0.2s ease', boxSizing: 'border-box' }}>
                     <div className="icon-box"><Icon size={20} style={{ color: '#A78BFA' }} /></div>
@@ -401,15 +173,15 @@ export default function Services() {
                     </div>
                   </div>
                 </a>
-              </FadeItem>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ═══ PACKAGES / PRICING ═════════════════════════════════════ */}
-      <RevealSection>
+      <div className="reveal">
       <section id="pricing" style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', background: 'rgba(167,139,250,0.015)', borderTop: '1px solid rgba(167,139,250,0.08)', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -424,7 +196,7 @@ export default function Services() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
             {PACKAGES.map(({ name, subtitle, price, period, desc, includes, cta, featured }, i) => (
-              <FadeItem key={name} delay={i * 0.1}>
+              <div className="reveal">
                 <div className={featured ? 'pricing-card featured' : 'pricing-card'} style={{ padding: '2rem', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
                   {featured && (
                     <div style={{ position: 'absolute', top: '-1px', left: '50%', transform: 'translateX(-50%)', padding: '0.25rem 1rem', background: 'linear-gradient(90deg, #A78BFA, #C4B5FD)', borderRadius: '0 0 12px 12px', fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }}>
@@ -452,15 +224,15 @@ export default function Services() {
                     {cta}
                   </a>
                 </div>
-              </FadeItem>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ═══ FAQ ════════════════════════════════════════════════════ */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -486,10 +258,10 @@ export default function Services() {
           ))}
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ═══ CTA ════════════════════════════════════════════════════ */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', textAlign: 'center', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.12) 0%, transparent 65%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '660px', margin: '0 auto' }}>
@@ -507,7 +279,7 @@ export default function Services() {
           <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#4B5563', marginTop: '0.625rem' }}>We don't sell your data. Ever. We build systems for your business, not a database for ours.</p>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       <Footer />
     </div>

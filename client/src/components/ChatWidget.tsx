@@ -185,7 +185,7 @@ export default function ChatWidget() {
         text: message,
         timestamp: new Date(),
       }]);
-    }, 45000);
+    }, 90000);
 
     return () => clearTimeout(timer);
   }, [location, isOpen, proactiveTriggered, isMobile]);
@@ -215,7 +215,7 @@ export default function ChatWidget() {
         }]);
         return true;
       });
-    }, 45000);
+    }, 90000);
 
     return () => clearTimeout(timer);
   }, [autoOpenTriggered, hasManuallyClosed, hasOpenedOnce, isMobile]);

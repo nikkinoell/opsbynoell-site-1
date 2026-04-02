@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { ArrowRight, Bot, Clock, Bell, UserCheck, Database, Zap, Star, ChevronDown } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { RevealSection } from '@/components/RevealSection'
 
 /* ─── TYPES ────────────────────────────────────────────────────── */
 interface FaqItem {
@@ -90,19 +89,7 @@ function GradientText({ children }: { children: React.ReactNode }) {
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
-      <span style={{
-        display: 'inline-block',
-        padding: '0.3rem 0.875rem',
-        background: 'rgba(167,139,250,0.1)',
-        border: '1px solid rgba(167,139,250,0.25)',
-        borderRadius: '100px',
-        fontFamily: "'Nicholas', serif",
-        fontSize: '0.75rem',
-        fontWeight: 600,
-        color: '#C4B5FD',
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase' as const,
-      }}>
+      <span style={{ display: 'inline-flex', padding: '0.5rem 1.25rem', fontSize: '0.75rem', fontWeight: 600, fontFamily: "'Nicholas', serif", letterSpacing: '0.08em', textTransform: 'uppercase', color: '#C4B5FD', background: 'rgba(167, 139, 250, 0.1)', border: '1px solid rgba(167, 139, 250, 0.2)', borderRadius: '999px' }}>
         {children}
       </span>
     </div>
@@ -122,7 +109,7 @@ function CtaButton({ href, children, large }: { href: string; children: React.Re
         gap: '0.5rem',
         padding: pad,
         fontSize: fz,
-        fontWeight: 700,
+        fontWeight: 600,
         textDecoration: 'none',
       }}
     >
@@ -282,7 +269,7 @@ export default function Nova() {
         </section>
 
         {/* ═══ THE PROBLEM ════════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{
           padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderTop: '1px solid rgba(167,139,250,0.08)',
@@ -294,7 +281,7 @@ export default function Nova() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-              fontWeight: 700,
+              fontWeight: 600,
               color: '#ffffff',
               lineHeight: 1.7,
               letterSpacing: '-0.02em',
@@ -313,10 +300,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ WHAT THEY GET ══════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -324,7 +311,7 @@ export default function Nova() {
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700,
+                fontWeight: 600,
                 color: '#ffffff',
                 lineHeight: 1.7,
                 letterSpacing: '-0.02em',
@@ -363,7 +350,7 @@ export default function Nova() {
                   <h3 style={{
                     fontFamily: "'Nicholas', serif",
                     fontSize: '1.0625rem',
-                    fontWeight: 700,
+                    fontWeight: 600,
                     color: '#ffffff',
                     lineHeight: 1.7,
                     marginBottom: '0.625rem',
@@ -383,10 +370,10 @@ export default function Nova() {
             </div>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ LIVE DEMO ══════════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{
           padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
@@ -398,7 +385,7 @@ export default function Nova() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-              fontWeight: 700,
+              fontWeight: 600,
               color: '#ffffff',
               lineHeight: 1.7,
               letterSpacing: '-0.02em',
@@ -416,10 +403,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ SOCIAL PROOF ═══════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '780px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -427,7 +414,7 @@ export default function Nova() {
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700,
+                fontWeight: 600,
                 color: '#ffffff',
                 lineHeight: 1.7,
                 letterSpacing: '-0.02em',
@@ -462,7 +449,7 @@ export default function Nova() {
               <div>
                 <div style={{
                   fontFamily: "'Nicholas', serif",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: '#ffffff',
                   fontSize: '1rem',
                   marginBottom: '0.2rem',
@@ -480,10 +467,10 @@ export default function Nova() {
             </div>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ PRICING ════════════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{
           padding: 'clamp(2.5rem, 6vw, 7rem) 0',
           borderBottom: '1px solid rgba(167,139,250,0.08)',
@@ -495,7 +482,7 @@ export default function Nova() {
             <h2 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-              fontWeight: 700,
+              fontWeight: 600,
               color: '#ffffff',
               lineHeight: 1.7,
               letterSpacing: '-0.02em',
@@ -531,7 +518,7 @@ export default function Nova() {
                   <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#A78BFA', marginLeft: '0.25rem', opacity: 0.7 }}>save $500</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#C4B5FD', lineHeight: 1 }}>$297</span>
+                  <span style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 600, color: '#C4B5FD', lineHeight: 1 }}>$297</span>
                   <span style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3' }}>/ month</span>
                 </div>
               </div>
@@ -581,10 +568,10 @@ export default function Nova() {
             </p>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ FAQ ════════════════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{ padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderBottom: '1px solid rgba(167,139,250,0.08)' }}>
           <div className="container" style={{ maxWidth: '760px', margin: '0 auto', padding: '0 1.5rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -592,7 +579,7 @@ export default function Nova() {
               <h2 style={{
                 fontFamily: "'Nicholas', serif",
                 fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700,
+                fontWeight: 600,
                 color: '#ffffff',
                 lineHeight: 1.7,
                 letterSpacing: '-0.02em',
@@ -603,10 +590,10 @@ export default function Nova() {
             <FaqAccordion items={FAQS} />
           </div>
         </section>
-        </RevealSection>
+        </div>
 
         {/* ═══ FINAL CTA ══════════════════════════════════════════════ */}
-        <RevealSection>
+        <div className="reveal">
         <section style={{ padding: '8rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           <div style={{
             position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -637,7 +624,7 @@ export default function Nova() {
             </p>
           </div>
         </section>
-        </RevealSection>
+        </div>
 
       </div>
       <Footer />

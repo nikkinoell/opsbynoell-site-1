@@ -7,36 +7,16 @@
 import { ArrowRight, X, Check } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { useFadeIn } from '@/hooks/useFadeIn';
-import { RevealSection } from '@/components/RevealSection'
-
-function FadeItem({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
-  const { ref, visible } = useFadeIn(0.1);
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0.7,
-        transform: visible ? 'translateY(0)' : 'translateY(10px)',
-        transition: `opacity 0.3s ease-out ${delay}s, transform 0.3s ease-out ${delay}s`,
-        ...style,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-      padding: '0.375rem 1rem', borderRadius: '99px',
-      border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(167,139,250,0.08)',
-      fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 600,
-      letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#A78BFA',
+      padding: '0.5rem 1.25rem', borderRadius: '999px',
+      border: '1px solid rgba(167,139,250,0.2)', background: 'rgba(167,139,250,0.1)',
+      fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600,
+      letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#C4B5FD',
     }}>
-      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#A78BFA', display: 'inline-block' }} />
       {children}
     </span>
   );
@@ -65,7 +45,7 @@ export default function CaseStudy() {
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', paddingTop: '80px', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
           background: 'linear-gradient(180deg, rgba(120,58,237,0.18) 0%, rgba(139,92,246,0.12) 35%, #010509 72%)',
@@ -74,8 +54,8 @@ export default function CaseStudy() {
         <div style={{ position: 'absolute', top: '80px', right: '-100px', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 65%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(2rem, 5vw, 5rem)', paddingBottom: '5.5rem' }}>
-          
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               <SectionBadge>Case Study · Laguna Niguel, CA</SectionBadge>
               <span style={{
                 fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 700,
@@ -84,20 +64,20 @@ export default function CaseStudy() {
                 padding: '0.3rem 0.875rem', borderRadius: '99px',
               }}>Founding Client Partner</span>
             </div>
-          
-          
+
+
             <h1 style={{
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(1.75rem, 5vw, 3.5rem)',
               fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.04em',
-              maxWidth: '860px', marginBottom: '2.5rem',
+              maxWidth: '860px', marginBottom: '2.5rem', marginLeft: 'auto', marginRight: 'auto',
             }}>
               <span style={{ background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>25 years of expertise.</span>{' '}
               <span style={{ color: '#ffffff' }}>Zero infrastructure.</span>
             </h1>
-          
-          
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
               {[
                 { label: 'Industry', value: 'Massage Therapy' },
                 { label: 'Location', value: 'Laguna Niguel, CA' },
@@ -114,16 +94,16 @@ export default function CaseStudy() {
                 </div>
               ))}
             </div>
-          
+
         </div>
       </section>
 
       {/* ─── THE CLIENT ─── */}
-      <RevealSection>
-      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0' }}>
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', alignItems: 'center' }} className="lg:grid-cols-2">
-            <FadeItem delay={0}>
+            <div className="reveal">
               <div>
                 <div style={{ marginBottom: '1.25rem' }}>
                   <SectionBadge>The Client</SectionBadge>
@@ -146,182 +126,168 @@ export default function CaseStudy() {
                   She was excellent at her work. Her operations were silently costing her thousands every month in missed opportunities.
                 </p>
               </div>
-            </FadeItem>
+            </div>
 
-            <FadeItem delay={0.15}>
-              <div style={{
-                background: 'rgba(167,139,250,0.04)',
-                border: '1px solid rgba(167,139,250,0.15)',
-                borderLeft: '3px solid #A78BFA',
-                borderRadius: '8px',
-                padding: '3rem',
+            <div className="reveal" style={{
+              background: 'rgba(167,139,250,0.04)',
+              border: '1px solid rgba(167,139,250,0.15)',
+              borderLeft: '3px solid #A78BFA',
+              borderRadius: '8px',
+              padding: '3rem',
+            }}>
+              <p style={{
+                fontFamily: "'Nicholas', serif",
+                fontSize: 'clamp(1.25rem, 2vw, 1.625rem)',
+                fontWeight: 600, color: '#ffffff',
+                lineHeight: 1.7, marginBottom: '1.5rem',
               }}>
-                <p style={{
-                  fontFamily: "'Nicholas', serif",
-                  fontSize: 'clamp(1.25rem, 2vw, 1.625rem)',
-                  fontWeight: 600, color: '#ffffff',
-                  lineHeight: 1.7, marginBottom: '1.5rem',
-                }}>
-                  "25 years of exceptional client work. Zero digital infrastructure. Santa was our founding client partner and the perfect proof of concept for what AI automation could do for a solo service business."
-                </p>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A78BFA' }}>
-                  Ops by Noell Assessment
-                </p>
-              </div>
-            </FadeItem>
+                "25 years of exceptional client work. Zero digital infrastructure. Santa was our founding client partner and the perfect proof of concept for what AI automation could do for a solo service business."
+              </p>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A78BFA' }}>
+                Ops by Noell Assessment
+              </p>
+            </div>
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── THE GAPS ─── */}
-      <RevealSection>
-      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
-          <FadeItem delay={0}>
-            <div style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
-              <div style={{ marginBottom: '1.25rem' }}>
-                <SectionBadge>The Gaps</SectionBadge>
-              </div>
-              <h2 style={{
-                fontFamily: "'Nicholas', serif",
-                fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.7, marginBottom: '1rem',
-              }}>
-                Six operational gaps. Each one costing revenue daily.
-              </h2>
-              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
-                When we sat down with Santa, we mapped every gap in her operation and quantified what each one was costing her monthly.
-              </p>
+          <div className="reveal" style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <SectionBadge>The Gaps</SectionBadge>
             </div>
-          </FadeItem>
+            <h2 style={{
+              fontFamily: "'Nicholas', serif",
+              fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
+              fontWeight: 700, color: '#ffffff',
+              lineHeight: 1.7, marginBottom: '1rem',
+            }}>
+              Six operational gaps. Each one costing revenue daily.
+            </h2>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+              When we sat down with Santa, we mapped every gap in her operation and quantified what each one was costing her monthly.
+            </p>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }} className="md:grid-cols-2 lg:grid-cols-3">
             {gaps.map((gap, i) => (
-              <FadeItem key={i} delay={i * 0.08}>
-                <div className="feature-card" style={{ padding: '2rem', height: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
-                    <div style={{
-                      width: '28px', height: '28px', borderRadius: '6px',
-                      background: 'rgba(255,80,80,0.12)', border: '1px solid rgba(255,80,80,0.2)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                    }}>
-                      <X size={12} color="#ff6b6b" />
-                    </div>
-                    <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff' }}>
-                      {gap.label}
-                    </h3>
+              <div key={i} className="reveal feature-card" style={{ padding: '2rem', height: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
+                  <div style={{
+                    width: '28px', height: '28px', borderRadius: '6px',
+                    background: 'rgba(255,80,80,0.12)', border: '1px solid rgba(255,80,80,0.2)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                  }}>
+                    <X size={12} color="#ff6b6b" />
                   </div>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.7 }}>
-                    {gap.detail}
-                  </p>
+                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.125rem', fontWeight: 700, color: '#ffffff' }}>
+                    {gap.label}
+                  </h3>
                 </div>
-              </FadeItem>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.875rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                  {gap.detail}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── WHAT WE BUILT ─── */}
-      <RevealSection>
-      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
-          <FadeItem delay={0}>
-            <div style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
-              <div style={{ marginBottom: '1.25rem' }}>
-                <SectionBadge>What We Built</SectionBadge>
-              </div>
-              <h2 style={{
-                fontFamily: "'Nicholas', serif",
-                fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
-                fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.7, marginBottom: '1rem',
-              }}>
-                A complete operational back office. Built in two weeks.
-              </h2>
-              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
-                We designed and installed every component of Santa's automation system. She didn't configure a single setting. She was live and capturing leads within 14 days of her audit.
-              </p>
+          <div className="reveal" style={{ maxWidth: '520px', marginBottom: '3.5rem' }}>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <SectionBadge>What We Built</SectionBadge>
             </div>
-          </FadeItem>
+            <h2 style={{
+              fontFamily: "'Nicholas', serif",
+              fontSize: 'clamp(1.375rem, 4vw, 2.5rem)',
+              fontWeight: 700, color: '#ffffff',
+              lineHeight: 1.7, marginBottom: '1rem',
+            }}>
+              A complete operational back office. Built in two weeks.
+            </h2>
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.75 }}>
+              We designed and installed every component of Santa's automation system. She didn't configure a single setting. She was live and capturing leads within 14 days of her audit.
+            </p>
+          </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(167,139,250,0.1)', borderRadius: '12px', overflow: 'hidden' }}>
             {built.map((item, i) => (
-              <FadeItem key={i} delay={i * 0.1}>
+              <div key={i} className="reveal" style={{
+                background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'rgba(167,139,250,0.04)',
+                padding: '1.75rem 2rem',
+                display: 'flex', alignItems: 'flex-start', gap: '1.5rem',
+              }}>
                 <div style={{
-                  background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'rgba(167,139,250,0.04)',
-                  padding: '1.75rem 2rem',
-                  display: 'flex', alignItems: 'flex-start', gap: '1.5rem',
+                  width: '32px', height: '32px', borderRadius: '8px',
+                  background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.3)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px',
                 }}>
-                  <div style={{
-                    width: '32px', height: '32px', borderRadius: '8px',
-                    background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.3)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px',
-                  }}>
-                    <Check size={16} color="#A78BFA" />
-                  </div>
-                  <div>
-                    <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.375rem' }}>
-                      {item.item}
-                    </h3>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
-                      {item.detail}
-                    </p>
-                  </div>
+                  <Check size={16} color="#A78BFA" />
                 </div>
-              </FadeItem>
+                <div>
+                  <h3 style={{ fontFamily: "'Nicholas', serif", fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.375rem' }}>
+                    {item.item}
+                  </h3>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: '#b8b6b3', lineHeight: 1.7 }}>
+                    {item.detail}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── SANTA QUOTE + STATS ─── */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'start' }} className="lg:grid-cols-2">
             {/* Quote */}
-            <FadeItem delay={0}>
-              <div style={{ background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.15)', borderLeft: '3px solid #A78BFA', borderRadius: '8px', padding: '2.5rem' }}>
-                <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.55, marginBottom: '1.5rem' }}>
-                  "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
+            <div className="reveal" style={{ background: 'rgba(167,139,250,0.04)', border: '1px solid rgba(167,139,250,0.15)', borderLeft: '3px solid #A78BFA', borderRadius: '8px', padding: '2.5rem' }}>
+              <p style={{ fontFamily: "'Nicholas', serif", fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.55, marginBottom: '1.5rem' }}>
+                "I used to dread Mondays because there would always be gaps I did not expect. Now I open my calendar and it is just full. The reminders go out and people show up. I do not think about it anymore."
+              </p>
+              <div>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Santa</p>
+                <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
+                  Licensed Massage Therapist, Laguna Niguel
                 </p>
-                <div>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff' }}>Santa</p>
-                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.25rem' }}>
-                    Licensed Massage Therapist, Laguna Niguel
-                  </p>
-                </div>
               </div>
-            </FadeItem>
+            </div>
             {/* Stats */}
-            <FadeItem delay={0.1}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '10px', overflow: 'hidden' }}>
-                {[
-                  { value: '4/wk → <1', label: 'No-Shows', sub: 'First two weeks' },
-                  { value: '40+', label: 'Reviews', sub: 'In 8 weeks' },
-                  { value: '2 weeks', label: 'Time to Live', sub: 'Audit to launch' },
-                  { value: '< 10s', label: 'Response Time', sub: 'Missed call text-back' },
-                ].map((s, i) => (
-                  <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '1.75rem 1.5rem' }}>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', color: '#b8b6b3' }}>{s.sub}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeItem>
+            <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '10px', overflow: 'hidden' }}>
+              {[
+                { value: '4/wk → <1', label: 'No-Shows', sub: 'First two weeks' },
+                { value: '40+', label: 'Reviews', sub: 'In 8 weeks' },
+                { value: '2 weeks', label: 'Time to Live', sub: 'Audit to launch' },
+                { value: '< 10s', label: 'Response Time', sub: 'Missed call text-back' },
+              ].map((s, i) => (
+                <div key={i} style={{ background: 'rgba(167,139,250,0.03)', padding: '1.75rem 1.5rem' }}>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1.625rem', fontWeight: 700, color: '#ffffff', lineHeight: 1, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>{s.value}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600, color: '#A78BFA', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>{s.label}</p>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.75rem', color: '#b8b6b3' }}>{s.sub}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
 
       {/* ─── RESULTS METRICS TABLE ─── */}
-      <RevealSection>
+      <div className="reveal">
       <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
@@ -355,140 +321,132 @@ export default function CaseStudy() {
           </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
 
       {/* ─── THE RESULT ─── */}
-      <RevealSection>
-      <section style={{ padding: 'clamp(2.5rem, 6vw, 6rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+      <div className="reveal">
+      <section style={{ padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
-          <FadeItem delay={0}>
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
-              <div style={{ marginBottom: '1.25rem' }}>
-                <SectionBadge>The Result</SectionBadge>
-              </div>
-              <h2 style={{
-                fontFamily: "'Nicholas', serif",
-                fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
-                fontWeight: 700, color: '#ffffff',
-                lineHeight: 1.7, marginBottom: '1rem',
-              }}>
-                Before and after.
-              </h2>
-              <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
-                The operational transformation: from zero infrastructure to a fully automated business back office.
-              </p>
-            </div>
-          </FadeItem>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '12px', overflow: 'hidden' }} className="md:grid-cols-2">
-            {/* Before */}
-            <FadeItem delay={0}>
-              <div style={{ background: 'rgba(255,255,255,0.01)', padding: '2.5rem', height: '100%' }}>
-                <p style={{
-                  fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
-                  letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
-                  marginBottom: '1.5rem', paddingBottom: '1rem',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
-                }}>
-                  Before Ops by Noell
-                </p>
-                {[
-                  'No website or online presence',
-                  'Booking by phone call only',
-                  'Missed calls = lost clients',
-                  'No appointment reminders',
-                  'No-shows with no recovery',
-                  'Zero online reviews',
-                  'No follow-up with past clients',
-                  'New clients only from word of mouth',
-                ].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
-                    <div style={{
-                      width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
-                      background: 'rgba(255,80,80,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <X size={11} color="rgba(255,100,100,0.6)" />
-                    </div>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{item}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeItem>
-
-            {/* After */}
-            <FadeItem delay={0.12}>
-              <div style={{
-                background: 'rgba(167,139,250,0.04)',
-                borderLeft: '2px solid rgba(167,139,250,0.4)',
-                padding: '2.5rem', height: '100%',
-              }}>
-                <p style={{
-                  fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
-                  letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A78BFA',
-                  marginBottom: '1.5rem', paddingBottom: '1rem',
-                  borderBottom: '1px solid rgba(167,139,250,0.2)',
-                }}>
-                  After Ops by Noell
-                </p>
-                {[
-                  'Professional website live and ranking',
-                  '24/7 online booking from any device',
-                  'Every missed call gets instant text response',
-                  'Automated reminders via text + email',
-                  'No-shows down from ~4/week to less than 1',
-                  'Consistent 5-star review generation',
-                  'Automated re-engagement for past clients',
-                  'New client pipeline running on autopilot',
-                  'Average response time to missed calls: under 10 seconds',
-                  'Review generation: from zero to consistent 5-star reviews within 30 days',
-                ].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
-                    <div style={{
-                      width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
-                      background: 'rgba(167,139,250,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <Check size={11} color="#A78BFA" />
-                    </div>
-                    <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7 }}>{item}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeItem>
-          </div>
-        </div>
-      </section>
-      </RevealSection>
-
-      {/* ─── CTA ─── */}
-      <RevealSection>
-      <section style={{ position: 'relative', padding: 'clamp(2.5rem, 6vw, 7rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <FadeItem delay={0}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <SectionBadge>Your Turn</SectionBadge>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: 'clamp(1.5rem, 4vw, 4rem)' }}>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <SectionBadge>The Result</SectionBadge>
             </div>
             <h2 style={{
               fontFamily: "'Nicholas', serif",
-              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em',
-              marginBottom: '1.25rem', maxWidth: '700px', margin: '0 auto 1.25rem',
-              background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              display: 'block',
+              fontSize: 'clamp(2.25rem, 4vw, 3.5rem)',
+              fontWeight: 700, color: '#ffffff',
+              lineHeight: 1.7, marginBottom: '1rem',
             }}>
-              If your business looks like Santa's did before we started, here's what the first step looks like.
+              Before and after.
             </h2>
-            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
-              30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
+            <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '480px', margin: '0 auto' }}>
+              The operational transformation: from zero infrastructure to a fully automated business back office.
             </p>
-            <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
-              Book a Free 30-Minute Call <ArrowRight size={16} />
-            </a>
-          </FadeItem>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1px', background: 'rgba(167,139,250,0.12)', borderRadius: '12px', overflow: 'hidden' }} className="md:grid-cols-2">
+            {/* Before */}
+            <div className="reveal" style={{ background: 'rgba(255,255,255,0.01)', padding: '2.5rem', height: '100%' }}>
+              <p style={{
+                fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
+                letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
+                marginBottom: '1.5rem', paddingBottom: '1rem',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+              }}>
+                Before Ops by Noell
+              </p>
+              {[
+                'No website or online presence',
+                'Booking by phone call only',
+                'Missed calls = lost clients',
+                'No appointment reminders',
+                'No-shows with no recovery',
+                'Zero online reviews',
+                'No follow-up with past clients',
+                'New clients only from word of mouth',
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
+                  <div style={{
+                    width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
+                    background: 'rgba(255,80,80,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <X size={11} color="rgba(255,100,100,0.6)" />
+                  </div>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* After */}
+            <div className="reveal" style={{
+              background: 'rgba(167,139,250,0.04)',
+              borderLeft: '2px solid rgba(167,139,250,0.4)',
+              padding: '2.5rem', height: '100%',
+            }}>
+              <p style={{
+                fontFamily: "'Nicholas', serif", fontSize: '0.625rem', fontWeight: 600,
+                letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A78BFA',
+                marginBottom: '1.5rem', paddingBottom: '1rem',
+                borderBottom: '1px solid rgba(167,139,250,0.2)',
+              }}>
+                After Ops by Noell
+              </p>
+              {[
+                'Professional website live and ranking',
+                '24/7 online booking from any device',
+                'Every missed call gets instant text response',
+                'Automated reminders via text + email',
+                'No-shows down from ~4/week to less than 1',
+                'Consistent 5-star review generation',
+                'Automated re-engagement for past clients',
+                'New client pipeline running on autopilot',
+                'Average response time to missed calls: under 10 seconds',
+                'Review generation: from zero to consistent 5-star reviews within 30 days',
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
+                  <div style={{
+                    width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
+                    background: 'rgba(167,139,250,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <Check size={11} color="#A78BFA" />
+                  </div>
+                  <p style={{ fontFamily: "'Nicholas', serif", fontSize: '0.9375rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
-      </RevealSection>
+      </div>
+
+      {/* ─── CTA ─── */}
+      <div className="reveal">
+      <section style={{ position: 'relative', padding: 'clamp(2rem, 4vw, 2.5rem) 0', borderTop: '1px solid rgba(167,139,250,0.08)', overflow: 'hidden', textAlign: 'center' }}>
+        <div style={{ position: 'absolute', bottom: '-60px', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="reveal" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+            <SectionBadge>Your Turn</SectionBadge>
+          </div>
+          <h2 style={{
+            fontFamily: "'Nicholas', serif",
+            fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+            fontWeight: 800, lineHeight: 1.7, letterSpacing: '-0.03em',
+            marginBottom: '1.25rem', maxWidth: '700px', margin: '0 auto 1.25rem',
+            background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            display: 'block',
+          }}>
+            If your business looks like Santa's did before we started, here's what the first step looks like.
+          </h2>
+          <p style={{ fontFamily: "'Nicholas', serif", fontSize: '1rem', color: '#b8b6b3', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
+            30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
+          </p>
+          <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem', fontWeight: 600 }}>
+            Book a Free 30-Minute Call <ArrowRight size={16} />
+          </a>
+        </div>
+      </section>
+      </div>
 
       <Footer />
 
