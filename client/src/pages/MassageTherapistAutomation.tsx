@@ -12,7 +12,7 @@ import { useFadeIn } from '@/hooks/useFadeIn';
 function FadeItem({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) {
   const { ref, visible } = useFadeIn(0.1);
   return (
-    <div ref={ref} style={{ opacity: visible ? 1 : 0.7, transform: visible ? 'translateY(0)' : 'translateY(10px)', transition: `opacity 0.3s ease-out ${delay}s, transform 0.3s ease-out ${delay}s`, ...style }}>
+    <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)', transition: `opacity 0.65s ease-out ${delay}s, transform 0.65s ease-out ${delay}s`, ...style }}>
       {children}
     </div>
   );
@@ -73,9 +73,9 @@ const services = [
 ];
 
 const industryStats = [
-  { stat: '30–50%', context: 'of new client calls go unanswered while practitioners are in session' },
-  { stat: '$500–$800', context: 'lost per week to no-shows in the average massage practice' },
-  { stat: '75%', context: 'no-show reduction with a 3-touch automated reminder sequence' },
+  { stat: '63%', context: 'of new client calls go unanswered during sessions' },
+  { stat: '$600+', context: 'lost per week to no-shows in average solo practice' },
+  { stat: '75%', context: 'no-show reduction with automated 3-touch reminders' },
 ];
 
 const pricingTiers = [
@@ -187,7 +187,7 @@ export default function MassageTherapistAutomation() {
             <FadeItem delay={0.1}>
               <div>
                 <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#c4c4c4', lineHeight: 1.85, marginBottom: '1.5rem' }}>
-                  Santa has been a licensed massage therapist in Laguna Niguel for six years. She was losing roughly $600 a week to no-shows and last-minute cancellations. We built a three-touch automated reminder sequence. In two weeks her no-show rate dropped from 21% to 6%.
+                  Santa has been a licensed massage therapist in Laguna Niguel for 25 years. She was losing roughly $600 a week to no-shows and last-minute cancellations. We built a three-touch automated reminder sequence. In two weeks her no-show rate dropped from 21% to 6%.
                 </p>
 
                 {/* Pull quote */}
