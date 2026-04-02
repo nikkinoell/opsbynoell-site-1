@@ -310,7 +310,43 @@ export default function CaseStudy() {
         </div>
       </section>
 
-      {/* ─── THE RESULT ─── */}
+
+      {/* ─── RESULTS METRICS TABLE ─── */}
+      <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
+        <div className="container">
+          <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+            <SectionBadge>By the Numbers</SectionBadge>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Sora', sans-serif" }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid rgba(167,139,250,0.2)' }}>
+                  {['Metric', 'Before', 'After', 'Timeline'].map((h) => (
+                    <th key={h} style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.625rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#A78BFA' }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { metric: 'No-shows per week', before: '4 per week (21% rate)', after: 'Less than 1 (6% rate)', timeline: '2 weeks' },
+                  { metric: 'Revenue recovered', before: '$0 automated', after: '$960 recovered', timeline: 'First 2 weeks' },
+                  { metric: 'Google reviews', before: 'Starting from zero', after: '40+ reviews', timeline: '8 weeks' },
+                  { metric: 'Time to go live', before: '—', after: '14 days total', timeline: 'Audit to automation' },
+                ].map((row, i) => (
+                  <tr key={i} style={{ borderBottom: '1px solid rgba(167,139,250,0.08)', background: i % 2 === 0 ? 'rgba(167,139,250,0.02)' : 'transparent' }}>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#ffffff', fontWeight: 600 }}>{row.metric}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#868583' }}>{row.before}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#A78BFA', fontWeight: 600 }}>{row.after}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.9375rem', color: '#868583' }}>{row.timeline}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── THE RESULT ─── */
       <section style={{ padding: '6rem 0', borderTop: '1px solid rgba(167,139,250,0.08)' }}>
         <div className="container">
           <FadeItem delay={0}>
@@ -422,18 +458,18 @@ export default function CaseStudy() {
               fontFamily: "'Nicholas', serif",
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
               fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em',
-              marginBottom: '1.25rem', maxWidth: '600px', margin: '0 auto 1.25rem',
+              marginBottom: '1.25rem', maxWidth: '700px', margin: '0 auto 1.25rem',
               background: 'linear-gradient(90deg, #A78BFA 0%, #C4B5FD 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               display: 'block',
             }}>
-              Ready to close your revenue gaps?
+              If your business looks like Santa's did before we started, here's what the first step looks like.
             </h2>
             <p style={{ fontFamily: "'Sora', sans-serif", fontSize: '1rem', color: '#868583', lineHeight: 1.75, maxWidth: '460px', margin: '0 auto 2.5rem' }}>
               30 minutes. Free. No obligation. We map your gaps, show you what we'd build, and tell you what it costs.
             </p>
             <a href="/book" className="btn-gradient" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontSize: '1rem', padding: '1rem 2.25rem' }}>
-              Book Your Free Intro Call <ArrowRight size={16} />
+              Book a Free 30-Minute Call <ArrowRight size={16} />
             </a>
           </FadeItem>
         </div>
