@@ -21,6 +21,7 @@ import Services from "./pages/Services";
 import CaseStudy from "./pages/CaseStudy";
 import About from "./pages/About";
 import Book from "./pages/Book";
+import BookThanks from "./pages/BookThanks";
 import BotAnalytics from "./pages/BotAnalytics";
 import Solutions from "./pages/Solutions";
 import Industries from "./pages/Industries";
@@ -86,6 +87,12 @@ const pageMeta: Record<string, { title: string; description: string; keywords: s
       "Book a free 30-minute intro call with Nikki. We map your revenue gaps and show you exactly how AI automation can recover lost leads and bookings.",
     keywords:
       "book free automation audit, revenue leak audit, free AI consultation, automation discovery call, local business revenue gaps, missed lead recovery, book Ops by Noell, free intro call",
+  },
+  "/book/thanks": {
+    title: "Booking Confirmed — Ops by Noell",
+    description:
+      "Your free 30-minute audit call is confirmed. Check your inbox for the calendar invite and what to prepare.",
+    keywords: "booking confirmation, ops by noell",
   },
   "/industries": {
     title: "Industries We Serve | Ops by Noell AI Automation",
@@ -239,6 +246,7 @@ function Router() {
       <Route path="/case-study" component={CaseStudy} />
         <Route path="/about" component={About} />
         <Route path="/book" component={Book} />
+        <Route path="/book/thanks" component={BookThanks} />
         <Route path="/industries" component={Services} />
         <Route path="/newsletter" component={Newsletter} />
         <Route path="/calculator" component={Calculator} />
