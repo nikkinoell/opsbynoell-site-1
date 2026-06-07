@@ -863,3 +863,19 @@ a[class*="btn"] {
   -webkit-backdrop-filter: none;
   border-bottom: 1px solid #E5E5E5;
 }
+
+
+/* ─── Sticky Mobile CTA Bar (Book page) ─── */
+/* Hidden on desktop, visible only on mobile */
+.sticky-mobile-cta {
+  display: none;
+}
+@media (max-width: 767px) {
+  .sticky-mobile-cta {
+    display: flex;
+  }
+  /* Add bottom padding to page content so sticky bar doesn't overlap footer */
+  body:has(.sticky-mobile-cta) {
+    padding-bottom: 72px;
+  }
+}

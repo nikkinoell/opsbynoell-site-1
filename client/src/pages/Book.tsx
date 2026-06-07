@@ -2,9 +2,14 @@
  * OPS BY NOELL — Book a Free Intro Call
  * Design: Quiet Editorial Luxury
  * Sections: Compact Centered Hero, GHL Booking (above fold), What to Expect, Santa Testimonial, Final CTA
+ * Mobile improvements (Jun 2026):
+ *   - Sticky mobile CTA bar anchored to booking widget
+ *   - Reduced hero padding on mobile so booking widget is above fold
+ *   - Lazy-loaded iframe to unblock initial paint
+ *   - Tighter hero copy (removed redundant subtext)
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Clock, TrendingDown, Shield } from 'lucide-react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -32,6 +37,8 @@ export default function Book() {
   const bookingPageVisit = trpc.notifications.bookingPageVisit.useMutation();
   const bookingIntent = trpc.notifications.bookingIntent.useMutation();
   const visitFired = useRef(false);
+  const bookingRef = useRef<HTMLDivElement>(null);
+  const [showStickyBar, setShowStickyBar] = useState(false);
 
   // Fire page-visit notification once on mount
   useEffect(() => {
@@ -44,6 +51,26 @@ export default function Book() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Show sticky CTA bar only after the booking widget scrolls out of view on mobile
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Show sticky bar when booking widget is NOT visible
+        setShowStickyBar(!entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    if (bookingRef.current) {
+      observer.observe(bookingRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToBooking = () => {
+    bookingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    bookingIntent.mutate({ source: 'sticky-mobile-cta', page: '/book' });
+  };
+
   const handleBookingCTA = (source: string) => {
     bookingIntent.mutate({ source, page: '/book' });
   };
@@ -54,41 +81,41 @@ export default function Book() {
 
       {/* ─── COMPACT CENTERED HERO ─── */}
       <section style={{
-        paddingTop: '110px',
-        paddingBottom: '1.5rem',
+        paddingTop: 'clamp(72px, 12vw, 110px)',
+        paddingBottom: 'clamp(0.75rem, 2vw, 1.5rem)',
         backgroundColor: 'transparent',
         textAlign: 'center',
       }}>
         <div className="container" style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <p className="eyebrow" style={{ marginBottom: '1rem' }}>Free 30-Minute Audit</p>
+          <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>Free 30-Minute Audit</p>
           <h1 style={{
             fontFamily: "'Nicholas', serif",
-            fontSize: 'clamp(1.75rem, 5vw, 3rem)',
+            fontSize: 'clamp(1.5rem, 5vw, 3rem)',
             fontWeight: 800,
             color: '#1A1A1A',
-            lineHeight: 1.7,
+            lineHeight: 1.6,
             letterSpacing: '-0.02em',
-            marginBottom: '1rem',
+            marginBottom: '0.5rem',
           }}>
             Book Your Free 30-Minute Audit
           </h1>
           <p style={{
             fontFamily: "'Nicholas', serif",
-            fontSize: '1.0625rem',
+            fontSize: '1rem',
             fontWeight: 400,
             color: '#555555',
-            lineHeight: 1.75,
-            maxWidth: '640px',
+            lineHeight: 1.6,
+            maxWidth: '480px',
             margin: '0 auto',
           }}>
-            No pitch. No slides. We listen first and show you your numbers.
+            No pitch. No slides. We find your revenue leaks in 30 minutes.
           </p>
         </div>
       </section>
 
       {/* ─── GHL BOOKING WIDGET (above fold) ─── */}
-      <div className="reveal">
-      <section style={{ paddingBottom: 'clamp(2rem, 4vw, 2.5rem)' }}>
+      <div className="reveal" ref={bookingRef} id="booking-widget">
+      <section style={{ paddingBottom: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
         <div className="container" style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div style={{ position: 'relative', minHeight: '600px', background: '#ffffff', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E8E8E8', boxShadow: '0 0 0 1px rgba(167,139,250,0.08), 0 24px 48px rgba(0,0,0,0.4)' }}>
             <p style={{
@@ -109,6 +136,7 @@ export default function Book() {
               style={{ width: '100%', height: '700px', minHeight: '600px', border: 'none', display: 'block', background: '#ffffff', position: 'relative', zIndex: 1 }}
               scrolling="no"
               title="Book a call with Ops by Noell"
+              loading="lazy"
             />
           </div>
         </div>
@@ -239,15 +267,66 @@ export default function Book() {
             </a>
             {' '}or book your free intro call above.
           </p>
-          <a href="#top" className="btn-primary" onClick={() => handleBookingCTA('final-cta-choose-a-time')}>
+          <button
+            className="btn-primary"
+            onClick={() => { scrollToBooking(); handleBookingCTA('final-cta-choose-a-time'); }}
+            style={{ cursor: 'pointer', border: 'none' }}
+          >
             Choose a Time
             <ArrowRight size={14} />
-          </a>
+          </button>
         </div>
       </section>
       </div>
 
       <Footer />
+
+      {/* ─── STICKY MOBILE CTA BAR ─── */}
+      {/* Only visible on mobile (max-width: 767px) when booking widget is out of view */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 999,
+          padding: '0.875rem 1.25rem',
+          background: '#1A1A1A',
+          borderTop: '1px solid rgba(167,139,250,0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.75rem',
+          transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
+          transition: 'transform 0.3s ease',
+          // Only show on mobile via inline media query workaround
+        }}
+        className="sticky-mobile-cta"
+      >
+        <button
+          onClick={scrollToBooking}
+          style={{
+            background: '#A78BFA',
+            color: '#FFFFFF',
+            border: 'none',
+            borderRadius: '6px',
+            padding: '0.75rem 2rem',
+            fontFamily: "'Nicholas', serif",
+            fontSize: '0.9375rem',
+            fontWeight: 600,
+            letterSpacing: '0.04em',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            width: '100%',
+            justifyContent: 'center',
+          }}
+        >
+          Book Your Free Audit
+          <ArrowRight size={14} />
+        </button>
+      </div>
     </div>
   );
 }
