@@ -174,6 +174,108 @@ const pageMeta: Record<string, { title: string; description: string; keywords: s
   },
 };
 
+// Organization schema — injected on every page to establish brand entity
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ops by Noell",
+  "url": "https://www.opsbynoell.com",
+  "logo": "https://d2xsxph8kpxj0f.cloudfront.net/310519663120940829/n7rBKSsjtvarmxAHpVkZmb/og-image-ezBMaMYGUkWYTobM4XmPLw.png",
+  "description": "Ops by Noell builds and runs AI-powered operational systems and front desk services for service-based businesses and B2B companies. Done for you, live in 14 days.",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Mission Viejo, California"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    "https://www.instagram.com/opsbynoell"
+  ]
+};
+
+// FAQPage schema — injected on homepage and services pages
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this a sales pitch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Missed Call Audit and the Digital Readiness Review are both working deliverables. You leave with a clear map of what is leaking, what it is worth, and whether Ops by Noell is the right fit. If it is not, we will say so."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I already have a booking system. Do I need to switch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work around the tools you already use. No migration. No rip-and-replace. The system layers on top of your existing scheduling, CRM, or practice management software. Jane App, Mindbody, GHL, Vagaro, Square — we have seen them all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I am not a tech person. Is this hard to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is exactly why this exists. You do not touch it. We configure the prompts, train the agents, wire the integrations, and run the monthly reporting. You approve it once and then you forget about it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I cannot afford a full-time receptionist.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You are not hiring one. You are getting a managed front desk that runs 24 hours a day, 7 days a week, for a fraction of the cost. No salary. No benefits. No turnover. No training. No Monday morning no-shows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is this for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hair salons, barbershops, med spas, massage practices, dental offices, chiropractic clinics, aestheticians, nail studios, personal trainers, and any service business where the owner or team is hands-on with clients and cannot always answer the phone. If you deliver excellent work but your front desk, follow-up, or client retention is not keeping up, we are a fit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between the Service track and the B2B track?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Service track is built for appointment-based businesses: salons, med spas, dental practices, HVAC, and similar. Three agents handle chat, phone, and client reactivation. The B2B track is built for companies selling to other businesses: SaaS, professional services, and B2B sales teams. Three agents handle outbound prospecting, lead qualification, and pipeline nurturing. Both tracks include a live dashboard and done-for-you setup."
+      }
+    }
+  ]
+};
+
+// Pages that should include FAQPage schema
+const faqPages = new Set(["/", "/services", "/solutions", "/industries"]);
+
+// Helper to upsert a JSON-LD schema script tag by id
+function setSchema(id: string, data: object) {
+  let el = document.getElementById(id) as HTMLScriptElement | null;
+  if (!el) {
+    el = document.createElement("script");
+    el.setAttribute("type", "application/ld+json");
+    el.setAttribute("id", id);
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(data);
+}
+
+function removeSchema(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
 // Helper to upsert a meta tag
 function setMeta(selector: string, attr: string, value: string) {
   let el = document.querySelector(selector) as HTMLMetaElement | null;
@@ -222,6 +324,16 @@ function MetaUpdater() {
 
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Inject Organization schema on every page
+    setSchema("schema-organization", organizationSchema);
+
+    // Inject FAQPage schema only on relevant pages
+    if (faqPages.has(location)) {
+      setSchema("schema-faq", faqSchema);
+    } else {
+      removeSchema("schema-faq");
+    }
   }, [location]);
 
   return null;
